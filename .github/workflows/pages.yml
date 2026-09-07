@@ -22,6 +22,7 @@ jobs:
       - run: npx vite build
         env:
           VITE_BASE: /pretty-focussed/
+          VITE_AI_PROXY: https://laurence-os-clients.netlify.app/.netlify/functions/anthropic
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - run: cp dist/index.html dist/404.html   # the app routes on the client; every path serves the app

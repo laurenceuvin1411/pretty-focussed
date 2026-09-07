@@ -19,8 +19,11 @@ export interface AskOptions {
 
 export class AIError extends Error {}
 
+// The proxy lives on Netlify. From GitHub Pages or any other host the build points at it with VITE_AI_PROXY.
+const PROXY = import.meta.env.VITE_AI_PROXY || '/.netlify/functions/anthropic'
+
 async function viaProxy(body: unknown): Promise<string | null> {
-  const res = await fetch('/.netlify/functions/anthropic', {
+  const res = await fetch(PROXY, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body),
