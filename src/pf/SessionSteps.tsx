@@ -7,7 +7,7 @@ import { useWeekStore, MAX_PRIORITIES } from '../store/pf/weekStore'
 import type { WeekPlan, Priority, Block } from '../store/pf/weekStore'
 import { useGoalStore } from '../store/pf/goalStore'
 import { useRevenueStore } from '../store/pf/revenueStore'
-import { useRitualStore, MAX_RITUALS, PHASE_LABEL, PHASE_HINT } from '../store/pf/ritualStore'
+import { useRitualStore, PHASE_LABEL, PHASE_HINT } from '../store/pf/ritualStore'
 import { useCalendarStore } from '../store/calendarStore'
 import { suggestPriorities, draftWeek } from '../lib/pf/assistant'
 import { localDraft } from '../lib/pf/localDraft'
@@ -321,7 +321,7 @@ export function StepRituals({ week, prefs, setPrefs, onNext, onBack }: { week: W
 
   return (
     <>
-      <Title over="Success habits · 1 min" title={rituals.length ? `${planned} habit mornings held.` : 'What stays in the diary.'} lead={phase ? `${PHASE_LABEL[phase]} this week. ${PHASE_HINT[phase]}` : rituals.length ? 'The days are filled in. Tap to move one.' : 'Tap the ones that keep the life side winning. Five at most.'} />
+      <Title over="Success habits · 1 min" title={rituals.length ? `${planned} habit mornings held.` : 'What stays in the diary.'} lead={phase ? `${PHASE_LABEL[phase]} this week. ${PHASE_HINT[phase]}` : rituals.length ? 'The days are filled in. Tap to move one.' : 'Tap the ones that keep the life side winning.'} />
 
       <div className="pf-rows" style={{ marginBottom: 28 }}>
         {rituals.map(r => {
@@ -346,7 +346,7 @@ export function StepRituals({ week, prefs, setPrefs, onNext, onBack }: { week: W
         })}
       </div>
 
-      {rituals.length < MAX_RITUALS && (
+      {(
         <div className="pf-fields" style={{ display: 'flex', flexDirection: 'column', gap: 18, marginBottom: 36 }}>
           <Field label={rituals.length ? 'One more, if it earns its place' : 'Tap to add'}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>

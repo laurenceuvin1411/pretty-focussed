@@ -1,7 +1,7 @@
-// Success habits: what she protects. Five at most, logged by day, the week drafted around them.
+// Success habits: what she protects. As many as she wants, logged by day, the week drafted around them.
 import { useRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import { useRitualStore, MAX_RITUALS, PHASE_LABEL, PHASE_HINT } from '../store/pf/ritualStore'
+import { useRitualStore, PHASE_LABEL, PHASE_HINT } from '../store/pf/ritualStore'
 import type { Ritual, CyclePhase } from '../store/pf/ritualStore'
 import { useWeekStore } from '../store/pf/weekStore'
 import { weekDates, weekKey, todayStr, fmtDay, DAY_SHORT, DAY_LONG } from '../lib/pf/week'
@@ -207,7 +207,6 @@ export function Rituals() {
   const dates = weekDates()
   const today = todayStr()
   const editing = rituals.find(r => r.id === sheet) ?? null
-  const atLimit = rituals.length >= MAX_RITUALS
 
   function close() { setSheet('closed') }
 
@@ -216,7 +215,7 @@ export function Rituals() {
       <div>
         <p className="pf-over">Success habits</p>
         <h1 className="pf-h2" style={{ marginTop: 12 }}>What you protect.</h1>
-        <p className="pf-body" style={{ marginTop: 12 }}>Five at most. The week is drafted around them.</p>
+        <p className="pf-body" style={{ marginTop: 12 }}>The week is drafted around them.</p>
       </div>
 
       <section aria-label="This week">
@@ -240,11 +239,7 @@ export function Rituals() {
           ))}
         </div>
         <div style={{ marginTop: 20 }}>
-          {atLimit ? (
-            <p className="pf-small">Five is the limit. Fewer is more here.</p>
-          ) : (
-            <button type="button" className="pf-btn pf-btn--secondary" onClick={() => setSheet('new')}>Add a habit</button>
-          )}
+          <button type="button" className="pf-btn pf-btn--secondary" onClick={() => setSheet('new')}>Add a habit</button>
         </div>
       </section>
 

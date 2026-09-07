@@ -4,7 +4,6 @@ import { persist } from 'zustand/middleware'
 import { differenceInCalendarDays, parseISO } from 'date-fns'
 import { scopedKey } from '../../lib/workspace'
 
-export const MAX_RITUALS = 5
 
 export type CyclePhase = 'menstrual' | 'follicular' | 'ovulatory' | 'luteal'
 export const PHASE_LABEL: Record<CyclePhase, string> = {
@@ -52,7 +51,6 @@ export const useRitualStore = create<RitualStore>()(
       cycleLength: 28,
 
       addRitual: (name, timesPerWeek, opts = {}) => {
-        if (get().rituals.length >= MAX_RITUALS) return null
         const id = crypto.randomUUID()
         set(s => ({
           rituals: [...s.rituals, {
