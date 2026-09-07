@@ -143,7 +143,7 @@ export default function App() {
   // TEMP dev-only: gastweergave simuleren (?guest in de URL) — niet in productie
   if (!user && import.meta.env.DEV && localStorage.getItem('laurence-os-last-user') === 'demo@extern.be') {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
         <Routes>
         <Route path="/session" element={<WeeklySession />} />
         <Route element={<NowShell />}>
@@ -202,7 +202,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <Routes>
         <Route path="/session" element={<WeeklySession />} />
         <Route element={<NowShell />}>
