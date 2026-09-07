@@ -174,11 +174,12 @@ function MonthView({ month, name }: { month: string; name: string }) {
         ) : (
           <div className="pf-rows">
             {rev.offers.map(o => (
-              <button key={o.id} type="button" className="pf-row" style={{ ...rowButton, gridTemplateColumns: 'minmax(0,1fr) auto auto' }}
+              <button key={o.id} type="button" className="pf-row" style={{ ...rowButton, gridTemplateColumns: 'minmax(0,1fr) auto auto auto' }}
                 onClick={() => setOfferSheet({ offer: o })} aria-label={`Edit ${o.name}`}>
                 <span style={{ fontSize: 16, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{o.name}</span>
                 <span className="pf-cap">{OFFER_KIND_LABEL[o.kind]}</span>
                 <span className="pf-mono" style={{ fontSize: 14, color: 'var(--text-2)' }}>{fmtInt(o.price)}<span className="pf-unit" style={{ fontSize: 11 }}>eur</span></span>
+                <span className="pf-cap" style={{ color: 'var(--text-3)', textDecoration: 'underline', textUnderlineOffset: 3 }}>Edit</span>
               </button>
             ))}
           </div>
