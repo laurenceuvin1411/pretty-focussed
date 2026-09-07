@@ -1,0 +1,1029 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-04T16:30:00+02:00",
+  "title": "Design System: Pretty Focussed",
+  "extensions": {
+    "colorMeta": {
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone (Plaster ground)",
+        "canonical": "oklch(96.2% 0.006 85)",
+        "tonalRamp": [
+          "#0C0B09",
+          "#262522",
+          "#43423F",
+          "#63615E",
+          "#84827E",
+          "#A7A5A1",
+          "#CBC9C5",
+          "#F0EEEA"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper (Plaster surface)",
+        "canonical": "oklch(92.9% 0.009 85)",
+        "tonalRamp": [
+          "#0D0B07",
+          "#272520",
+          "#44423D",
+          "#63615C",
+          "#85827D",
+          "#A7A59F",
+          "#CCC9C3",
+          "#F1EEE8"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White (elevated only)",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Stone",
+        "canonical": "oklch(86.2% 0.015 85)",
+        "tonalRamp": [
+          "#0E0B05",
+          "#28251D",
+          "#464139",
+          "#656158",
+          "#868279",
+          "#A9A49B",
+          "#CEC9BF",
+          "#F3EEE4"
+        ]
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "oklch(67.4% 0.012 85)",
+        "tonalRamp": [
+          "#0E0B06",
+          "#28251E",
+          "#45423B",
+          "#646159",
+          "#86827A",
+          "#A9A59C",
+          "#CDC9C0",
+          "#F2EEE5"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "oklch(51.5% 0.013 85)",
+        "tonalRamp": [
+          "#0E0B05",
+          "#28251E",
+          "#45423A",
+          "#656159",
+          "#868279",
+          "#A9A59C",
+          "#CDC9C0",
+          "#F3EEE5"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "canonical": "oklch(44.2% 0.008 89)",
+        "tonalRamp": [
+          "#0D0B07",
+          "#272520",
+          "#44423D",
+          "#63615C",
+          "#84827D",
+          "#A7A59F",
+          "#CBC9C3",
+          "#F1EEE8"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "oklch(19.2% 0.012 115)",
+        "tonalRamp": [
+          "#0B0C07",
+          "#25261F",
+          "#42433C",
+          "#61625B",
+          "#82837B",
+          "#A4A69E",
+          "#C9CAC2",
+          "#EEF0E7"
+        ]
+      },
+      "ink-hover": {
+        "role": "primary",
+        "displayName": "Ink, hover",
+        "canonical": "oklch(23.5% 0.015 113)",
+        "tonalRamp": [
+          "#0B0C05",
+          "#25261E",
+          "#42433A",
+          "#616259",
+          "#828379",
+          "#A5A69C",
+          "#C9CAC0",
+          "#EEF0E5"
+        ]
+      },
+      "ink-surface": {
+        "role": "neutral",
+        "displayName": "Ink surface (dark)",
+        "canonical": "oklch(23.5% 0.013 120)",
+        "tonalRamp": [
+          "#0A0C06",
+          "#24261F",
+          "#41433B",
+          "#60625A",
+          "#81847B",
+          "#A4A69D",
+          "#C8CBC1",
+          "#EDF0E6"
+        ]
+      },
+      "ink-elevated": {
+        "role": "neutral",
+        "displayName": "Ink elevated (dark)",
+        "canonical": "oklch(28.3% 0.017 122)",
+        "tonalRamp": [
+          "#0A0C05",
+          "#23261E",
+          "#40443A",
+          "#5F6359",
+          "#808479",
+          "#A3A79C",
+          "#C7CBBF",
+          "#ECF0E4"
+        ]
+      },
+      "ink-border": {
+        "role": "neutral",
+        "displayName": "Ink hairline (dark)",
+        "canonical": "oklch(31.4% 0.017 127)",
+        "tonalRamp": [
+          "#090C06",
+          "#23271E",
+          "#40443A",
+          "#5F6359",
+          "#80847A",
+          "#A2A79C",
+          "#C6CBC0",
+          "#EBF1E5"
+        ]
+      },
+      "veil": {
+        "role": "secondary",
+        "displayName": "Veil (depth 0)",
+        "canonical": "oklch(92.1% 0.018 124)",
+        "tonalRamp": [
+          "#0A0C05",
+          "#23271D",
+          "#404439",
+          "#5F6358",
+          "#808479",
+          "#A2A79B",
+          "#C6CBBF",
+          "#ECF1E4"
+        ],
+        "depthScale": [
+          "#E2E7DA",
+          "#C6D0B8",
+          "#98A886",
+          "#6E7F5E",
+          "#3E4936"
+        ]
+      },
+      "haze": {
+        "role": "secondary",
+        "displayName": "Haze (depth 1)",
+        "canonical": "oklch(84.3% 0.034 126)",
+        "tonalRamp": [
+          "#080E01",
+          "#212815",
+          "#3D4531",
+          "#5C6550",
+          "#7D8670",
+          "#A0A992",
+          "#C4CEB6",
+          "#E9F3DA"
+        ],
+        "depthScale": [
+          "#E2E7DA",
+          "#C6D0B8",
+          "#98A886",
+          "#6E7F5E",
+          "#3E4936"
+        ]
+      },
+      "sage": {
+        "role": "secondary",
+        "displayName": "Sage (depth 2)",
+        "canonical": "oklch(71.0% 0.051 128)",
+        "tonalRamp": [
+          "#050F00",
+          "#1E2A0C",
+          "#3A4729",
+          "#596748",
+          "#798968",
+          "#9CAC8A",
+          "#BFD0AD",
+          "#E4F6D1"
+        ],
+        "depthScale": [
+          "#E2E7DA",
+          "#C6D0B8",
+          "#98A886",
+          "#6E7F5E",
+          "#3E4936"
+        ]
+      },
+      "focus": {
+        "role": "secondary",
+        "displayName": "Focus (depth 3)",
+        "canonical": "oklch(57.3% 0.053 130)",
+        "tonalRamp": [
+          "#040F00",
+          "#1C2A0C",
+          "#394829",
+          "#576848",
+          "#788968",
+          "#9AAC89",
+          "#BED1AD",
+          "#E3F6D1"
+        ],
+        "depthScale": [
+          "#E2E7DA",
+          "#C6D0B8",
+          "#98A886",
+          "#6E7F5E",
+          "#3E4936"
+        ]
+      },
+      "depth": {
+        "role": "secondary",
+        "displayName": "Depth (depth 4)",
+        "canonical": "oklch(39.0% 0.034 132)",
+        "tonalRamp": [
+          "#060E02",
+          "#1F2917",
+          "#3B4633",
+          "#5A6652",
+          "#7B8772",
+          "#9DAA94",
+          "#C1CEB8",
+          "#E6F4DC"
+        ],
+        "depthScale": [
+          "#E2E7DA",
+          "#C6D0B8",
+          "#98A886",
+          "#6E7F5E",
+          "#3E4936"
+        ]
+      },
+      "shell": {
+        "role": "tertiary",
+        "displayName": "Shell",
+        "canonical": "oklch(92.2% 0.020 65)",
+        "tonalRamp": [
+          "#110904",
+          "#2C231B",
+          "#4A4037",
+          "#695F56",
+          "#8B8076",
+          "#AEA398",
+          "#D3C7BC",
+          "#F8ECE1"
+        ]
+      },
+      "flush": {
+        "role": "tertiary",
+        "displayName": "Flush",
+        "canonical": "oklch(81.3% 0.054 48)",
+        "tonalRamp": [
+          "#1C0300",
+          "#3A1C0B",
+          "#5A3928",
+          "#7B5846",
+          "#9E7966",
+          "#C29B88",
+          "#E8BFAB",
+          "#FFE5D0"
+        ]
+      },
+      "travertine": {
+        "role": "neutral",
+        "displayName": "Travertine (ground)",
+        "canonical": "oklch(93.2% 0.019 75)",
+        "tonalRamp": [
+          "#100A04",
+          "#29231A",
+          "#484137",
+          "#6A6258",
+          "#8D857A",
+          "#B2A99E",
+          "#D5CCC1",
+          "#F6EDE1"
+        ]
+      },
+      "travertine-surface": {
+        "role": "neutral",
+        "displayName": "Travertine surface",
+        "canonical": "oklch(90.6% 0.020 80)",
+        "tonalRamp": [
+          "#0F0A03",
+          "#292319",
+          "#484137",
+          "#696257",
+          "#8C8579",
+          "#B1AA9D",
+          "#D5CDC0",
+          "#F5EDE0"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field (ground)",
+        "canonical": "oklch(94.4% 0.018 127)",
+        "tonalRamp": [
+          "#090D05",
+          "#22261C",
+          "#40443A",
+          "#60655A",
+          "#83887D",
+          "#A8ADA1",
+          "#CAD0C3",
+          "#EBF1E4"
+        ]
+      },
+      "field-surface": {
+        "role": "neutral",
+        "displayName": "Field surface",
+        "canonical": "oklch(91.9% 0.021 127)",
+        "tonalRamp": [
+          "#090D04",
+          "#21261B",
+          "#3F4539",
+          "#606659",
+          "#82897B",
+          "#A7AE9F",
+          "#CAD1C2",
+          "#EAF1E2"
+        ]
+      },
+      "air": {
+        "role": "neutral",
+        "displayName": "Air (ground)",
+        "canonical": "oklch(94.2% 0.014 245)",
+        "tonalRamp": [
+          "#060C11",
+          "#1E252B",
+          "#3C434A",
+          "#5D646B",
+          "#7F878E",
+          "#A4ACB4",
+          "#C6CFD7",
+          "#E7F0F8"
+        ]
+      },
+      "air-surface": {
+        "role": "neutral",
+        "displayName": "Air surface",
+        "canonical": "oklch(91.4% 0.015 245)",
+        "tonalRamp": [
+          "#060C11",
+          "#1E252B",
+          "#3C434A",
+          "#5D646B",
+          "#7F878F",
+          "#A3ACB4",
+          "#C6CFD7",
+          "#E7F0F8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "The one typographic event on the session's slot screen. Always with its mono unit."
+      },
+      "numeral-md": {
+        "displayName": "Numeral, medium",
+        "purpose": "The stats row on the Field, Sales, Content and Recap, and the value inside every aperture ring."
+      },
+      "numeral-sm": {
+        "displayName": "Numeral, small",
+        "purpose": "Stats beside a ring (Target and Logged; In, Out and Pay target), the fixed-costs total, a sale just logged from a conversation, a goal ring's value, a habit's weekly count, a lane's count."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "The session's closing line only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "One per screen, declarative, ending in a full stop, max 18ch."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Sheet titles and the slot name on the schedule screen."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "Goal titles, the week line in Content (with the week number as a mono caption on its baseline), a cycle phase name, the assistant's proposed intention, day names."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Leads under the headline and panel copy in Slate, max 56ch."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Supporting lines, ground notes, limits and status copy."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "All three button ranks, chips and the segments of a segmented control."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels above inputs, section and stage captions (with a mono count), lane labels, a cost's kind, the empty-state line; in Ink the one-word Due, in Depth Posted and Paid."
+      },
+      "overline": {
+        "displayName": "Overline",
+        "purpose": "One per screen, uppercase, above the headline, in the form Section · qualifier."
+      },
+      "unit": {
+        "displayName": "Unit",
+        "purpose": "Mono unit at 35 percent of its numeral with an 11px floor."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Day-dot labels, block times, week numbers, sale and next-step dates, cost dates and amounts, the kept line's value captions, inline counts; at 10px the kept line's month axis."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Pretty Focussed beside the 22px mark in the shell header. The only place the name is set."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sh-sm",
+        "value": "0 1px 2px rgb(62 73 54 / .04)",
+        "purpose": "The toggle pill, its knob, content post cards and the segmented control's pill."
+      },
+      {
+        "name": "sh-md",
+        "value": "0 4px 16px rgb(62 73 54 / .06)",
+        "purpose": "The primary pill, the panel and the recap card preview. Warm-tinted, never grey."
+      },
+      {
+        "name": "sh-lg",
+        "value": "0 8px 32px rgb(62 73 54 / .08)",
+        "purpose": "The nav pill."
+      },
+      {
+        "name": "sh-xl",
+        "value": "0 16px 56px rgb(62 73 54 / .10)",
+        "purpose": "The sheet and modal."
+      },
+      {
+        "name": "sh-glass",
+        "value": "inset 0 1px 0 rgb(255 255 255 / .45), 0 8px 32px rgb(62 73 54 / .08)",
+        "purpose": "The glass pill: one inner top highlight plus lift."
+      },
+      {
+        "name": "focus-ring",
+        "value": "0 0 0 3px var(--ground), 0 0 0 5px rgb(20 21 15 / .4)",
+        "purpose": "Focused inputs: 3px ground gap, 2px Ink at 40 percent."
+      },
+      {
+        "name": "dot-ring",
+        "value": "0 0 0 3px var(--ground), 0 0 0 4px rgb(20 21 15 / .25)",
+        "purpose": "The current step dot's soft ring."
+      },
+      {
+        "name": "swatch-ring",
+        "value": "0 0 0 2px var(--ground), 0 0 0 3.5px var(--text)",
+        "purpose": "The chosen ground disc; unchosen discs carry inset 0 0 0 1px rgb(20 21 15 / .12)."
+      },
+      {
+        "name": "sh-md-dark",
+        "value": "0 4px 16px rgb(0 0 0 / .3)",
+        "purpose": "Dark-theme remap of sh-md; lg and xl remap to .36 and .42."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.23, 1, .32, 1)",
+        "purpose": "Every product transition, the resolve, the modal's entry."
+      },
+      {
+        "name": "ease-sheet",
+        "value": "cubic-bezier(.32, .72, 0, 1)",
+        "purpose": "The phone sheet sliding up."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(.77, 0, .175, 1)",
+        "purpose": "Declared for on-screen movement; not yet consumed."
+      },
+      {
+        "name": "d-press",
+        "value": "120ms",
+        "purpose": "Press scale to 0.97 on every pressable (0.99 on a pressable row, 0.98 on a post card)."
+      },
+      {
+        "name": "d-fast",
+        "value": "160ms",
+        "purpose": "Hover, focus ring, fills, check fade, the toggle knob."
+      },
+      {
+        "name": "d-base",
+        "value": "200ms",
+        "purpose": "The resolve (enter from opacity 0, blur 3px, 4px down); ring value changes; focal plane shifts; hold-to-remove release."
+      },
+      {
+        "name": "d-slow",
+        "value": "260ms",
+        "purpose": "Sheet slide-up (ease-sheet) and modal grow from scale(.96) (ease-out)."
+      },
+      {
+        "name": "hold-to-remove",
+        "value": "clip-path 1600ms linear while pressed; 200ms ease-out back on release",
+        "purpose": "Destructive confirmation: Ink sweeps across the secondary pill; release when full removes."
+      },
+      {
+        "name": "nav-change",
+        "value": "none",
+        "purpose": "The nav pill does not animate on tab change; the page content resolves."
+      },
+      {
+        "name": "brand-resolve",
+        "value": "600ms ease-out",
+        "purpose": "The mark's body resolving from 8px blur on Login and the closing screen."
+      },
+      {
+        "name": "brand-sweep",
+        "value": "900ms ease-out",
+        "purpose": "The mark's arc sweep."
+      },
+      {
+        "name": "brand-snap",
+        "value": "80ms linear at 720ms",
+        "purpose": "The Ink dot arriving. No easing, no scale."
+      },
+      {
+        "name": "loader-orbit",
+        "value": "900ms linear infinite",
+        "purpose": "The single arc segment orbiting. Never a spinner."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms on every animation and transition; peripheral blur removed, opacity .55 kept",
+        "purpose": "prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "week",
+        "value": "900px"
+      },
+      {
+        "name": "hover-gate",
+        "value": "(hover: hover) and (pointer: fine)"
+      }
+    ],
+    "layers": [
+      {
+        "name": "app",
+        "value": "1"
+      },
+      {
+        "name": "room",
+        "value": "400"
+      },
+      {
+        "name": "dock",
+        "value": "401"
+      },
+      {
+        "name": "nav",
+        "value": "402"
+      },
+      {
+        "name": "scrim",
+        "value": "500"
+      }
+    ],
+    "blur": [
+      {
+        "name": "peripheral",
+        "value": "blur(2px) opacity .55"
+      },
+      {
+        "name": "dim",
+        "value": "opacity .55"
+      },
+      {
+        "name": "faded",
+        "value": "opacity .4"
+      },
+      {
+        "name": "bubble",
+        "value": "blur(0 to 3px) opacity .35 to 1 by recency"
+      },
+      {
+        "name": "scrim",
+        "value": "backdrop blur(8px) under rgb(20 21 15 / .4)"
+      },
+      {
+        "name": "glass",
+        "value": "blur(32px) saturate(1.2)"
+      },
+      {
+        "name": "field",
+        "value": "blur(10px) opacity .9"
+      },
+      {
+        "name": "grain",
+        "value": "opacity .035 mix-blend-mode overlay"
+      }
+    ],
+    "grounds": [
+      {
+        "id": "plaster",
+        "name": "Plaster",
+        "ground": "#F4F2EE",
+        "surface": "#EAE7E1",
+        "note": "Bone, unchanged. The room the brand was built in."
+      },
+      {
+        "id": "travertine",
+        "name": "Travertine",
+        "ground": "#F0E7DB",
+        "surface": "#E7DFD2",
+        "note": "The warmest. Sits naturally beside skin and print."
+      },
+      {
+        "id": "field",
+        "name": "Field",
+        "ground": "#E9EFE2",
+        "surface": "#E0E7D8",
+        "note": "A sage-tinted room, held well under the instrument."
+      },
+      {
+        "id": "air",
+        "name": "Air",
+        "ground": "#E4EDF5",
+        "surface": "#DBE4EC",
+        "note": "North light in a white room."
+      }
+    ],
+    "openItems": [
+      "The Room (ground quieting on session start and travelling over 90 minutes) is not built; the four grounds are static rest values and collapse to Ink in dark mode.",
+      "The depth gradient rendered as a 120 to 200 percent slice with noise is not built; --gradient-depth is declared and unused, and the ring, mark, kept line and recap card each draw their own gradient (the kept line's stops as hex, not tokens).",
+      "FOCUSED as the resting state is built on Today only; the Field, Goals, Money (Revenue, Sales, Finance), Success habits, Content and Recap are OPEN at rest.",
+      "Sheets have no exit animation and no spring drag-to-dismiss.",
+      "Declared, unused: --ease-in-out, --depth-0 as a fill, --gradient-depth, --pf-flush.",
+      "Legacy keyframes and off-palette badge colours in src/index.css, and Archivo, Instrument Serif italic and Space Mono in index.html, belong to the Laurence OS pages under Settings > More and are not part of the system."
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (the Full Stop)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "At most one Ink pill per page, exactly one per sheet.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Walk in</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:14px 28px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;background:transparent;white-space:nowrap;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1),opacity 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:disabled{opacity:.4;cursor:default}.ds-btn:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}.ds-btn-primary{background:#14150F;color:#F4F2EE;box-shadow:0 4px 16px rgb(62 73 54 / .06)}@media (hover:hover) and (pointer:fine){.ds-btn-primary:hover{background:#1E1F17}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Transparent pill with a 1px Stone inset ring for in-flow and page actions.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Add a habit</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:14px 28px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;background:transparent;white-space:nowrap;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:none;box-shadow:inset 0 0 0 1px #D6D1C7,0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}.ds-btn-secondary{box-shadow:inset 0 0 0 1px #D6D1C7;color:#14150F}@media (hover:hover) and (pointer:fine){.ds-btn-secondary:hover{background:rgb(214 209 199 / .4)}}"
+    },
+    {
+      "name": "Tertiary Button",
+      "kind": "button",
+      "refersTo": "button-tertiary",
+      "description": "Underlined text in Slate; the second action everywhere.",
+      "html": "<button class=\"ds-btn ds-btn-tertiary\">Leave it</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;background:transparent;transition:transform 120ms cubic-bezier(.23,1,.32,1),color 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn-tertiary{padding:10px 6px;color:#55534E;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgb(20 21 15 / .3)}@media (hover:hover) and (pointer:fine){.ds-btn-tertiary:hover{color:#14150F}}.ds-btn-tertiary:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Hold to remove",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Destructive: Ink sweeps across the pill over 1.6s while pressed; release when full removes. Never red, never a dialog.",
+      "html": "<button class=\"ds-hold\" aria-label=\"Hold to remove\"><span>Hold to remove</span><span class=\"ds-hold-fill\" aria-hidden=\"true\">Hold to remove</span></button>",
+      "css": ".ds-hold{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:14px 28px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;background:transparent;color:#14150F;box-shadow:inset 0 0 0 1px #D6D1C7;user-select:none;touch-action:none}.ds-hold-fill{position:absolute;inset:0;display:grid;place-items:center;background:#14150F;color:#F4F2EE;clip-path:inset(0 100% 0 0);transition:clip-path 200ms cubic-bezier(.23,1,.32,1)}.ds-hold:active .ds-hold-fill{clip-path:inset(0 0 0 0);transition:clip-path 1600ms linear}.ds-hold:focus-visible{outline:none;box-shadow:inset 0 0 0 1px #D6D1C7,0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Nav Pill",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "The standing Full Stop: a floating Ink pill of 36px circular items; the active one is a Bone circle. Never animates on change.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Pretty Focussed\"><a class=\"ds-nav-item is-on\" href=\"#\" aria-label=\"Field\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg></a><a class=\"ds-nav-item\" href=\"#\" aria-label=\"Today\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41\"/></svg></a><a class=\"ds-nav-item\" href=\"#\" aria-label=\"Goals\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/></svg></a><a class=\"ds-nav-item\" href=\"#\" aria-label=\"Settings\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 7h-9M14 17H5\"/><circle cx=\"17\" cy=\"17\" r=\"3\"/><circle cx=\"7\" cy=\"7\" r=\"3\"/></svg></a></nav>",
+      "css": ".ds-nav{display:inline-flex;gap:4px;padding:6px;border-radius:999px;background:#14150F;box-shadow:0 8px 32px rgb(62 73 54 / .08)}.ds-nav-item{position:relative;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#F4F2EE;opacity:.55;text-decoration:none}.ds-nav-item::after{content:\"\";position:absolute;inset:-4px}.ds-nav-item svg{width:18px;height:18px}.ds-nav-item.is-on{background:#F4F2EE;color:#14150F;opacity:1}.ds-nav-item:active{transform:scale(.97)}@media (hover:hover) and (pointer:fine){.ds-nav-item:hover{opacity:1}}.ds-nav-item:focus-visible{outline:none;box-shadow:0 0 0 3px #14150F,0 0 0 5px rgb(244 242 238 / .4)}"
+    },
+    {
+      "name": "Glass Pill",
+      "kind": "chip",
+      "refersTo": "glass-pill",
+      "description": "One label per view: 72 percent glass, 32px blur, one inner top highlight. WEEK in the session header, NOW beside the current block.",
+      "html": "<span class=\"ds-glass\"><b>Week</b> <span class=\"ds-mono\">36</span></span> <span class=\"ds-glass\"><b>Now</b></span>",
+      "css": ".ds-glass{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgb(255 255 255 / .72);backdrop-filter:blur(32px) saturate(1.2);-webkit-backdrop-filter:blur(32px) saturate(1.2);box-shadow:inset 0 1px 0 rgb(255 255 255 / .45),0 8px 32px rgb(62 73 54 / .08);font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#55534E;white-space:nowrap;margin-right:8px}.ds-glass b{font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#14150F}.ds-mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "One-tap action pill with a mono unit inside; pressed fills Ink (a chooser inside a sheet).",
+      "html": "<button class=\"ds-chip\">Strategy session <span class=\"ds-unit\">600 eur</span></button> <button class=\"ds-chip\" aria-pressed=\"true\">Posted</button> <button class=\"ds-chip\">+1<span class=\"ds-unit\">hours</span></button>",
+      "css": ".ds-chip{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:10px 16px;border:0;border-radius:999px;box-shadow:inset 0 0 0 1px #D6D1C7;background:transparent;color:#14150F;font:500 14px/1 'Instrument Sans','Inter',system-ui,sans-serif;cursor:pointer;margin-right:8px;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1)}.ds-chip::after{content:\"\";position:absolute;inset:-2px;border-radius:inherit}.ds-chip:active{transform:scale(.97)}.ds-chip[aria-pressed=\"true\"]{background:#14150F;color:#F4F2EE;box-shadow:none}.ds-chip:focus-visible{outline:none;box-shadow:inset 0 0 0 1px #D6D1C7,0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}.ds-unit{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.02em;color:#6B675F;font-weight:400}.ds-chip[aria-pressed=\"true\"] .ds-unit{color:#D6D1C7}"
+    },
+    {
+      "name": "Chevrons",
+      "kind": "button",
+      "refersTo": "chevron",
+      "description": "Month and week navigation only: bare 44px circles, Muted, no border, Ink on hover.",
+      "html": "<span class=\"ds-chevs\"><button class=\"ds-chev\" aria-label=\"Previous month\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m15 18-6-6 6-6\"/></svg></button><button class=\"ds-chev\" aria-label=\"Next month\" disabled><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 18 6-6-6-6\"/></svg></button></span>",
+      "css": ".ds-chevs{display:inline-flex;gap:8px}.ds-chev{width:44px;height:44px;border:0;background:transparent;color:#6B675F;display:grid;place-items:center;cursor:pointer;padding:0;border-radius:50%;transition:transform 120ms cubic-bezier(.23,1,.32,1),color 160ms cubic-bezier(.23,1,.32,1)}.ds-chev svg{width:16px;height:16px}.ds-chev:active{transform:scale(.97)}.ds-chev:disabled{opacity:.35;cursor:default}@media (hover:hover) and (pointer:fine){.ds-chev:hover:not(:disabled){color:#14150F}}.ds-chev:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Segmented control",
+      "kind": "nav",
+      "refersTo": "segments",
+      "description": "One nav item, several readings: a content-sized Paper pill whose chosen segment fills Ink and counts as the page's Ink object. Money only: Revenue, Sales, Finance.",
+      "html": "<div class=\"ds-segments\" role=\"tablist\" aria-label=\"Money\"><button class=\"ds-segment\" role=\"tab\" aria-selected=\"true\">Revenue</button><button class=\"ds-segment\" role=\"tab\" aria-selected=\"false\">Sales</button><button class=\"ds-segment\" role=\"tab\" aria-selected=\"false\">Finance</button></div>",
+      "css": ".ds-segments{display:inline-flex;gap:2px;padding:4px;border-radius:999px;background:#EAE7E1;box-shadow:0 1px 2px rgb(62 73 54 / .04)}.ds-segment{border:0;background:transparent;color:#55534E;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;padding:10px 16px;min-height:40px;border-radius:999px;cursor:pointer;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1),color 160ms cubic-bezier(.23,1,.32,1)}.ds-segment:active{transform:scale(.97)}.ds-segment[aria-selected=\"true\"]{background:#14150F;color:#F4F2EE}.ds-segment:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Input with label",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "White elevated field, Stone hairline, 14px radius, label above in the label style.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-label\">Habit</span><input class=\"ds-input\" placeholder=\"Run, pilates, a screen-free evening\"></label>",
+      "css": ".ds-field{display:block;max-width:360px}.ds-label{display:block;margin-bottom:8px;font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-input{width:100%;box-sizing:border-box;display:block;background:#FFFFFF;border:1px solid #D6D1C7;border-radius:14px;padding:14px 16px;font:400 16px/1.4 'Instrument Sans','Inter',system-ui,sans-serif;color:#14150F;outline:none;appearance:none;transition:border-color 160ms cubic-bezier(.23,1,.32,1),box-shadow 160ms cubic-bezier(.23,1,.32,1)}.ds-input::placeholder{color:#6B675F}.ds-input:focus,.ds-input:focus-visible{border-color:#14150F;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Toggle",
+      "kind": "input",
+      "refersTo": "toggle",
+      "description": "A Paper pill holding a 40 by 24px track: Stone off, Ink on, an 18px White knob travelling 16px over 160ms.",
+      "html": "<button class=\"ds-toggle\" aria-pressed=\"true\"><span>Bone room</span><span class=\"ds-track\" aria-hidden=\"true\"><span></span></span></button> <button class=\"ds-toggle\" aria-pressed=\"false\"><span>Cycle-aware</span><span class=\"ds-track\" aria-hidden=\"true\"><span></span></span></button>",
+      "css": ".ds-toggle{display:inline-flex;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-radius:999px;background:#EAE7E1;box-shadow:0 1px 2px rgb(62 73 54 / .04);border:0;font:400 14px/1.4 'Instrument Sans','Inter',system-ui,sans-serif;color:#14150F;cursor:pointer;min-height:44px;margin-right:12px;transition:transform 120ms cubic-bezier(.23,1,.32,1)}.ds-toggle:active{transform:scale(.97)}.ds-track{width:40px;height:24px;border-radius:999px;background:#D6D1C7;position:relative;transition:background-color 160ms cubic-bezier(.23,1,.32,1);flex:0 0 auto}.ds-track span{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgb(62 73 54 / .04);transition:transform 160ms cubic-bezier(.23,1,.32,1)}.ds-toggle[aria-pressed=\"true\"] .ds-track{background:#14150F}.ds-toggle[aria-pressed=\"true\"] .ds-track span{transform:translateX(16px)}.ds-toggle:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Ground swatches",
+      "kind": "input",
+      "refersTo": "ground-swatch",
+      "description": "Four 44px discs, one per room; the chosen one ringed in Ink. Only --ground and --surface change.",
+      "html": "<div class=\"ds-swatches\" role=\"radiogroup\" aria-label=\"Ground\"><button class=\"ds-swatch\" role=\"radio\" aria-checked=\"true\"><span class=\"ds-disc\" style=\"background:#F4F2EE\"></span><span class=\"ds-cap ds-cap-on\">Plaster</span></button><button class=\"ds-swatch\" role=\"radio\" aria-checked=\"false\"><span class=\"ds-disc\" style=\"background:#F0E7DB\"></span><span class=\"ds-cap\">Travertine</span></button><button class=\"ds-swatch\" role=\"radio\" aria-checked=\"false\"><span class=\"ds-disc\" style=\"background:#E9EFE2\"></span><span class=\"ds-cap\">Field</span></button><button class=\"ds-swatch\" role=\"radio\" aria-checked=\"false\"><span class=\"ds-disc\" style=\"background:#E4EDF5\"></span><span class=\"ds-cap\">Air</span></button></div>",
+      "css": ".ds-swatches{display:flex;gap:20px;flex-wrap:wrap}.ds-swatch{display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:none;padding:0;cursor:pointer;font:inherit;color:inherit;transition:transform 120ms cubic-bezier(.23,1,.32,1)}.ds-swatch:active{transform:scale(.97)}.ds-disc{width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1px rgb(20 21 15 / .12);display:block}.ds-swatch[aria-checked=\"true\"] .ds-disc{box-shadow:0 0 0 2px #F4F2EE,0 0 0 3.5px #14150F}.ds-cap{font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-cap-on{color:#14150F}.ds-swatch:focus-visible{outline:none}.ds-swatch:focus-visible .ds-disc{box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "The page goes out of focus (Ink 40 percent, 8px blur); the sheet is the one sharp plane, 32px corners, one primary and one tertiary.",
+      "html": "<div class=\"ds-scrim\"><div class=\"ds-sheet\" role=\"dialog\" aria-modal=\"true\" aria-label=\"Edit block\"><span class=\"ds-grab\" aria-hidden=\"true\"></span><h2 class=\"ds-sheet-title\">Edit block</h2><label class=\"ds-field\"><span class=\"ds-label\">Title</span><input class=\"ds-input\" value=\"Conversations 4 and 5\"></label><div class=\"ds-actions\"><button class=\"ds-btn ds-btn-primary\">Save</button><button class=\"ds-btn ds-btn-tertiary\">Remove</button></div></div></div>",
+      "css": ".ds-scrim{position:relative;padding:24px;border-radius:24px;background:rgb(20 21 15 / .4);display:flex;justify-content:center}.ds-sheet{width:100%;max-width:400px;background:#FFFFFF;color:#14150F;border-radius:32px;padding:14px 22px 28px;box-shadow:0 16px 56px rgb(62 73 54 / .10);font-family:'Instrument Sans','Inter',system-ui,sans-serif}.ds-grab{display:block;width:36px;height:4px;border-radius:999px;background:#D6D1C7;margin:0 auto 18px}.ds-sheet-title{margin:0 0 18px;font-size:clamp(1.375rem,1.1rem + 1vw,1.875rem);line-height:1.2;letter-spacing:-.02em;font-weight:500}.ds-field{display:block}.ds-label{display:block;margin-bottom:8px;font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-input{width:100%;box-sizing:border-box;display:block;background:#FFFFFF;border:1px solid #D6D1C7;border-radius:14px;padding:14px 16px;font:400 16px/1.4 'Instrument Sans','Inter',system-ui,sans-serif;color:#14150F;outline:none;appearance:none}.ds-input:focus{border-color:#14150F;box-shadow:0 0 0 3px #FFFFFF,0 0 0 5px rgb(20 21 15 / .4)}.ds-actions{display:flex;align-items:center;gap:18px;margin-top:28px}.ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:14px 28px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;background:transparent;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn-primary{background:#14150F;color:#F4F2EE;box-shadow:0 4px 16px rgb(62 73 54 / .06)}@media (hover:hover) and (pointer:fine){.ds-btn-primary:hover{background:#1E1F17}}.ds-btn-tertiary{padding:10px 6px;color:#55534E;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgb(20 21 15 / .3)}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Paper on the ground with a warm shadow and no border; 24px radius.",
+      "html": "<div class=\"ds-panel\"><span class=\"ds-label\">Cycle-aware planning</span><p class=\"ds-body\">Optional. Stays on this device.</p></div>",
+      "css": ".ds-panel{background:#EAE7E1;border-radius:24px;padding:20px 22px;box-shadow:0 4px 16px rgb(62 73 54 / .06);max-width:420px;font-family:'Instrument Sans','Inter',system-ui,sans-serif}.ds-label{display:block;margin-bottom:8px;font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-body{margin:0;font:400 16px/26px 'Instrument Sans','Inter',system-ui,sans-serif;color:#55534E;max-width:56ch}"
+    },
+    {
+      "name": "Content post card",
+      "kind": "card",
+      "refersTo": "content-post",
+      "description": "A Paper card in the content week: caption line (format in Muted, Posted in Depth) over a 14px title; posted cards fade.",
+      "html": "<div class=\"ds-day\"><button class=\"ds-day-head\"><span class=\"ds-day-name\">Tue</span><span class=\"ds-mono\">2</span></button><button class=\"ds-post\"><span class=\"ds-cap\">Reel</span><span class=\"ds-post-title\">Plan the week with me</span></button><button class=\"ds-post ds-faded\"><span class=\"ds-cap ds-cap-depth\">Posted</span><span class=\"ds-post-title\">Three, not six</span></button></div>",
+      "css": ".ds-day{display:flex;flex-direction:column;gap:8px;padding-bottom:8px;border-bottom:1px dotted #D6D1C7;max-width:220px;font-family:'Instrument Sans','Inter',system-ui,sans-serif}.ds-day-head{display:flex;align-items:baseline;gap:8px;background:none;border:0;padding:6px 0;font:inherit;font-size:15px;color:#14150F;cursor:pointer;text-align:left;min-height:36px}.ds-day-name{font-weight:500}.ds-mono{font:400 11px/16px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.02em;color:#6B675F}.ds-post{display:flex;flex-direction:column;gap:2px;text-align:left;background:#EAE7E1;border:0;border-radius:14px;padding:10px 12px;font:inherit;color:#14150F;cursor:pointer;box-shadow:0 1px 2px rgb(62 73 54 / .04);transition:transform 120ms cubic-bezier(.23,1,.32,1)}.ds-post:active{transform:scale(.98)}.ds-post-title{font-size:14px;line-height:1.35}.ds-cap{font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-cap-depth{color:#3E4936}.ds-faded{opacity:.4}"
+    },
+    {
+      "name": "Error block",
+      "kind": "card",
+      "refersTo": "error",
+      "description": "Ink type on Shell with a 1px Ink left rule. Never red.",
+      "html": "<p class=\"ds-error\" role=\"alert\">The assistant did not answer. Nothing is lost; try again in a moment.</p>",
+      "css": ".ds-error{background:#EFE3D8;border-radius:14px;padding:12px 16px;color:#14150F;font:400 14px/1.5 'Instrument Sans','Inter',system-ui,sans-serif;border-left:1px solid #14150F;margin:0;max-width:420px}"
+    },
+    {
+      "name": "Stats row",
+      "kind": "custom",
+      "refersTo": "numeral-md",
+      "description": "Three numerals with caption labels and mono units; a met target reads Met in Depth; a zero stat sits at 40 percent.",
+      "html": "<div class=\"ds-stats\"><div><span class=\"ds-cap\">This week</span><p class=\"ds-num\">2<span class=\"ds-unit\">/3 priorities</span></p></div><div><span class=\"ds-cap\">Habits</span><p class=\"ds-num\">5<span class=\"ds-unit\">/7</span></p></div><div><span class=\"ds-cap\">To go</span><p class=\"ds-num\">5,900<span class=\"ds-unit\">eur</span></p></div></div>",
+      "css": ".ds-stats{display:flex;flex-wrap:wrap;gap:20px 44px;font-family:'Instrument Sans','Inter',system-ui,sans-serif;color:#14150F}.ds-cap{display:block;margin-bottom:8px;font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-num{margin:0;font-size:clamp(1.875rem,1.4rem + 1.5vw,2.5rem);line-height:1;letter-spacing:-.03em;font-weight:500;font-variant-numeric:tabular-nums}.ds-unit{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:max(.35em,11px);letter-spacing:.02em;color:#6B675F;margin-left:.3em;font-weight:400}"
+    },
+    {
+      "name": "Hairline row with circle check",
+      "kind": "custom",
+      "refersTo": "circle-check",
+      "description": "The list primitive: marker, text, mono count or caption, dotted divider. Done rows fade, never strike.",
+      "html": "<div class=\"ds-rows\"><div class=\"ds-row ds-faded\"><button class=\"ds-check\" role=\"checkbox\" aria-checked=\"true\" aria-label=\"Sales page live\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg></button><span>Sales page live</span><span class=\"ds-cap\">Business</span></div><div class=\"ds-row\"><button class=\"ds-check\" role=\"checkbox\" aria-checked=\"false\" aria-label=\"Five sales conversations booked\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg></button><span>Five sales conversations booked</span><span class=\"ds-cap\">Business</span></div><div class=\"ds-row\"><button class=\"ds-check\" role=\"checkbox\" aria-checked=\"false\" aria-label=\"Run\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg></button><span>Run</span><span class=\"ds-numsm\">2<span class=\"ds-unit\">/3</span></span></div></div>",
+      "css": ".ds-rows{display:flex;flex-direction:column;max-width:420px;font:400 16px/1.4 'Instrument Sans','Inter',system-ui,sans-serif;color:#14150F}.ds-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px dotted #D6D1C7}.ds-rows>.ds-row:last-child{border-bottom:0}.ds-faded{opacity:.4;transition:opacity 200ms cubic-bezier(.23,1,.32,1)}.ds-cap{font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-numsm{font-size:1.375rem;line-height:1;letter-spacing:-.02em;font-weight:500;font-variant-numeric:tabular-nums}.ds-unit{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:max(.35em,11px);letter-spacing:.02em;color:#6B675F;margin-left:.3em;font-weight:400}.ds-check{width:24px;height:24px;min-width:24px;border-radius:50%;padding:0;cursor:pointer;display:inline-grid;place-items:center;border:1px solid #D6D1C7;background:transparent;color:#F4F2EE;position:relative;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1),border-color 160ms cubic-bezier(.23,1,.32,1)}.ds-check::after{content:\"\";position:absolute;inset:-10px}.ds-check:active{transform:scale(.97)}.ds-check[aria-checked=\"true\"]{background:#14150F;border-color:#14150F}.ds-check svg{width:11px;height:11px;opacity:0;transition:opacity 160ms cubic-bezier(.23,1,.32,1)}.ds-check[aria-checked=\"true\"] svg{opacity:1}.ds-check:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}"
+    },
+    {
+      "name": "Day dots, kind dots and step dots",
+      "kind": "custom",
+      "refersTo": "day-dot",
+      "description": "32px day circles (pressed fills Haze, planned is a dashed Muted ring), 10px kind dots by hairline grammar, and the 8px step row.",
+      "html": "<div class=\"ds-days\"><button class=\"ds-day\" aria-pressed=\"true\">1</button><button class=\"ds-day\" aria-pressed=\"true\">2</button><button class=\"ds-day\">3</button><button class=\"ds-day ds-planned\">4</button><button class=\"ds-day\" disabled>5</button><button class=\"ds-day\" disabled>6</button><button class=\"ds-day\" disabled>7</button></div><div class=\"ds-kinds\"><span class=\"ds-kind\" data-kind=\"priority\"></span><span class=\"ds-kind\" data-kind=\"ritual\"></span><span class=\"ds-kind\" data-kind=\"event\"></span><span class=\"ds-kind\" data-kind=\"rest\"></span></div><div class=\"ds-dots\" role=\"list\"><span class=\"ds-dot\" data-state=\"done\"></span><span class=\"ds-dot\" data-state=\"done\"></span><span class=\"ds-dot\" data-state=\"current\"></span><span class=\"ds-dot\"></span><span class=\"ds-dot\"></span></div>",
+      "css": ".ds-days{display:grid;grid-template-columns:repeat(7,32px);gap:6px;margin-bottom:24px}.ds-day{position:relative;width:32px;height:32px;border-radius:50%;border:1px solid #D6D1C7;background:transparent;color:#55534E;font:500 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.02em;cursor:pointer;padding:0;display:grid;place-items:center;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1),color 160ms cubic-bezier(.23,1,.32,1)}.ds-day::after{content:\"\";position:absolute;inset:-6px}.ds-day:active{transform:scale(.97)}.ds-day[aria-pressed=\"true\"]{background:#C6D0B8;color:#14150F;border-color:#C6D0B8}.ds-day.ds-planned{border-style:dashed;border-color:#6B675F}.ds-day:disabled{opacity:.4;cursor:default}.ds-day:focus-visible{outline:none;box-shadow:0 0 0 3px #F4F2EE,0 0 0 5px rgb(20 21 15 / .4)}.ds-kinds{display:flex;gap:14px;margin-bottom:24px}.ds-kind{width:10px;height:10px;border-radius:50%;border:1px solid #D6D1C7;display:block}.ds-kind[data-kind=\"priority\"]{background:#14150F;border-color:#14150F}.ds-kind[data-kind=\"ritual\"]{border-color:#6B675F}.ds-kind[data-kind=\"event\"]{border-color:#55534E}.ds-kind[data-kind=\"rest\"]{border-style:dotted}.ds-dots{display:flex;align-items:center;gap:10px}.ds-dot{width:8px;height:8px;border-radius:50%;border:1px solid #D6D1C7;background:transparent;display:block}.ds-dot[data-state=\"done\"]{background:#14150F;border-color:#14150F}.ds-dot[data-state=\"current\"]{background:#14150F;border-color:#14150F;box-shadow:0 0 0 3px #F4F2EE,0 0 0 4px rgb(20 21 15 / .25)}"
+    },
+    {
+      "name": "Aperture ring",
+      "kind": "custom",
+      "refersTo": "numeral-md",
+      "description": "Progress is an arc from twelve: dotted Stone track filling its box, Haze-to-Focus value, a rim tick, caption and numeral with mono unit at centre. The dial sweeps 294 degrees and never closes.",
+      "html": "<div class=\"ds-ring\"><svg viewBox=\"8 8 184 184\" aria-hidden=\"true\"><defs><linearGradient id=\"ds-depth\" x1=\"0.1\" y1=\"0\" x2=\"0.9\" y2=\"1\"><stop offset=\"0\" stop-color=\"#C6D0B8\"/><stop offset=\".6\" stop-color=\"#98A886\"/><stop offset=\"1\" stop-color=\"#6E7F5E\"/></linearGradient></defs><circle cx=\"100\" cy=\"100\" r=\"78\" fill=\"none\" stroke=\"rgb(20 21 15 / .16)\" stroke-width=\"2\" stroke-dasharray=\"1.5 5\" stroke-linecap=\"round\" transform=\"rotate(-90 100 100)\"/><circle cx=\"100\" cy=\"100\" r=\"78\" fill=\"none\" stroke=\"url(#ds-depth)\" stroke-width=\"12\" stroke-linecap=\"round\" transform=\"rotate(-90 100 100)\" stroke-dasharray=\"490.09\" stroke-dashoffset=\"385.1\"/><line x1=\"100\" y1=\"34\" x2=\"100\" y2=\"10\" stroke=\"currentColor\" stroke-width=\"1\" transform=\"rotate(77.2 100 100)\"/></svg><div class=\"ds-ring-c\"><span class=\"ds-cap\">to go</span><span class=\"ds-num\">5,900<span class=\"ds-unit\">eur</span></span></div></div>",
+      "css": ".ds-ring{position:relative;width:200px;height:200px;color:#14150F;font-family:'Instrument Sans','Inter',system-ui,sans-serif}.ds-ring svg{display:block;width:100%;height:100%}.ds-ring-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}.ds-cap{font:500 11px/16px 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.06em;color:#6B675F}.ds-num{font-size:clamp(1.875rem,1.4rem + 1.5vw,2.5rem);line-height:1;letter-spacing:-.03em;font-weight:500;font-variant-numeric:tabular-nums}.ds-unit{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:max(.35em,11px);letter-spacing:.02em;color:#6B675F;margin-left:.3em;font-weight:400}"
+    },
+    {
+      "name": "Kept line",
+      "kind": "custom",
+      "refersTo": "mono",
+      "description": "A number's history over six months: dotted Stone scaffold, one 2px Ink Catmull-Rom curve, a Focus fill at 12 percent, a 6px dot on the month being read, 10px mono axis, mono captions at the corners.",
+      "html": "<div class=\"ds-kept\"><span class=\"ds-kept-cap ds-kept-hi\">2,600 eur</span><span class=\"ds-kept-cap ds-kept-lo\">0 eur</span><svg viewBox=\"0 0 320 96\" role=\"img\" aria-label=\"Kept per month, 6 months\"><defs><linearGradient id=\"ds-kept-f\" x1=\"0\" y1=\"0\" x2=\"0.3\" y2=\"1\"><stop offset=\"0\" stop-color=\"#6E7F5E\" stop-opacity=\".12\"/><stop offset=\"1\" stop-color=\"#E2E7DA\" stop-opacity=\"0\"/></linearGradient></defs><line x1=\"0\" x2=\"320\" y1=\"16\" y2=\"16\" class=\"ds-kept-scaffold\"/><line x1=\"0\" x2=\"320\" y1=\"52\" y2=\"52\" class=\"ds-kept-scaffold\"/><line x1=\"0\" x2=\"320\" y1=\"88\" y2=\"88\" class=\"ds-kept-scaffold\"/><path d=\"M 26.7 58.3 C 35.6 55.8 62.2 42.3 80.0 43.5 C 97.8 44.7 115.5 68.2 133.3 65.7 C 151.1 63.2 168.9 33.6 186.7 28.7 C 204.5 23.8 222.2 36.9 240.0 36.1 C 257.8 35.3 284.4 25.8 293.3 23.7 L 293.3 88 L 26.7 88 Z\" fill=\"url(#ds-kept-f)\"/><path d=\"M 26.7 58.3 C 35.6 55.8 62.2 42.3 80.0 43.5 C 97.8 44.7 115.5 68.2 133.3 65.7 C 151.1 63.2 168.9 33.6 186.7 28.7 C 204.5 23.8 222.2 36.9 240.0 36.1 C 257.8 35.3 284.4 25.8 293.3 23.7\" class=\"ds-kept-line\"/><circle cx=\"293.3\" cy=\"23.7\" r=\"3\" fill=\"#14150F\"/></svg><div class=\"ds-kept-axis\"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span class=\"is-read\">Sep</span></div></div>",
+      "css": ".ds-kept{position:relative;max-width:560px;margin-top:6px}.ds-kept svg{display:block;width:100%;height:auto}.ds-kept-scaffold{stroke:#D6D1C7;stroke-width:1;stroke-dasharray:1.5 5;stroke-linecap:round;vector-effect:non-scaling-stroke}.ds-kept-line{fill:none;stroke:#14150F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}.ds-kept-cap{position:absolute;font:500 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.06em;color:#6B675F;font-variant-numeric:tabular-nums}.ds-kept-hi{right:0;top:-4px}.ds-kept-lo{left:0;bottom:calc(8.5% + 20px)}.ds-kept-axis{display:grid;grid-template-columns:repeat(6,1fr);margin-top:6px}.ds-kept-axis span{font:400 10px/14px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.02em;text-align:center;color:#6B675F}.ds-kept-axis .is-read{color:#14150F}"
+    },
+    {
+      "name": "Bubble field",
+      "kind": "custom",
+      "refersTo": "sage",
+      "description": "One Sage circle per real session or post; size is magnitude, blur and opacity are recency. Data, never decoration.",
+      "html": "<div class=\"ds-bubbles\" role=\"img\" aria-label=\"5 sessions, oldest to newest\"><span style=\"width:22px;height:22px;opacity:.35;filter:blur(3px)\"></span><span style=\"width:38px;height:38px;opacity:.51;filter:blur(2.3px)\"></span><span style=\"width:30px;height:30px;opacity:.68;filter:blur(1.5px)\"></span><span style=\"width:46px;height:46px;opacity:.84;filter:blur(.8px)\"></span><span style=\"width:38px;height:38px;opacity:1;filter:blur(0)\"></span></div>",
+      "css": ".ds-bubbles{height:80px;display:flex;align-items:center;gap:18px}.ds-bubbles span{display:block;border-radius:50%;background:#98A886;flex-shrink:0}"
+    },
+    {
+      "name": "Empty state",
+      "kind": "custom",
+      "refersTo": "stone",
+      "description": "A dotted aperture outline and one line. No illustration; at most one action.",
+      "html": "<div class=\"ds-empty\"><svg width=\"64\" height=\"64\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#D6D1C7\" stroke-width=\"2\" stroke-dasharray=\"1.5 6\" stroke-linecap=\"round\"/></svg><p class=\"ds-h2\">Your week is not set yet.</p><p class=\"ds-body\"><span class=\"ds-mono\">20 minutes</span> on Sunday. Monday starts clear.</p><button class=\"ds-btn ds-btn-primary\">Walk in</button></div>",
+      "css": ".ds-empty{display:flex;flex-direction:column;align-items:flex-start;gap:22px;max-width:420px;font-family:'Instrument Sans','Inter',system-ui,sans-serif;color:#14150F}.ds-empty svg{display:block;opacity:.7}.ds-h2{margin:0;font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem);line-height:1.12;letter-spacing:-.025em;font-weight:500;max-width:18ch}.ds-body{margin:0;font:400 16px/26px 'Instrument Sans','Inter',system-ui,sans-serif;color:#55534E}.ds-mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}.ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:14px 28px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Instrument Sans','Inter',system-ui,sans-serif;letter-spacing:.005em;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 160ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn-primary{background:#14150F;color:#F4F2EE;box-shadow:0 4px 16px rgb(62 73 54 / .06)}@media (hover:hover) and (pointer:fine){.ds-btn-primary:hover{background:#1E1F17}}"
+    },
+    {
+      "name": "The Conversation Card (signature)",
+      "description": "Sales only. An open conversation as a Paper card (radius 20, warm shadow, no border) with a 22px stage ring that fills in sage towards Won, the text column and a circle check. Drag right reveals the next stage on a Haze wash and commits at 96px or a flick over 0.11px/ms; drag left parks it as Not now; friction past 132px; no transition while the finger moves, 260ms strong ease-out snap back, 180ms leave. The check crossfades (140ms, 2px blur) into an inline next-step form with three date chips. Won opens a sheet where the Aperture mark plays and the value counts up over 700ms; Done logs the sale.",
+      "html": "<div class=\"ds-lead-wrap\"><div class=\"ds-lead-under\"><span>Proposal out</span><span>Not now</span></div><div class=\"ds-lead\" role=\"button\" tabindex=\"0\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"none\" stroke=\"rgb(20 21 15 / .16)\" stroke-width=\"3\" stroke-dasharray=\"2 8\"/><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"none\" stroke=\"#C6D0B8\" stroke-width=\"11\" stroke-linecap=\"round\" transform=\"rotate(-90 50 50)\" stroke-dasharray=\"251\" stroke-dashoffset=\"125\"/></svg><span><span class=\"ds-name\">Anke V.</span><span class=\"ds-cap\">Strategy session · <span class=\"ds-mono\">600 eur</span></span><span class=\"ds-small\">Send two dates <span class=\"ds-mono\">3 Sep</span></span></span><button class=\"ds-check\" role=\"checkbox\" aria-checked=\"false\" aria-label=\"Send two dates done. Set the next one\"></button></div></div>",
+      "kind": "card",
+      "refersTo": "conversation-card",
+      "css": ".ds-lead-wrap{position:relative;border-radius:20px}.ds-lead-under{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 22px;border-radius:inherit;color:#3E4936;font-weight:500;opacity:0}.ds-lead{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:start;background:#EAE7E1;border-radius:20px;padding:16px 18px;box-shadow:0 4px 16px rgb(62 73 54/.06);touch-action:pan-y;user-select:none}.ds-lead>svg{margin-top:3px}.ds-name{display:block;font-size:16px;font-weight:500}.ds-small{display:block;font-size:14px;margin-top:4px}"
+    },
+    {
+      "name": "Horizons (Goals)",
+      "kind": "pattern",
+      "refersTo": "goals-horizons",
+      "description": "Goals seen at four distances (Year, Quarter, Month, Week) under one segmented pill. Each horizon opens with a time overline and an aperture ring of elapsed time with radial hairline ticks for its divisions. Year: the word for the year as the typographic event, three outcomes per lane with stage rings that fill as quarter goals serving them land. Quarter: measurable rings are the tap target for one more; a new goal opens its sheet with a live preview ring and unit chips. Month: an inline focus line, the quarter's goals as Haze chips, and every week of the month as a row of priorities. Week: the three priorities with the goal and year outcome they serve.",
+      "html": "<div class=\"ds-segments\" role=\"tablist\"><button class=\"ds-segment\" role=\"tab\" aria-selected=\"false\">Year</button><button class=\"ds-segment\" role=\"tab\" aria-selected=\"true\">Quarter</button><button class=\"ds-segment\" role=\"tab\" aria-selected=\"false\">Month</button><button class=\"ds-segment\" role=\"tab\" aria-selected=\"false\">Week</button></div>",
+      "css": ".ds-word{font-size:clamp(2.75rem,2rem + 4vw,5.5rem);line-height:1;letter-spacing:-.035em;font-weight:500}.ds-chip-haze[aria-pressed=true]{background:#C6D0B8;color:#14150F}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A Soft Field, One Sharp Thing",
+    "overview": "**Creative North Star: \"A Soft Field, One Sharp Thing\"**\n\nPretty Focussed is built on depth of field. Nothing on a screen is removed, greyed or struck out; one plane is brought forward and everything else is held soft, warm and present. The whole app now lives in that world: the Field (home), Today, Goals, Money (Revenue, Sales and Finance as three readings of one page), Success habits, Content, Recap and Settings under one shell, the Login room in front of it, and the Weekly Session in its own fixed room at `/session`. Every page shows the idea the same way: a warm ground with a blurred sage-and-shell field under it, one overline and one declarative headline that ends in a full stop, three numerals with tiny mono units, hairline rows, an aperture for anything that is progress, one Ink line where a number has a history, and one small dense Ink object. The mood is relief, then competence. It never asks for urgency and never rewards with noise.\n\nDensity is low and deliberate. Every screen is one reading with one next step, phone first, a 560px reading column for most pages and a 1120px canvas only where the Field, Goals and Content need room to sit asymmetrically. The largest empty space sits above or beside the primary statement. Hierarchy comes from density and scale, not from colour: the whole system passes a greyscale test because green is a state marker and Ink is the only accent object. The floating Ink nav pill is the app's standing Full Stop; a page adds one Ink pill of its own only when it has a single obvious next step. She may change the room (four grounds: Plaster, Travertine, Field, Air); the instrument, the sage scale, Ink and the nav pill never change. The pre-existing Laurence OS pages remain reachable from Settings under \"More\", re-themed through `src/index.css` but not rebuilt to this component set.\n\nConfirmed visual rejections, taken from the pinned kit and honoured by the build: no white ground, no pure black, no cool grey, no red or amber, no borders on cards, no radius under 14px, no horizontal progress bars, no spinners, no shimmer, no strikethrough, no confetti, no streaks, no illustration in empty states, no serif, no italics, no bold.",
+    "keyCharacteristics": [
+      "Warm ground (Bone by default, or Travertine, Field or Air) with an occupied atmosphere: a blurred radial field and 3.5 percent grain, never a flat void.",
+      "One floating Ink nav pill, bottom-centre on phones and top-centre from 768px, that never animates on change; at most one further Ink pill per page, and exactly one inside any sheet.",
+      "One nav item may hold several readings: Money switches Revenue, Sales and Finance with a Paper segmented pill whose chosen segment is Ink. That segment counts as the page's Ink object, so all three readings keep their primaries inside sheets.",
+      "One grotesque, two weights (Instrument Sans 400 and 500) with a 6:1 scale jump from numeral to label; JetBrains Mono for units, times and counts only.",
+      "Every screen opens the same way: one overline (\"Section · qualifier\"), one declarative headline ending in a full stop, then a stats row of three numerals with mono units.",
+      "Green is the sage depth scale (Veil to Depth) and encodes state; Depth is the only green that carries type, and only for Held, Met, Complete, Posted and Paid.",
+      "Progress is an arc from twelve o'clock; steps are a row of dots; loading is a single orbiting arc segment; history is a bubble field where blur and opacity are recency, or, over months, one 2px Ink curve on dotted scaffold.",
+      "The periphery goes soft (opacity .55, blur 2px) or dim (opacity .55, no blur), the completed goes faded (opacity .4); nothing is hidden or crossed out, and hover or focus lifts anything soft back to sharp.",
+      "Circles, pills and superellipses only; surfaces by tone and a warm-tinted shadow, never a border; kind is carried by hairline grammar, never by shade.",
+      "Product motion under 300ms on one ease-out curve (sheets 260ms on the sheet curve); the brand mark alone runs on the 600 to 900ms brand clock; destructive actions hold to confirm for 1.6s."
+    ],
+    "rules": [
+      {
+        "name": "The Full Stop Rule",
+        "body": "The nav pill is the app's standing Full Stop. A page may carry one more filled Ink pill, and only when it has a single next step (\"Walk in\", \"Open today\", \"Plan a post\", \"Write the recap\"); Today, Goals, Money (Revenue, Sales and Finance), Success habits and Settings carry none and put their primary inside a sheet, where the scrim has blurred the nav. A segmented control's chosen segment is an Ink fill and counts as the page's one, which is why Money never carries an Ink pill of its own. Never two filled buttons on one page or in one sheet. Ink may otherwise appear only as text or as a state mark under 24px. A chosen day dot fills with Haze, never Ink, so it cannot become a second full stop.",
+        "section": "colors"
+      },
+      {
+        "name": "The Instrument Never Changes Rule",
+        "body": "She picks the room, not the instrument. A ground re-values `--ground` and `--surface` and nothing else; the sage scale, Ink, Stone, the nav pill and the recap card are the same in every room and both themes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Green Is a State Rule",
+        "body": "Sage tones appear only where a value is being encoded: the ring's arc, a chosen day, a bubble in a field, a cycle phase beside its day label, the fill under the kept line, the loading arc, the mark. Never as a surface tint for its own sake, never as text below Depth, and Depth text only for Held, Met, Complete, Posted and Paid.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Red Rule",
+        "body": "There is no warning colour. Errors sit as Ink type on Shell; destructive actions are a two-step tertiary Remove or a hold-to-confirm sweep in Ink; attention is drawn by sharpness, not hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Neutral Rule",
+        "body": "Every neutral is warm (hue 39 to 43). No Tailwind gray, slate or zinc; no pure black on pure white.",
+        "section": "colors"
+      },
+      {
+        "name": "The Unit Rule",
+        "body": "Every numeral carries its unit in mono at 35 percent of its size with an 11px floor, set in Muted. \"20\" is never on screen; \"20 min\" is.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Overline, One Headline Rule",
+        "body": "Each screen opens with exactly one overline and one headline. The overline names the section and its qualifier with a middle dot; the headline states a fact and ends in a full stop. Nothing else on the page uses either style.",
+        "section": "typography"
+      },
+      {
+        "name": "The Skip-a-Step Rule",
+        "body": "Adjacent sizes never sit together. A screen pairs numeral with label, headline with overline, never headline with title. One typographic event per screen.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two Weights Rule",
+        "body": "400 for reading, 500 for what is current, named or pressed. There is no third weight, no italic and no serif anywhere in the product.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tone-Not-Border Rule",
+        "body": "Surfaces are defined by tone and a warm shadow. The only 1px strokes are hairlines that mean something: a row divider, an input edge, a secondary button's ring, a dot's track, a toggle's off track.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Focal Plane Rule",
+        "body": "The periphery goes soft, never grey and never hidden: `opacity: .55; filter: blur(2px)` for what has passed, `opacity: .55` alone for what is still to come, `opacity: .4` for what is done. Blur never touches text being read or a control being operated, it is capped at 4px on product UI (3px in bubble fields), and hover or focus-within lifts a soft element to sharp. Under reduced motion the blur drops to none and opacity alone carries the hierarchy.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Out-of-Focus Scrim Rule",
+        "body": "A sheet or modal blurs the page behind it (8px) under Ink at 40 percent. The page is not dimmed to black; it goes soft, and the sheet is the one sharp plane.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Warm Shadow Rule",
+        "body": "Every shadow is `rgb(62 73 54 / a)` with a at 10 percent or below. Grey and black shadows exist only in the dark theme, where they are the ground's own colour.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do treat the nav pill as the standing Full Stop: at most one further Ink pill per page, only for the single next step, and exactly one primary inside a sheet.",
+      "Do open every screen with one overline (\"Section · qualifier\", 10px, +0.14em, uppercase) and one declarative headline that ends in a full stop.",
+      "Do set every numeral with its unit in JetBrains Mono at max(0.35em, 11px), Muted, +0.02em, and build a stats row as three such numerals with caption labels.",
+      "Do use the depth scale for chosen or planned state (Haze light, Focus dark), Sage for bubbles, Focus at 12 percent under the kept line, and Depth text only for Held, Met, Complete, Posted and Paid.",
+      "Do soften what has passed with `opacity: .55; filter: blur(2px)`, dim what is to come with `opacity: .55`, fade what is done to `opacity: .4`, and let hover or focus lift anything soft back to sharp.",
+      "Do carry kind by hairline grammar: solid Ink dot for a priority, Muted ring for a habit, Slate ring for an event, dotted ring for admin and rest, dashed ring for a planned day.",
+      "Do draw progress as an arc from twelve o'clock in a `8 8 184 184` viewbox with a dotted track, a gradient value and a rim tick; draw loading as one orbiting arc segment at 900ms; draw history as a bubble field where blur and opacity are recency.",
+      "Do draw a number's history over months as the kept line: three dotted Stone scaffold lines, one 2px Ink Catmull-Rom curve, a Focus fill at 12 percent fading to nothing, a 6px Ink dot on the month being read, 10px mono month labels and mono value captions at the corners, and only once two months have data.",
+      "Do switch readings inside one nav item with the segmented control (a content-sized Paper pill, 4px padding, one Ink segment in the button style) and count the chosen segment as the page's Ink object.",
+      "Do put a sheet's page out of focus (Ink 40 percent, 8px backdrop blur), slide it up on phones over 260ms on the sheet curve and grow it from `scale(.96)` on desktop.",
+      "Do make destruction a two-step tertiary Remove or a 1600ms hold-to-remove sweep in Ink.",
+      "Do scale every pressable to 0.97 on `:active` over 120ms, give every control a 44px hit area, and gate hover behind `(hover: hover) and (pointer: fine)`.",
+      "Do keep every radius at 14px or above: pill 999, input 14, card 20, panel 24, sheet 32.",
+      "Do tint every shadow with Depth green `rgb(62 73 54)` at 10 percent or below in light mode: small for toggles and post cards, medium for pills and panels, large for the nav pill, extra large for the sheet.",
+      "Do put field labels above the input in the label style (11px, +0.06em, Muted) and keep placeholders as hints only.",
+      "Do re-value only `--ground` and `--surface` when adding a room; consume semantic tokens (`--ground`, `--text-2`, `--action`, `--depth-1`) in components; primitives (`--pf-*`) are reached only by the token map and the focus ring.",
+      "Do give every empty state a dotted aperture outline, one line (\"Nothing yet.\") and at most one action.",
+      "Do write copy declarative and spare, opening with the answer: \"Three is enough. Finish one first.\""
+    ],
+    "donts": [
+      "Don't use a white page ground, pure black, a cool grey, red or amber anywhere; White is the elevated surface only (inputs, the toggle knob, the sheet).",
+      "Don't put a second filled button on a page or in a sheet, leave a page chip pressed, or animate the nav pill on change.",
+      "Don't use Sage, Haze or Veil as text; Depth is the only green that may carry type, and only for Held, Met, Complete, Posted and Paid.",
+      "Don't draw a horizontal progress bar, a spinner, a shimmer, a strikethrough, a badge, a streak, confetti or an illustration in an empty state.",
+      "Don't put a border on a panel, card, sheet or post card; the error block's 1px Ink left rule is the only surface border.",
+      "Don't introduce a third weight, an italic, a serif or a display face; the loaded set is Instrument Sans 400 and 500 and JetBrains Mono 400.",
+      "Don't blur text being read or a control being operated, and never exceed 4px blur on product UI (3px in a bubble field).",
+      "Don't animate a high-frequency action, exceed 300ms on product UI (the hold-to-remove sweep is the one exception), use `ease-in`, or `transition: all`.",
+      "Don't let green be the sole carrier of meaning; pair every state colour with a numeral and its unit, a hairline mark or a label.",
+      "Don't use a chevron as decoration; the only chevrons are the select arrow and the bare 44px period controls.",
+      "Don't draw a chart with bars, an axis line, tick marks, a gridline heavier than the dotted scaffold, a second series, a tooltip or a value colour other than Ink.",
+      "Don't give a segmented control an underline, a colour, a sliding indicator or the full column width, and don't add an Ink pill to a page whose segment is already Ink.",
+      "Don't let a ground change anything but `--ground` and `--surface`, or let the recap card follow the room or the theme.",
+      "Don't use exclamation marks, emoji, ellipses, question-mark headlines or softeners in product copy."
+    ]
+  }
+}

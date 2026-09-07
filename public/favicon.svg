@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect width="48" height="48" rx="8" fill="#121316"/>
+  <!-- Vertical stem -->
+  <rect x="13" y="11" width="6" height="27" rx="1" fill="#F4F4F2"/>
+  <!-- Horizontal foot -->
+  <rect x="13" y="32" width="22" height="6" rx="1" fill="#F4F4F2"/>
+</svg>

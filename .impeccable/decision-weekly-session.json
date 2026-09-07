@@ -1,0 +1,162 @@
+{
+  "title": "Choose the visual world for the Weekly Session",
+  "question": "The roll assigned The Turndown Card. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Turndown Card",
+      "kicker": "THE ROLL",
+      "lineage": "hotel turndown cards left on the pillow at night",
+      "thesis": "The Weekly Session is turndown service for her week: someone prepared tomorrow while she was out.",
+      "palette": ["#F7F0E8", "#33201A", "#C96F8B", "#F8DFE6"],
+      "materials": ["thick uncoated card stock", "blind-embossed monogram", "one line in ink"],
+      "viewport": "Phone, full screen, no sidebar. A single cream card fills the frame with a blind-embossed pf. at top, WEEK 37 in small tracked caps, one italic line in the concierge's hand (\"Good evening. Let's turn your week down.\"), and the five steps printed as a short list with hairline rules; the first step is the only filled mark and the card's one dark button reads Begin. Every step is a new card placed on the same pillow: same frame, new contents.",
+      "risk": "Cream card plus italic serif is where this brand already lives; if the card is not physically convincing (weight, emboss, hairlines) it collapses into a generic cream wizard.",
+      "raised": [
+        { "from": "challenger-centre-rail", "raise": "Every state is a printed mark: an empty square at rest, filled when chosen, struck through when spent; hairlines drawn at one device pixel, no rounded corners on marks." },
+        { "from": "challenger-tensegrity", "raise": "Every priority shows the goal it pulls on, and every ritual the life lane it protects; the week card reads as balanced or leaning, never as a neutral list." },
+        { "from": "challenger-arcade", "raise": "Rose is reserved by law for the one thing that matters now: the current step's mark, the day's one priority, the sale that closed the gap." },
+        { "from": "challenger-oscilloscope", "raise": "The generated week sits on one fixed seven-day graticule at the same scale every time; completing the session locks it still, like a triggered trace." },
+        { "from": "challenger-pc98", "raise": "The card frame never moves; navigation swaps the card's contents, and the exit of one card is the entrance of the next." }
+      ],
+      "wireframe": { "cols": 6, "rows": 12, "regions": [
+        { "label": "pf. monogram", "x": 0, "y": 0, "w": 2, "h": 1 },
+        { "label": "WEEK 37", "x": 4, "y": 0, "w": 2, "h": 1 },
+        { "label": "concierge line (italic)", "x": 0, "y": 2, "w": 6, "h": 2, "accent": true },
+        { "label": "1 Look back", "x": 0, "y": 5, "w": 6, "h": 1 },
+        { "label": "2 Money", "x": 0, "y": 6, "w": 6, "h": 1 },
+        { "label": "3 Your three", "x": 0, "y": 7, "w": 6, "h": 1 },
+        { "label": "4 Rituals", "x": 0, "y": 8, "w": 6, "h": 1 },
+        { "label": "5 Your week", "x": 0, "y": 9, "w": 6, "h": 1 },
+        { "label": "Begin", "x": 0, "y": 11, "w": 6, "h": 1, "accent": true }
+      ] },
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "model-pick",
+      "label": "The Class Schedule",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "the studio booking board she already uses every week",
+      "thesis": "The session is Sunday's 7pm class; steps are the class sequence, and booking it is the commitment.",
+      "palette": ["#F7F0E8", "#33201A", "#C96F8B", "#F2C9D4"],
+      "materials": ["time-slot rows", "instructor chip", "book button"],
+      "viewport": "Phone, full screen. A schedule column for Sunday with one highlighted slot, Weekly Session · 20 min, and the five steps as a class sequence beneath it; Book is the primary action and each step then opens as its own slot card.",
+      "risk": "It is the screen she already knows, which is also why most runs in this category land near it; it can read as a booking app rather than as her own studio.",
+      "wireframe": { "cols": 6, "rows": 12, "regions": [
+        { "label": "SUNDAY 7 SEPT", "x": 0, "y": 0, "w": 6, "h": 1 },
+        { "label": "19:00 Weekly Session · 20 min", "x": 0, "y": 2, "w": 6, "h": 2, "accent": true },
+        { "label": "sequence: look back", "x": 0, "y": 5, "w": 6, "h": 1 },
+        { "label": "money", "x": 0, "y": 6, "w": 6, "h": 1 },
+        { "label": "your three", "x": 0, "y": 7, "w": 6, "h": 1 },
+        { "label": "rituals", "x": 0, "y": 8, "w": 6, "h": 1 },
+        { "label": "your week", "x": 0, "y": 9, "w": 6, "h": 1 },
+        { "label": "Book", "x": 0, "y": 11, "w": 6, "h": 1, "accent": true }
+      ] },
+      "comp": ".impeccable/mocks/decision/model-pick.webp"
+    },
+    {
+      "id": "challenger-centre-rail",
+      "label": "Centre-Rail Reference Setting",
+      "verdict": "competitive",
+      "lineage": "wide-margin scholarly editions ruled by a ruling engine",
+      "thesis": "The session as a keyed reference page: two short columns around a rail of keys, every state a printed mark.",
+      "palette": ["#F7F0E8", "#33201A", "#C96F8B"],
+      "materials": ["bone paper", "one rubric accent", "hairline rules at one device pixel"],
+      "viewport": "Phone: the rail goes outboard; a narrow text measure with keyed steps 1 to 5 down the margin, detents cut where the flow changes, and the current key filled in rose.",
+      "case": "Fuses cleanly on clarity: keys, detents and printed-mark states carry a guided flow with no chrome. Loses on identification: she does not see herself in a scholarly apparatus.",
+      "risk": "Reads as a document to study rather than a session to walk through.",
+      "wireframe": { "cols": 6, "rows": 12, "regions": [
+        { "label": "rail: keys 1-5", "x": 0, "y": 0, "w": 1, "h": 12, "accent": true },
+        { "label": "step text column", "x": 1, "y": 1, "w": 5, "h": 6 },
+        { "label": "apparatus small caps", "x": 1, "y": 8, "w": 5, "h": 2 },
+        { "label": "next detent", "x": 1, "y": 11, "w": 5, "h": 1 }
+      ] },
+      "comp": ".impeccable/mocks/decision/challenger-centre-rail.webp",
+      "hero": "https://impeccable.style/worlds/cards/rw-centre-rail-reference-setting-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/rw-centre-rail-reference-setting.webp"
+    },
+    {
+      "id": "challenger-cape",
+      "label": "Drawcord Cape",
+      "verdict": "competitive",
+      "lineage": "a silk cape with hidden drawcord channels",
+      "thesis": "Five inputs lie flat; one pull of the cord gathers them into the shape of a week.",
+      "palette": ["#33201A", "#C96F8B", "#F7F0E8"],
+      "materials": ["matte silk ground", "one cord as control", "channel stitching"],
+      "viewport": "Phone: goals, revenue, rituals and calendar laid flat as stitched channels; a single cord handle at the bottom; pulling it gathers the plane into the week.",
+      "case": "Holds identification: the material world of a woman whose friends dress well. Loses on clarity: five steps of honest data entry do not survive as a single pull.",
+      "risk": "Black silk and gold conflict with the cream studio; translated to cream and rose it risks becoming decoration on a form.",
+      "wireframe": { "cols": 6, "rows": 12, "regions": [
+        { "label": "channel: goals", "x": 0, "y": 1, "w": 6, "h": 2 },
+        { "label": "channel: money", "x": 0, "y": 3, "w": 6, "h": 2 },
+        { "label": "channel: rituals", "x": 0, "y": 5, "w": 6, "h": 2 },
+        { "label": "channel: calendar", "x": 0, "y": 7, "w": 6, "h": 2 },
+        { "label": "cord handle: pull", "x": 2, "y": 10, "w": 2, "h": 2, "accent": true }
+      ] },
+      "comp": ".impeccable/mocks/decision/challenger-cape.webp",
+      "hero": "https://impeccable.style/worlds/cards/textiles-weave-drape-fashion-drawcord-transforming-cape-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/textiles-weave-drape-fashion-drawcord-transforming-cape.webp"
+    },
+    {
+      "id": "challenger-tensegrity",
+      "label": "Tensegrity Column",
+      "verdict": "declined",
+      "lineage": "carbon rods and red cord held apart by opposing forces",
+      "thesis": "Business and life as opposing tensions that hold the week rigid.",
+      "palette": ["#1A1A1A", "#B0463F", "#D9D6D0"],
+      "materials": ["carbon rods", "red cord", "concrete ground"],
+      "case": "The two-lane idea is apt, but she does not identify with an engineering bench, and a force diagram hides the task.",
+      "kept": "Every priority traces to the goal it pulls on; every ritual to the lane it protects.",
+      "hero": "https://impeccable.style/worlds/cards/kinetic-sculpture-automata-tensegrity-breathing-column-hero.webp"
+    },
+    {
+      "id": "challenger-arcade",
+      "label": "CRT Arcade Pixel Glow",
+      "verdict": "declined",
+      "lineage": "phosphor arcade cabinets",
+      "thesis": "The week as a tile-grid stage under scanlines.",
+      "palette": ["#000000", "#FFD23F", "#2FBF71", "#FF3B6B"],
+      "materials": ["fat pixels", "scanlines", "phosphor bloom"],
+      "case": "Loses both axes: wrong audience, and a guided session cannot live on a 240-line playfield.",
+      "kept": "One colour reserved by law for the thing that matters now.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-crt-arcade-pixel-glow-hero.webp"
+    },
+    {
+      "id": "challenger-oscilloscope",
+      "label": "Oscilloscope Bench",
+      "verdict": "declined",
+      "lineage": "CRT oscilloscopes on a signal bench",
+      "thesis": "Her week as a triggered trace on a ten-division graticule.",
+      "palette": ["#0B0F0C", "#3DFF7A", "#FFB400"],
+      "materials": ["phosphor trace", "etched graticule", "detented knobs"],
+      "case": "Loses both axes: instrument culture is not hers, and knobs are the wrong controls for words.",
+      "kept": "One fixed graticule for the week; completing the session locks the trace still.",
+      "hero": "https://impeccable.style/worlds/cards/scientific-notation-oscilloscope-signal-bench-hero.webp"
+    },
+    {
+      "id": "challenger-pc98",
+      "label": "PC-98 Sixteen-Colour Field",
+      "verdict": "declined",
+      "lineage": "Japanese 640 by 400 sixteen-colour screens",
+      "thesis": "Fixed regions, a docked text window, dithered light.",
+      "palette": ["#101830", "#F8D8C0", "#40A0C0", "#F04080"],
+      "materials": ["ordered dither", "bitmap face", "bevelled window"],
+      "case": "Loses both axes: retro-computing is not her world and a bitmap face fights the brand's type.",
+      "kept": "The frame never moves; each step swaps the card's contents, never the layout.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-pc98-sixteen-color-field-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": true },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A five-step wizard with a progress bar, white cards and one dark primary button, executed impeccably.",
+    "palette": ["#FFFFFF", "#111111", "#F7F0E8", "#C96F8B"],
+    "materials": ["progress bar", "white cards", "pill buttons"],
+    "viewport": "Step 1 of 5 with a progress bar on top, a card with a heading, three textareas and a Next button pinned to the bottom.",
+    "risk": "Indistinguishable from every onboarding wizard she has abandoned.",
+    "comp": ".impeccable/mocks/decision/canon.webp"
+  },
+  "steer": true
+}
