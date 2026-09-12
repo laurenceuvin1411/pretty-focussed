@@ -82,20 +82,20 @@ function AddTaskModal({ projectId, onClose }: { projectId: string; onClose: () =
   }
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div style={{ background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: 20, width: '100%', maxWidth: 480, padding: '28px 28px 24px' }}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgb(20 21 15 / .4)', backdropFilter: 'blur(6px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div style={{ background: 'var(--color-card)', border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', borderRadius: 20, width: '100%', maxWidth: 480, padding: '28px 28px 24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22 }}>
           <div>
-            <h2 style={{ fontSize: 17, fontWeight: 700, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>Taak toevoegen</h2>
+            <h2 style={{ fontSize: 17, fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>Taak toevoegen</h2>
             <p style={{ fontSize: 12, color: 'var(--color-subtle)', marginTop: 2 }}>Terugkerende checklist-taak</p>
           </div>
-          <button onClick={onClose} style={{ width: 32, height: 32, borderRadius: 9, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
+          <button onClick={onClose} style={{ width: 32, height: 32, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
             <X size={14} />
           </button>
         </div>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-muted)', display: 'block', marginBottom: 5, letterSpacing: '0.06em' }}>Taak</label>
+            <label style={{ fontSize: 11, fontWeight: 500, color: 'var(--color-muted)', display: 'block', marginBottom: 5, letterSpacing: '0.06em' }}>Taak</label>
             <input
               style={inputStyle}
               value={title}
@@ -106,7 +106,7 @@ function AddTaskModal({ projectId, onClose }: { projectId: string; onClose: () =
             />
           </div>
           <div>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-muted)', display: 'block', marginBottom: 5, letterSpacing: '0.06em' }}>Notitie (optioneel)</label>
+            <label style={{ fontSize: 11, fontWeight: 500, color: 'var(--color-muted)', display: 'block', marginBottom: 5, letterSpacing: '0.06em' }}>Notitie (optioneel)</label>
             <input
               style={inputStyle}
               value={description}
@@ -115,7 +115,7 @@ function AddTaskModal({ projectId, onClose }: { projectId: string; onClose: () =
             />
           </div>
           <div>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-muted)', display: 'block', marginBottom: 5, letterSpacing: '0.06em' }}>Vervaldatum (optioneel)</label>
+            <label style={{ fontSize: 11, fontWeight: 500, color: 'var(--color-muted)', display: 'block', marginBottom: 5, letterSpacing: '0.06em' }}>Vervaldatum (optioneel)</label>
             <input
               type="date"
               style={{ ...inputStyle, colorScheme: 'light dark' }}
@@ -124,7 +124,7 @@ function AddTaskModal({ projectId, onClose }: { projectId: string; onClose: () =
             />
           </div>
           <div>
-            <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-muted)', display: 'block', marginBottom: 8, letterSpacing: '0.06em' }}>Herhaling</label>
+            <label style={{ fontSize: 11, fontWeight: 500, color: 'var(--color-muted)', display: 'block', marginBottom: 8, letterSpacing: '0.06em' }}>Herhaling</label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {RECURRENCE_OPTIONS.map(opt => (
                 <button
@@ -139,7 +139,7 @@ function AddTaskModal({ projectId, onClose }: { projectId: string; onClose: () =
                     transition: 'all 150ms',
                   }}
                 >
-                  <span style={{ fontSize: 13, fontWeight: 600, color: recurrence === opt.value ? 'var(--color-accent)' : 'var(--color-ink)' }}>{opt.label}</span>
+                  <span style={{ fontSize: 13, fontWeight: 500, color: recurrence === opt.value ? 'var(--color-accent)' : 'var(--color-ink)' }}>{opt.label}</span>
                   <span style={{ fontSize: 11, color: 'var(--color-subtle)' }}>{opt.sub}</span>
                 </button>
               ))}
@@ -149,7 +149,7 @@ function AddTaskModal({ projectId, onClose }: { projectId: string; onClose: () =
             <button type="button" onClick={onClose} style={{ flex: 1, padding: 11, borderRadius: 16, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-muted)', fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>
               Annuleer
             </button>
-            <button type="submit" style={{ flex: 2, padding: 11, borderRadius: 16, border: 'none', background: 'var(--color-accent)', color: 'var(--color-bg)', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+            <button type="submit" style={{ flex: 2, padding: 11, borderRadius: 16, border: 'none', background: 'var(--color-accent)', color: 'var(--color-bg)', fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
               Toevoegen
             </button>
           </div>
@@ -178,10 +178,10 @@ function CheckRow({ item, done, onToggle, onDelete }: {
           background: done ? 'var(--color-brand-green)' : 'transparent',
           border: `1.5px solid ${done ? 'var(--color-brand-green)' : 'rgba(210,180,145,0.28)'}`,
           transition: 'all 180ms ease', cursor: 'pointer',
-          boxShadow: done ? '0 0 8px rgba(109,184,137,0.40)' : 'none',
+          boxShadow: done ? '0 0 8px var(--pf-sage-soft)' : 'none',
         }}
       >
-        {done && <Check size={12} color="#0A0805" strokeWidth={3} />}
+        {done && <Check size={12} color="var(--color-ink)" strokeWidth={3} />}
       </button>
       <div style={{ flex: 1, cursor: 'pointer' }} onClick={onToggle}>
         <p style={{ fontSize: 14, fontWeight: 500, color: done ? 'var(--color-muted)' : 'var(--color-ink)', textDecoration: done ? 'line-through' : 'none', transition: 'all 180ms' }}>
@@ -197,14 +197,14 @@ function CheckRow({ item, done, onToggle, onDelete }: {
           const isToday = item.dueDate === today
           const isOverdue = item.dueDate < today
           return (
-            <p style={{ fontSize: 11, fontWeight: 600, color: isOverdue ? '#C4935A' : isToday ? '#4C6481' : 'var(--color-subtle)', marginTop: 4, fontFamily: 'var(--font-mono)' }}>
+            <p style={{ fontSize: 11, fontWeight: 500, color: isOverdue ? 'var(--pf-depth-text)' : isToday ? 'var(--pf-depth-text)' : 'var(--color-subtle)', marginTop: 4, fontFamily: 'var(--font-mono)' }}>
               {isOverdue ? 'Verlopen · ' : isToday ? 'Vandaag · ' : ''}{item.dueDate}
             </p>
           )
         })()}
       </div>
       {done && (
-        <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-brand-green)', background: 'rgba(109,184,137,0.12)', padding: '2px 8px', borderRadius: 99, flexShrink: 0, marginTop: 2 }}>
+        <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--color-brand-green)', background: 'var(--pf-sage-soft)', padding: '2px 8px', borderRadius: 99, flexShrink: 0, marginTop: 2 }}>
           Klaar
         </span>
       )}
@@ -212,7 +212,7 @@ function CheckRow({ item, done, onToggle, onDelete }: {
         <button
           onClick={onDelete}
           title="Verwijder taak"
-          style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)', flexShrink: 0, marginTop: 0 }}
+          style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)', flexShrink: 0, marginTop: 0 }}
         >
           <Trash2 size={12} />
         </button>
@@ -245,12 +245,12 @@ function ChecklistSection({ projectId, checklist, projectColor }: {
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '12px 18px 10px',
-        background: allDone ? 'rgba(109,184,137,0.05)' : 'transparent',
+        background: allDone ? 'var(--pf-sage-soft)' : 'transparent',
         borderBottom: '1px solid var(--color-border)',
         borderTop: '1px solid var(--color-border)',
       }}>
         <div>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: projectColor }}>
+          <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: projectColor }}>
             {checklist.title}
           </p>
           <p style={{ fontSize: 11, color: 'var(--color-subtle)', marginTop: 2 }}>
@@ -268,11 +268,11 @@ function ChecklistSection({ projectId, checklist, projectColor }: {
               }} />
             ))}
           </div>
-          <span style={{ fontSize: 12, fontWeight: 700, color: allDone ? 'var(--color-brand-green)' : 'var(--color-muted)' }}>
+          <span style={{ fontSize: 12, fontWeight: 500, color: allDone ? 'var(--color-brand-green)' : 'var(--color-muted)' }}>
             {done}/{total}
           </span>
           {allDone && (
-            <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-brand-green)', background: 'rgba(109,184,137,0.12)', padding: '2px 8px', borderRadius: 99 }}>
+            <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--color-brand-green)', background: 'var(--pf-sage-soft)', padding: '2px 8px', borderRadius: 99 }}>
               Klaar
             </span>
           )}
@@ -281,13 +281,13 @@ function ChecklistSection({ projectId, checklist, projectColor }: {
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginLeft: 8 }}>
               <button
                 onClick={() => setViewDate(d => prevPeriod(recurrence, d))}
-                style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'var(--color-card)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
+                style={{ width: 26, height: 26, borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
                 <ChevronLeft size={12} />
               </button>
               <button
                 onClick={() => setViewDate(d => nextPeriod(recurrence, d))}
                 disabled={isFuture}
-                style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'var(--color-card)', cursor: isFuture ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', opacity: isFuture ? 0.3 : 1 }}>
+                style={{ width: 26, height: 26, borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', cursor: isFuture ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', opacity: isFuture ? 0.3 : 1 }}>
                 <ChevronRight size={12} />
               </button>
             </div>
@@ -321,7 +321,7 @@ function ProjectCard({ project, onAddTask }: {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 10, height: 10, borderRadius: '50%', flexShrink: 0, background: project.color }} />
           <div>
-            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>{project.name}</h2>
+            <h2 style={{ fontSize: 16, fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>{project.name}</h2>
             <p style={{ fontSize: 11, color: 'var(--color-subtle)', marginTop: 1 }}>
               {project.checklists.reduce((n, c) => n + c.items.length, 0)} taken
             </p>
@@ -329,7 +329,7 @@ function ProjectCard({ project, onAddTask }: {
         </div>
         <button
           onClick={onAddTask}
-          style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 9, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-muted)', fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 150ms' }}
+          style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-muted)', fontSize: 12, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 150ms' }}
         >
           <Plus size={13} /> Taak toevoegen
         </button>
@@ -383,7 +383,7 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
       {/* Header */}
       <div style={{ marginBottom: 24, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div>
-          <h1 style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1, color: 'var(--color-ink)' }}>
+          <h1 style={{ fontSize: 32, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1, color: 'var(--color-ink)' }}>
             {resolvedId ? (activeProject?.name ?? 'Project') : 'Projects'}
           </h1>
           {resolvedId && (
@@ -393,7 +393,7 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
         {isCustomProject && (
           <button
             onClick={handleDeleteProject}
-            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 9, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit', marginTop: 4 }}
+            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit', marginTop: 4 }}
           >
             <Trash2 size={13} /> Verwijder project
           </button>
@@ -410,7 +410,7 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
                 key={p.id}
                 onClick={() => setActiveId(p.id)}
                 style={{
-                  padding: '8px 18px', borderRadius: 16, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                  padding: '8px 18px', borderRadius: 16, fontSize: 13, fontWeight: 500, cursor: 'pointer',
                   border: `1.5px solid ${isActive ? p.color + '60' : 'var(--color-border)'}`,
                   background: isActive ? p.color + '14' : 'var(--color-card)',
                   color: isActive ? p.color : 'var(--color-muted)',
@@ -436,9 +436,9 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
               onClick={() => setSubTab(tab.id as 'admin' | 'team')}
               style={{
                 padding: '9px 18px', background: 'none', border: 'none', cursor: 'pointer',
-                fontSize: 13, fontWeight: 600, fontFamily: 'inherit',
+                fontSize: 13, fontWeight: 500, fontFamily: 'inherit',
                 color: subTab === tab.id ? 'var(--color-ink)' : 'var(--color-muted)',
-                borderBottom: `2px solid ${subTab === tab.id ? '#4C6481' : 'transparent'}`,
+                borderBottom: `2px solid ${subTab === tab.id ? 'var(--pf-depth-text)' : 'transparent'}`,
                 marginBottom: -1,
                 transition: 'all 150ms',
               }}
@@ -461,9 +461,9 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
               onClick={() => setCustomTab(tab.id as 'admin' | 'marketing')}
               style={{
                 padding: '9px 18px', background: 'none', border: 'none', cursor: 'pointer',
-                fontSize: 13, fontWeight: 600, fontFamily: 'inherit',
+                fontSize: 13, fontWeight: 500, fontFamily: 'inherit',
                 color: customTab === tab.id ? 'var(--color-ink)' : 'var(--color-muted)',
-                borderBottom: `2px solid ${customTab === tab.id ? '#4C6481' : 'transparent'}`,
+                borderBottom: `2px solid ${customTab === tab.id ? 'var(--pf-depth-text)' : 'transparent'}`,
                 marginBottom: -1,
                 transition: 'all 150ms',
               }}

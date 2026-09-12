@@ -57,14 +57,14 @@ function getKompasStore(projectId: string): KompasHook {
 }
 
 // ── UI ───────────────────────────────────────────────────────────
-const ACCENT = '#4C6481'
+const ACCENT = 'var(--pf-sage)'
 
 function SectionCard({ icon, title, sub, children }: { icon: React.ReactNode; title: string; sub: string; children: React.ReactNode }) {
   return (
     <div className="card" style={{ padding: '22px 24px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
         {icon}
-        <h2 style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-ink)', fontFamily: 'var(--font-mono)' }}>{title}</h2>
+        <h2 style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-ink)', fontFamily: 'var(--font-mono)' }}>{title}</h2>
       </div>
       <p style={{ fontSize: 11.5, color: 'var(--color-subtle)', marginBottom: 14 }}>{sub}</p>
       {children}
@@ -82,7 +82,7 @@ export function ProjectKompas({ projectId, projectName }: { projectId: string; p
   return (
     <div style={{ maxWidth: 760 }}>
       <div style={{ marginBottom: 30 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2, marginBottom: 4 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2, marginBottom: 4 }}>
           Kompas · {projectName}
         </h1>
         <p style={{ fontSize: 12, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
@@ -94,7 +94,7 @@ export function ProjectKompas({ projectId, projectName }: { projectId: string; p
         <SectionCard icon={<Compass size={13} color={ACCENT} />} title="Noordster" sub="Waar wil je met dit project naartoe? Eén heldere zin.">
           <textarea
             className="textarea"
-            style={{ width: '100%', minHeight: 64, boxSizing: 'border-box', fontSize: 14, fontWeight: 600 }}
+            style={{ width: '100%', minHeight: 64, boxSizing: 'border-box', fontSize: 14, fontWeight: 500 }}
             placeholder="Bv. Dé referentie worden in mijn niche tegen eind 2027."
             value={store.noordster}
             onChange={e => store.setNoordster(e.target.value)}
@@ -104,13 +104,13 @@ export function ProjectKompas({ projectId, projectName }: { projectId: string; p
         <SectionCard icon={<Layers size={13} color={ACCENT} />} title="Pijlers" sub="De 2 tot 4 dingen waar dit project op steunt.">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {store.pijlers.map((p, i) => (
-              <div key={p.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '10px 12px', borderRadius: 12, border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-                <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: ACCENT, fontWeight: 700, marginTop: 3 }}>{String(i + 1).padStart(2, '0')}</span>
+              <div key={p.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '10px 12px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
+                <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: ACCENT, fontWeight: 500, marginTop: 3 }}>{String(i + 1).padStart(2, '0')}</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <input
                     value={p.title}
                     onChange={e => store.updatePijler(p.id, { title: e.target.value })}
-                    style={{ width: '100%', border: 'none', background: 'none', fontSize: 13, fontWeight: 700, color: 'var(--color-ink)', fontFamily: 'inherit', outline: 'none' }}
+                    style={{ width: '100%', border: 'none', background: 'none', fontSize: 13, fontWeight: 500, color: 'var(--color-ink)', fontFamily: 'inherit', outline: 'none' }}
                   />
                   <input
                     value={p.detail}
@@ -155,9 +155,9 @@ export function ProjectKompas({ projectId, projectName }: { projectId: string; p
         <SectionCard icon={<Target size={13} color={ACCENT} />} title="Doelen dit kwartaal" sub="Concreet en afvinkbaar.">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {store.doelen.map(d => (
-              <div key={d.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', borderRadius: 12, border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
+              <div key={d.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
                 <input type="checkbox" checked={d.done} onChange={() => store.toggleDoel(d.id)} style={{ cursor: 'pointer' }} />
-                <span style={{ flex: 1, fontSize: 13, color: d.done ? 'var(--color-subtle)' : 'var(--color-ink)', textDecoration: d.done ? 'line-through' : 'none', fontWeight: 600 }}>
+                <span style={{ flex: 1, fontSize: 13, color: d.done ? 'var(--color-subtle)' : 'var(--color-ink)', textDecoration: d.done ? 'line-through' : 'none', fontWeight: 500 }}>
                   {d.title}
                 </span>
                 <button onClick={() => store.removeDoel(d.id)} style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'var(--color-subtle)', padding: 2 }}>

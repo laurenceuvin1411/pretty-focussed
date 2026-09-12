@@ -35,8 +35,8 @@ function postsInWeek(scripts: Script[], postedDays: Record<string, Pillar>, ref 
 }
 import { saveContentFile, deleteContentFile, downloadContentFile } from '../utils/contentFiles'
 
-const ACCENT = '#4C6481'
-const GOLD = '#D4A96A'
+const ACCENT = 'var(--pf-sage)'
+const GOLD = 'var(--pf-depth-text)'
 
 const PILLAR_ICON: Record<Pillar, React.ReactNode> = {
   brand: <Sparkles size={12} />,
@@ -45,21 +45,21 @@ const PILLAR_ICON: Record<Pillar, React.ReactNode> = {
 }
 
 const SCRIPT_STATUS_CFG: Record<ScriptStatus, { label: string; color: string }> = {
-  draft:  { label: 'Draft',   color: '#7C7F84' },
-  ready:  { label: 'Klaar',   color: '#7AACCF' },
-  filmed: { label: 'Gefilmd', color: '#A57A8B' },
-  posted: { label: 'Gepost',  color: '#6DB889' },
+  draft:  { label: 'Draft',   color: 'var(--color-subtle)' },
+  ready:  { label: 'Klaar',   color: 'var(--pf-depth-text)' },
+  filmed: { label: 'Gefilmd', color: 'var(--pf-depth-text)' },
+  posted: { label: 'Gepost',  color: 'var(--pf-depth-text)' },
 }
 
 const CARD_STATUS_CFG: Record<CardStatus, { label: string; color: string }> = {
-  'idea':        { label: 'Idee',    color: '#7C7F84' },
-  'planned':     { label: 'Gepland', color: '#7AACCF' },
-  'in-progress': { label: 'Bezig',   color: '#D4A96A' },
-  'posted':      { label: 'Gepost',  color: '#6DB889' },
+  'idea':        { label: 'Idee',    color: 'var(--color-subtle)' },
+  'planned':     { label: 'Gepland', color: 'var(--pf-depth-text)' },
+  'in-progress': { label: 'Bezig',   color: 'var(--pf-depth-text)' },
+  'posted':      { label: 'Gepost',  color: 'var(--pf-depth-text)' },
 }
 
 const inputStyle: React.CSSProperties = {
-  padding: '8px 12px', borderRadius: 9, border: '1px solid var(--color-border)',
+  padding: '8px 12px', borderRadius: 14, border: '1px solid var(--color-border)',
   background: 'var(--color-surface)', color: 'var(--color-ink)', fontSize: 12,
   fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box',
 }
@@ -83,10 +83,10 @@ function FormatToggle({ value, onChange }: { value?: ContentFormat; onChange: (f
             key={f}
             onClick={() => onChange(active ? undefined : f)}
             style={{
-              display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', borderRadius: 9,
-              fontSize: 11.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 150ms',
+              display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', borderRadius: 14,
+              fontSize: 11.5, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 150ms',
               border: `1.5px solid ${active ? ACCENT : 'var(--color-border)'}`,
-              background: active ? 'rgba(76,100,129,0.10)' : 'transparent',
+              background: active ? 'var(--pf-sage-soft)' : 'transparent',
               color: active ? ACCENT : 'var(--color-muted)',
             }}
           >
@@ -110,8 +110,8 @@ function SectionShell({ title, icon, defaultOpen = true, badge, children }: {
       >
         {open ? <ChevronDown size={13} color="var(--color-subtle)" /> : <ChevronRight size={13} color="var(--color-subtle)" />}
         {icon}
-        <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-ink)', fontFamily: 'var(--font-mono)' }}>{title}</span>
-        {badge && <span style={{ fontSize: 10, fontWeight: 700, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>{badge}</span>}
+        <span style={{ fontSize: 12, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-ink)', fontFamily: 'var(--font-mono)' }}>{title}</span>
+        {badge && <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>{badge}</span>}
       </button>
       {open && children}
     </section>
@@ -128,25 +128,25 @@ function Dashboard() {
 
   const kpis = [
     { label: 'Posts dit jaar', value: stats.postsThisYear, sub: 'alle pillars' },
-    { label: 'Deze week', value: `${thisWeek}/${weekGoal}`, sub: 'weekdoel', color: thisWeek >= weekGoal ? '#6DB889' : GOLD },
+    { label: 'Deze week', value: `${thisWeek}/${weekGoal}`, sub: 'weekdoel', color: thisWeek >= weekGoal ? 'var(--pf-depth-text)' : GOLD },
     { label: 'Weekdoel', value: `${Math.min(100, Math.round((thisWeek / weekGoal) * 100))}%`, sub: 'deze week', bar: Math.min(100, Math.round((thisWeek / weekGoal) * 100)) },
-    { label: 'Streak', value: stats.streak, sub: stats.streak === 1 ? 'week' : 'weken', icon: <Flame size={13} color={stats.streak > 0 ? '#C4935A' : 'var(--color-subtle)'} /> },
+    { label: 'Streak', value: stats.streak, sub: stats.streak === 1 ? 'week' : 'weken', icon: <Flame size={13} color={stats.streak > 0 ? 'var(--pf-depth-text)' : 'var(--color-subtle)'} /> },
     { label: 'Deze maand', value: stats.postedThisMonth, sub: 'gepost' },
   ]
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
       {kpis.map(k => (
-        <div key={k.label} style={{ borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)', padding: '16px 18px' }}>
-          <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>{k.label}</p>
+        <div key={k.label} style={{ borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', padding: '16px 18px' }}>
+          <p style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>{k.label}</p>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
             {k.icon}
-            <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em', color: k.color ?? 'var(--color-ink)', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>{k.value}</span>
+            <span style={{ fontSize: 26, fontWeight: 500, letterSpacing: '-0.03em', color: k.color ?? 'var(--color-ink)', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>{k.value}</span>
           </div>
           <p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 4 }}>{k.sub}</p>
           {k.bar !== undefined && (
             <div style={{ height: 3, borderRadius: 99, background: 'var(--color-border)', overflow: 'hidden', marginTop: 10 }}>
-              <div style={{ height: '100%', width: `${k.bar}%`, background: `linear-gradient(90deg, ${ACCENT}, ${GOLD})`, borderRadius: 99, transition: 'width 800ms cubic-bezier(.16,1,.3,1)' }} />
+              <div style={{ height: '100%', width: `${k.bar}%`, background: 'var(--pf-sage)', borderRadius: 99, transition: 'width 800ms cubic-bezier(.16,1,.3,1)' }} />
             </div>
           )}
         </div>
@@ -166,11 +166,11 @@ function WeekGoalHeader() {
   const done = thisWeek >= weekGoal
 
   return (
-    <div style={{ borderRadius: 16, border: `1.5px solid ${done ? 'rgba(109,184,137,0.4)' : GOLD + '35'}`, background: `linear-gradient(135deg, ${done ? 'rgba(109,184,137,0.06)' : 'rgba(212,169,106,0.06)'}, transparent)`, padding: '20px 24px', marginBottom: 16 }}>
+    <div style={{ borderRadius: 16, border: `1.5px solid ${done ? 'var(--pf-sage-soft)' : 'var(--pf-sage-soft)'}`, background: 'transparent', padding: '20px 24px', marginBottom: 16 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 14 }}>
         <div>
-          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: done ? '#6DB889' : GOLD, fontFamily: 'var(--font-mono)', marginBottom: 4 }}>Weekdoel</p>
-          <p style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: done ? 'var(--pf-depth-text)' : GOLD, fontFamily: 'var(--font-mono)', marginBottom: 4 }}>Weekdoel</p>
+          <p style={{ fontSize: 18, fontWeight: 500, letterSpacing: '-0.02em', color: 'var(--color-ink)', display: 'flex', alignItems: 'center', gap: 6 }}>
             <input
               type="number"
               min={1}
@@ -178,19 +178,19 @@ function WeekGoalHeader() {
               value={weekGoal}
               onChange={e => setWeekGoal(Number(e.target.value))}
               title="Pas je weekdoel aan"
-              style={{ width: 44, padding: '2px 6px', borderRadius: 8, border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-ink)', fontSize: 16, fontWeight: 800, fontFamily: 'inherit', textAlign: 'center', outline: 'none' }}
+              style={{ width: 44, padding: '2px 6px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-ink)', fontSize: 16, fontWeight: 500, fontFamily: 'inherit', textAlign: 'center', outline: 'none' }}
             />
             posts per week
           </p>
         </div>
-        <p style={{ fontSize: 28, fontWeight: 800, fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em', color: done ? '#6DB889' : GOLD, lineHeight: 1 }}>
+        <p style={{ fontSize: 28, fontWeight: 500, fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em', color: done ? 'var(--pf-depth-text)' : GOLD, lineHeight: 1 }}>
           {thisWeek}<span style={{ fontSize: 15, color: 'var(--color-subtle)' }}>/{weekGoal}</span>
         </p>
       </div>
-      <div style={{ height: 6, borderRadius: 99, background: 'rgba(124,127,132,0.10)', overflow: 'hidden' }}>
-        <div style={{ height: '100%', width: `${pct}%`, background: done ? '#6DB889' : `linear-gradient(90deg, ${GOLD}, #C4935A)`, borderRadius: 99, transition: 'width 800ms cubic-bezier(.16,1,.3,1)' }} />
+      <div style={{ height: 6, borderRadius: 99, background: 'var(--color-surface-stone)', overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${pct}%`, background: done ? 'var(--pf-depth-text)' : 'var(--pf-sage)', borderRadius: 99, transition: 'width 800ms cubic-bezier(.16,1,.3,1)' }} />
       </div>
-      {done && <p style={{ fontSize: 11, color: '#6DB889', fontWeight: 700, marginTop: 10 }}>Weekdoel gehaald. Alles erboven is bonus.</p>}
+      {done && <p style={{ fontSize: 11, color: 'var(--pf-depth-text)', fontWeight: 500, marginTop: 10 }}>Weekdoel gehaald. Alles erboven is bonus.</p>}
     </div>
   )
 }
@@ -221,7 +221,7 @@ function ScriptRow({ script, expanded, onToggleExpand, onDragStart, onDragOver, 
       onMouseLeave={() => setHover(false)}
       style={{
         borderBottom: '1px solid var(--color-border)',
-        background: justCompleted ? 'rgba(109,184,137,0.08)' : hover ? 'rgba(124,127,132,0.03)' : 'transparent',
+        background: justCompleted ? 'var(--pf-sage-soft)' : hover ? 'var(--color-surface-stone)' : 'transparent',
         transition: 'background 400ms',
       }}
     >
@@ -232,10 +232,10 @@ function ScriptRow({ script, expanded, onToggleExpand, onDragStart, onDragOver, 
           onClick={handleToggle}
           aria-label={script.posted ? 'Markeer als niet gepost' : 'Markeer als gepost'}
           style={{
-            width: 22, height: 22, borderRadius: 7, flexShrink: 0, cursor: 'pointer',
+            width: 22, height: 22, borderRadius: 14, flexShrink: 0, cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: script.posted ? '#6DB889' : 'transparent',
-            border: `2px solid ${script.posted ? '#6DB889' : 'rgba(124,127,132,0.30)'}`,
+            background: script.posted ? 'var(--pf-depth-text)' : 'transparent',
+            border: `2px solid ${script.posted ? 'var(--pf-depth-text)' : 'var(--color-surface-stone)'}`,
             transition: 'all 250ms cubic-bezier(.16,1,.3,1)',
             transform: justCompleted ? 'scale(1.15)' : 'scale(1)',
           }}
@@ -249,13 +249,13 @@ function ScriptRow({ script, expanded, onToggleExpand, onDragStart, onDragOver, 
           placeholder="Titel van de video..."
           style={{
             flex: 1, border: 'none', background: 'transparent', outline: 'none',
-            fontSize: 13.5, fontWeight: 600, fontFamily: 'inherit', letterSpacing: '-0.01em',
+            fontSize: 13.5, fontWeight: 500, fontFamily: 'inherit', letterSpacing: '-0.01em',
             color: script.posted ? 'var(--color-muted)' : 'var(--color-ink)',
             textDecoration: script.posted ? 'line-through' : 'none', minWidth: 0,
           }}
         />
 
-        <span style={{ fontSize: 9, fontWeight: 700, padding: '2px 8px', borderRadius: 99, flexShrink: 0, fontFamily: 'var(--font-mono)', background: `${SCRIPT_STATUS_CFG[script.status].color}15`, color: SCRIPT_STATUS_CFG[script.status].color }}>
+        <span style={{ fontSize: 9, fontWeight: 500, padding: '2px 8px', borderRadius: 99, flexShrink: 0, fontFamily: 'var(--font-mono)', background: `${SCRIPT_STATUS_CFG[script.status].color}15`, color: SCRIPT_STATUS_CFG[script.status].color }}>
           {SCRIPT_STATUS_CFG[script.status].label}
         </span>
 
@@ -278,7 +278,7 @@ function ScriptRow({ script, expanded, onToggleExpand, onDragStart, onDragOver, 
       {expanded && (
         <div style={{ padding: '4px 46px 18px', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
-            <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: GOLD, fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Script</label>
+            <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: GOLD, fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Script</label>
             <textarea
               value={script.script}
               onChange={e => updateScript(script.id, { script: e.target.value })}
@@ -289,17 +289,17 @@ function ScriptRow({ script, expanded, onToggleExpand, onDragStart, onDragOver, 
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 10 }}>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>CTA</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>CTA</label>
               <input value={script.cta} onChange={e => updateScript(script.id, { cta: e.target.value })} placeholder="Link in bio / DM me..." style={{ ...inputStyle, width: '100%' }} />
             </div>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Platform</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Platform</label>
               <select value={script.platform} onChange={e => updateScript(script.id, { platform: e.target.value })} style={{ ...inputStyle, width: '100%', cursor: 'pointer' }}>
                 {['Instagram', 'TikTok', 'YouTube', 'LinkedIn', 'Meerdere'].map(p => <option key={p}>{p}</option>)}
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Status</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Status</label>
               <select value={script.status} onChange={e => updateScript(script.id, { status: e.target.value as ScriptStatus })} style={{ ...inputStyle, width: '100%', cursor: 'pointer' }}>
                 {(Object.keys(SCRIPT_STATUS_CFG) as ScriptStatus[]).map(st => <option key={st} value={st}>{SCRIPT_STATUS_CFG[st].label}</option>)}
               </select>
@@ -307,11 +307,11 @@ function ScriptRow({ script, expanded, onToggleExpand, onDragStart, onDragOver, 
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px', gap: 10 }}>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Notities</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Notities</label>
               <input value={script.notes} onChange={e => updateScript(script.id, { notes: e.target.value })} placeholder="B-roll, outfit, locatie..." style={{ ...inputStyle, width: '100%' }} />
             </div>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Geplande datum</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Geplande datum</label>
               <input type="date" value={script.plannedDate ?? ''} onChange={e => updateScript(script.id, { plannedDate: e.target.value || undefined })} style={{ ...inputStyle, width: '100%', colorScheme: 'light dark' }} />
             </div>
           </div>
@@ -356,7 +356,7 @@ function AuthorityTracker() {
         <button
           onClick={newScript}
           data-testid="new-script"
-          style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 16px', borderRadius: 16, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
+          style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 16px', borderRadius: 16, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 12, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}
         >
           <Plus size={13} /> Nieuw script
         </button>
@@ -384,7 +384,7 @@ function AuthorityTracker() {
           </p>
         </div>
       ) : (
-        <div style={{ borderRadius: 14, border: '1px solid var(--color-border)', background: 'var(--color-card)', overflow: 'hidden' }}>
+        <div style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', overflow: 'hidden' }}>
           {visible.map(s => (
             <ScriptRow
               key={s.id}
@@ -417,22 +417,22 @@ function PlannerCard({ card, onOpen, onDragStart }: { card: ContentCard; onOpen:
       draggable
       onDragStart={onDragStart}
       onClick={onOpen}
-      style={{ borderRadius: 12, border: '1px solid var(--color-border)', background: 'var(--color-card)', padding: '11px 13px', cursor: 'pointer', transition: 'border-color 150ms' }}
+      style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', padding: '11px 13px', cursor: 'pointer', transition: 'border-color 150ms' }}
       onMouseEnter={e => (e.currentTarget.style.borderColor = cfg.color + '60')}
       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
     >
-      <p style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-ink)', lineHeight: 1.4, marginBottom: 7, letterSpacing: '-0.01em' }}>
-        {card.priority === 'high' && <span style={{ color: '#C4935A', marginRight: 4 }}>!</span>}
+      <p style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--color-ink)', lineHeight: 1.4, marginBottom: 7, letterSpacing: '-0.01em' }}>
+        {card.priority === 'high' && <span style={{ color: 'var(--pf-depth-text)', marginRight: 4 }}>!</span>}
         {card.title}
       </p>
       <div style={{ display: 'flex', gap: 5, alignItems: 'center', flexWrap: 'wrap' }}>
-        <span style={{ fontSize: 8.5, fontWeight: 700, padding: '2px 7px', borderRadius: 99, fontFamily: 'var(--font-mono)', background: `${st.color}15`, color: st.color }}>{st.label}</span>
+        <span style={{ fontSize: 8.5, fontWeight: 500, padding: '2px 7px', borderRadius: 99, fontFamily: 'var(--font-mono)', background: `${st.color}15`, color: st.color }}>{st.label}</span>
         {card.format && (
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 8.5, fontWeight: 700, padding: '2px 7px', borderRadius: 99, fontFamily: 'var(--font-mono)', background: 'rgba(76,100,129,0.10)', color: ACCENT }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: 8.5, fontWeight: 500, padding: '2px 7px', borderRadius: 99, fontFamily: 'var(--font-mono)', background: 'var(--pf-sage-soft)', color: ACCENT }}>
             {FORMAT_CFG[card.format].icon} {FORMAT_CFG[card.format].label}
           </span>
         )}
-        {card.hasFile && <Download size={9} color="#6DB889" />}
+        {card.hasFile && <Download size={9} color="var(--pf-depth-text)" />}
         {card.date && <Mono style={{ fontSize: 8.5, color: 'var(--color-subtle)' }}>{format(new Date(card.date + 'T12:00:00'), 'd MMM', { locale: nlBE })}</Mono>}
         <Mono style={{ fontSize: 8.5, color: 'var(--color-subtle)' }}>{card.platform}</Mono>
       </div>
@@ -472,8 +472,8 @@ function PlannerBoard({ onOpenCard }: { onOpenCard: (id: string) => void }) {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 12, padding: '0 4px' }}>
               <span style={{ color: cfg.color }}>{PILLAR_ICON[p]}</span>
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: cfg.color, fontFamily: 'var(--font-mono)', flex: 1 }}>{cfg.label}</span>
-              <Mono style={{ fontSize: 10, fontWeight: 700, color: cfg.color }}>{colCards.length}</Mono>
+              <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: cfg.color, fontFamily: 'var(--font-mono)', flex: 1 }}>{cfg.label}</span>
+              <Mono style={{ fontSize: 10, fontWeight: 500, color: cfg.color }}>{colCards.length}</Mono>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 7, marginBottom: 10 }}>
@@ -539,10 +539,10 @@ function CardPanel({ cardId, onClose }: { cardId: string; onClose: () => void })
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', justifyContent: 'flex-end' }}>
-      <div onClick={onClose} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(3px)' }} />
+      <div onClick={onClose} style={{ position: 'absolute', inset: 0, background: 'rgb(20 21 15 / .4)', backdropFilter: 'blur(3px)' }} />
       <div style={{ position: 'relative', width: 380, maxWidth: '90vw', height: '100%', background: 'var(--color-bg)', borderLeft: '1px solid var(--color-border)', padding: '28px 26px', overflowY: 'auto', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: cfg.color, fontFamily: 'var(--font-mono)' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: cfg.color, fontFamily: 'var(--font-mono)' }}>
             {PILLAR_ICON[card.pillar]} {cfg.label}
           </span>
           <button onClick={onClose} aria-label="Sluit paneel" style={{ width: 28, height: 28, borderRadius: 16, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}><X size={13} /></button>
@@ -552,32 +552,32 @@ function CardPanel({ cardId, onClose }: { cardId: string; onClose: () => void })
           value={card.title}
           onChange={e => updateCard(card.id, { title: e.target.value })}
           rows={2}
-          style={{ width: '100%', border: 'none', background: 'transparent', outline: 'none', resize: 'none', fontSize: 18, fontWeight: 700, color: 'var(--color-ink)', fontFamily: 'inherit', letterSpacing: '-0.01em', lineHeight: 1.35, marginBottom: 18, boxSizing: 'border-box', padding: 0 }}
+          style={{ width: '100%', border: 'none', background: 'transparent', outline: 'none', resize: 'none', fontSize: 18, fontWeight: 500, color: 'var(--color-ink)', fontFamily: 'inherit', letterSpacing: '-0.01em', lineHeight: 1.35, marginBottom: 18, boxSizing: 'border-box', padding: 0 }}
         />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Pillar</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Pillar</label>
               <select value={card.pillar} onChange={e => updateCard(card.id, { pillar: e.target.value as Pillar })} style={{ ...inputStyle, width: '100%', cursor: 'pointer' }}>
                 {(Object.keys(PILLAR_CFG) as Pillar[]).map(p => <option key={p} value={p}>{PILLAR_CFG[p].label}</option>)}
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Status</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Status</label>
               <select value={card.status} onChange={e => updateCard(card.id, { status: e.target.value as CardStatus })} style={{ ...inputStyle, width: '100%', cursor: 'pointer' }}>
                 {(Object.keys(CARD_STATUS_CFG) as CardStatus[]).map(st => <option key={st} value={st}>{CARD_STATUS_CFG[st].label}</option>)}
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Prioriteit</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Prioriteit</label>
               <select value={card.priority} onChange={e => updateCard(card.id, { priority: e.target.value as any })} style={{ ...inputStyle, width: '100%', cursor: 'pointer' }}>
                 <option value="normal">Normaal</option>
                 <option value="high">Hoog</option>
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Platform</label>
+              <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Platform</label>
               <select value={card.platform} onChange={e => updateCard(card.id, { platform: e.target.value })} style={{ ...inputStyle, width: '100%', cursor: 'pointer' }}>
                 {['Instagram', 'TikTok', 'YouTube', 'LinkedIn', 'Meerdere'].map(p => <option key={p}>{p}</option>)}
               </select>
@@ -585,18 +585,18 @@ function CardPanel({ cardId, onClose }: { cardId: string; onClose: () => void })
           </div>
 
           <div>
-            <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Format</label>
+            <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Format</label>
             <FormatToggle value={card.format} onChange={f => updateCard(card.id, { format: f })} />
           </div>
 
           <div>
-            <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Publicatiedatum</label>
+            <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Publicatiedatum</label>
             <input type="date" value={card.date ?? ''} onChange={e => updateCard(card.id, { date: e.target.value || undefined })} style={{ ...inputStyle, width: '100%', colorScheme: 'light dark' }} />
           </div>
 
           {/* Bestand klaarzetten om op de postdag te downloaden */}
           <div>
-            <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Content-bestand</label>
+            <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Content-bestand</label>
             <input
               ref={fileInputRef}
               type="file"
@@ -605,20 +605,20 @@ function CardPanel({ cardId, onClose }: { cardId: string; onClose: () => void })
               onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f); e.target.value = '' }}
             />
             {card.hasFile ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '11px 14px', borderRadius: 16, border: `1px solid rgba(109,184,137,0.35)`, background: 'rgba(109,184,137,0.06)' }}>
-                <Check size={12} color="#6DB889" strokeWidth={3} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '11px 14px', borderRadius: 16, border: `1px solid var(--pf-sage-soft)`, background: 'var(--pf-sage-soft)' }}>
+                <Check size={12} color="var(--pf-depth-text)" strokeWidth={3} />
                 <span style={{ fontSize: 12, color: 'var(--color-ink)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{card.fileName ?? 'bestand'}</span>
                 <button
                   onClick={() => downloadContentFile(card.id)}
                   title="Download om te posten"
-                  style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', borderRadius: 16, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 11, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', flexShrink: 0 }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 12px', borderRadius: 16, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 11, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', flexShrink: 0 }}
                 >
                   <Download size={11} /> Download
                 </button>
                 <button
                   onClick={async () => { await deleteContentFile(card.id); updateCard(card.id, { hasFile: false, fileName: undefined }) }}
                   title="Verwijder bestand"
-                  style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)', flexShrink: 0 }}
+                  style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)', flexShrink: 0 }}
                 >
                   <Trash2 size={11} />
                 </button>
@@ -638,7 +638,7 @@ function CardPanel({ cardId, onClose }: { cardId: string; onClose: () => void })
           </div>
 
           <div>
-            <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Notities</label>
+            <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 5 }}>Notities</label>
             <textarea
               value={card.notes}
               onChange={e => updateCard(card.id, { notes: e.target.value })}
@@ -650,7 +650,7 @@ function CardPanel({ cardId, onClose }: { cardId: string; onClose: () => void })
 
           <button
             onClick={() => { deleteCard(card.id); onClose() }}
-            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 14px', borderRadius: 9, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 11, cursor: 'pointer', fontFamily: 'inherit', alignSelf: 'flex-start' }}
+            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '9px 14px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 11, cursor: 'pointer', fontFamily: 'inherit', alignSelf: 'flex-start' }}
           >
             <Trash2 size={11} /> Verwijder idee
           </button>
@@ -703,20 +703,20 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
   ]
 
   return (
-    <div style={{ borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)', padding: 18 }}>
+    <div style={{ borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', padding: 18 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-        <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-ink)', textTransform: 'capitalize', letterSpacing: '-0.01em' }}>
+        <p style={{ fontSize: 14, fontWeight: 500, color: 'var(--color-ink)', textTransform: 'capitalize', letterSpacing: '-0.01em' }}>
           {format(viewDate, 'MMMM yyyy', { locale: nlBE })}
         </p>
         <div style={{ display: 'flex', gap: 6 }}>
-          <button onClick={() => setViewDate(d => subMonths(d, 1))} aria-label="Vorige maand" style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}><ChevronLeft size={12} /></button>
-          <button onClick={() => setViewDate(d => addMonths(d, 1))} aria-label="Volgende maand" style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}><ChevronRight size={12} /></button>
+          <button onClick={() => setViewDate(d => subMonths(d, 1))} aria-label="Vorige maand" style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}><ChevronLeft size={12} /></button>
+          <button onClick={() => setViewDate(d => addMonths(d, 1))} aria-label="Volgende maand" style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}><ChevronRight size={12} /></button>
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 5, marginBottom: 5 }}>
         {['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'].map(d => (
-          <div key={d} style={{ textAlign: 'center', fontSize: 8.5, fontWeight: 700, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', padding: '3px 0' }}>{d}</div>
+          <div key={d} style={{ textAlign: 'center', fontSize: 8.5, fontWeight: 500, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', padding: '3px 0' }}>{d}</div>
         ))}
       </div>
 
@@ -739,7 +739,7 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                 dragRef.current = null
               }}
               className="cal-day"
-              style={{ minHeight: 74, borderRadius: 16, border: `1px solid ${isToday ? ACCENT + '50' : 'var(--color-border)'}`, background: isToday ? 'rgba(76,100,129,0.04)' : 'transparent', padding: '5px 6px', display: 'flex', flexDirection: 'column', gap: 3, position: 'relative' }}
+              style={{ minHeight: 74, borderRadius: 16, border: `1px solid ${isToday ? 'var(--pf-sage-soft)' : 'var(--color-border)'}`, background: isToday ? 'var(--pf-sage-soft)' : 'transparent', padding: '5px 6px', display: 'flex', flexDirection: 'column', gap: 3, position: 'relative' }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span style={{ fontSize: 9.5, fontWeight: isToday ? 800 : 500, color: isToday ? ACCENT : 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>{d}</span>
@@ -748,7 +748,7 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                     onClick={() => { setAddingDate(dateStr); setAddTitle(''); setAddPillar('brand') }}
                     aria-label={`Content toevoegen op ${dateStr}`}
                     className="cal-day-add"
-                    style={{ width: 16, height: 16, borderRadius: 5, border: 'none', background: 'rgba(76,100,129,0.10)', color: ACCENT, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                    style={{ width: 16, height: 16, borderRadius: 14, border: 'none', background: 'var(--pf-sage-soft)', color: ACCENT, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
                   >
                     <Plus size={10} />
                   </button>
@@ -762,9 +762,9 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                         title={dayPillar ? `Gepost · ${PILLAR_CFG[dayPillar].label} · klik om te verwijderen` : 'Vink af als je die dag gepost hebt'}
                         className={dayPillar ? '' : 'cal-day-add'}
                         style={{
-                          width: 16, height: 16, borderRadius: 5, cursor: 'pointer', padding: 0,
+                          width: 16, height: 16, borderRadius: 14, cursor: 'pointer', padding: 0,
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          border: `1.5px solid ${pillarColor ?? 'rgba(124,127,132,0.45)'}`,
+                          border: `1.5px solid ${pillarColor ?? 'var(--color-surface-stone)'}`,
                           background: pillarColor ?? 'transparent',
                           color: '#fff', transition: 'all 150ms',
                         }}
@@ -784,7 +784,7 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                     onDragStart={() => { dragRef.current = { type: item.type, id: item.id } }}
                     onClick={() => item.type === 'card' && onOpenCard(item.id)}
                     title={item.title}
-                    style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 8.5, fontWeight: 600, padding: '3px 6px', borderRadius: 5, background: cfg.bg, color: item.done ? 'var(--color-subtle)' : cfg.color, cursor: item.type === 'card' ? 'pointer' : 'grab', textDecoration: item.done ? 'line-through' : 'none', borderLeft: `2px solid ${cfg.color}` }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 8.5, fontWeight: 500, padding: '3px 6px', borderRadius: 14, background: cfg.bg, color: item.done ? 'var(--color-subtle)' : cfg.color, cursor: item.type === 'card' ? 'pointer' : 'grab', textDecoration: item.done ? 'line-through' : 'none', borderLeft: `2px solid ${cfg.color}` }}
                   >
                     {item.format && <span style={{ flexShrink: 0, display: 'inline-flex' }}>{item.format === 'reel' ? <Film size={8} /> : <LayoutGrid size={8} />}</span>}
                     <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{item.title || 'Zonder titel'}</span>
@@ -792,7 +792,7 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                       <button
                         onClick={e => { e.stopPropagation(); downloadContentFile(item.id) }}
                         title="Download bestand om te posten"
-                        style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: '#6DB889', display: 'inline-flex', flexShrink: 0 }}
+                        style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0, color: 'var(--pf-depth-text)', display: 'inline-flex', flexShrink: 0 }}
                       >
                         <Download size={9} />
                       </button>
@@ -813,10 +813,10 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
 
       {/* Pillar-keuze bij dag afvinken */}
       {pillarPickDate && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '26vh', background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(4px)' }}
+        <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '26vh', background: 'rgb(20 21 15 / .4)', backdropFilter: 'blur(4px)' }}
           onClick={() => setPillarPickDate(null)}>
           <div onClick={e => e.stopPropagation()} style={{ width: 340, maxWidth: '90vw', borderRadius: 16, background: 'var(--color-bg)', border: '1px solid var(--color-border)', boxShadow: '0 24px 64px rgba(0,0,0,0.30)', padding: '18px 18px 14px' }}>
-            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+            <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
               Wat postte je op {format(new Date(pillarPickDate + 'T12:00:00'), 'd MMMM', { locale: nlBE })}?
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -826,13 +826,13 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                   <button
                     key={p}
                     onClick={() => { setPostedDay(pillarPickDate, p); setPillarPickDate(null) }}
-                    style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 14px', borderRadius: 11, border: '1.5px solid var(--color-border)', background: cfg.bg, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', transition: 'border-color 150ms' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 14px', borderRadius: 14, border: '1.5px solid var(--color-border)', background: cfg.bg, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', transition: 'border-color 150ms' }}
                     onMouseEnter={e => (e.currentTarget.style.borderColor = cfg.color)}
                     onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
                   >
                     <span style={{ color: cfg.color }}>{PILLAR_ICON[p]}</span>
-                    <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--color-ink)', flex: 1 }}>{cfg.label}</span>
-                    {p === 'customers' && calBusiness === 'lu' && <Mono style={{ fontSize: 9, color: GOLD, fontWeight: 700 }}>telt voor de 100</Mono>}
+                    <span style={{ fontSize: 12.5, fontWeight: 500, color: 'var(--color-ink)', flex: 1 }}>{cfg.label}</span>
+                    {p === 'customers' && calBusiness === 'lu' && <Mono style={{ fontSize: 9, color: GOLD, fontWeight: 500 }}>telt voor de 100</Mono>}
                   </button>
                 )
               })}
@@ -843,10 +843,10 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
 
       {/* Quick add popover */}
       {addingDate && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '22vh', background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(4px)' }}
+        <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '22vh', background: 'rgb(20 21 15 / .4)', backdropFilter: 'blur(4px)' }}
           onClick={() => setAddingDate(null)}>
           <div onClick={e => e.stopPropagation()} style={{ width: 400, maxWidth: '90vw', borderRadius: 16, background: 'var(--color-bg)', border: '1px solid var(--color-border)', boxShadow: '0 24px 64px rgba(0,0,0,0.30)', padding: '20px 20px 16px' }}>
-            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+            <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
               Content op {format(new Date(addingDate + 'T12:00:00'), 'EEEE d MMMM', { locale: nlBE })}
             </p>
             <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
@@ -855,7 +855,7 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
                 const active = addPillar === p
                 return (
                   <button key={p} onClick={() => setAddPillar(p)}
-                    style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 12px', borderRadius: 9, fontSize: 10.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 150ms',
+                    style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 12px', borderRadius: 14, fontSize: 10.5, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 150ms',
                       border: `1.5px solid ${active ? cfg.color : 'var(--color-border)'}`,
                       background: active ? cfg.bg : 'transparent',
                       color: active ? cfg.color : 'var(--color-muted)' }}>
@@ -874,7 +874,7 @@ function ContentCalendar({ onOpenCard }: { onOpenCard: (id: string) => void }) {
             />
             <div style={{ display: 'flex', gap: 8, marginTop: 10, justifyContent: 'flex-end' }}>
               <button onClick={() => setAddingDate(null)} style={{ padding: '7px 13px', borderRadius: 16, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 11.5, cursor: 'pointer', fontFamily: 'inherit' }}>Annuleer</button>
-              <button onClick={saveQuickAdd} disabled={!addTitle.trim()} style={{ padding: '7px 16px', borderRadius: 16, border: 'none', background: addTitle.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: addTitle.trim() ? 'var(--color-bg)' : 'var(--color-muted)', fontSize: 11.5, fontWeight: 700, cursor: addTitle.trim() ? 'pointer' : 'default', fontFamily: 'inherit' }}>Inplannen</button>
+              <button onClick={saveQuickAdd} disabled={!addTitle.trim()} style={{ padding: '7px 16px', borderRadius: 16, border: 'none', background: addTitle.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: addTitle.trim() ? 'var(--color-bg)' : 'var(--color-muted)', fontSize: 11.5, fontWeight: 500, cursor: addTitle.trim() ? 'pointer' : 'default', fontFamily: 'inherit' }}>Inplannen</button>
             </div>
           </div>
         </div>
@@ -941,7 +941,7 @@ function QuickCapture() {
         data-testid="quick-capture-fab"
         title="Nieuw content-idee (N)"
         style={{
-          position: 'fixed', bottom: 28, right: 28, zIndex: 250,
+          display: 'none', position: 'fixed', bottom: 28, right: 28, zIndex: 250,   // no floating buttons in this room; N and the Nieuw script pill remain
           width: 52, height: 52, borderRadius: 18, border: 'none',
           background: 'var(--color-ink)', color: 'var(--color-bg)', cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -951,15 +951,15 @@ function QuickCapture() {
         onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.06)')}
         onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
       >
-        {saved ? <Check size={20} color="#6DB889" strokeWidth={3} /> : <Plus size={20} />}
+        {saved ? <Check size={20} color="var(--pf-depth-text)" strokeWidth={3} /> : <Plus size={20} />}
       </button>
 
       {/* Popup */}
       {open && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '18vh', background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(4px)' }}
+        <div style={{ position: 'fixed', inset: 0, zIndex: 300, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '18vh', background: 'rgb(20 21 15 / .4)', backdropFilter: 'blur(4px)' }}
           onClick={() => { setOpen(false); setPillar(null); setTitle('') }}>
           <div onClick={e => e.stopPropagation()} style={{ width: 440, maxWidth: '90vw', borderRadius: 18, background: 'var(--color-bg)', border: '1px solid var(--color-border)', boxShadow: '0 24px 64px rgba(0,0,0,0.30)', padding: '22px 22px 18px' }}>
-            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>
+            <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>
               Nieuw content-idee <Mono style={{ opacity: 0.6 }}>· druk N</Mono>
             </p>
 
@@ -971,12 +971,12 @@ function QuickCapture() {
                     <button
                       key={p}
                       onClick={() => setPillar(p)}
-                      style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '13px 16px', borderRadius: 12, border: '1.5px solid var(--color-border)', background: cfg.bg, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', transition: 'border-color 150ms' }}
+                      style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '13px 16px', borderRadius: 14, border: '1.5px solid var(--color-border)', background: cfg.bg, cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left', transition: 'border-color 150ms' }}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = cfg.color)}
                       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
                     >
                       <span style={{ color: cfg.color }}>{PILLAR_ICON[p]}</span>
-                      <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-ink)', flex: 1 }}>{cfg.label}</span>
+                      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-ink)', flex: 1 }}>{cfg.label}</span>
                       <ChevronRight size={13} color="var(--color-subtle)" />
                     </button>
                   )
@@ -986,7 +986,7 @@ function QuickCapture() {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
                   <span style={{ color: PILLAR_CFG[pillar].color }}>{PILLAR_ICON[pillar]}</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: PILLAR_CFG[pillar].color, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{PILLAR_CFG[pillar].label}</span>
+                  <span style={{ fontSize: 11, fontWeight: 500, color: PILLAR_CFG[pillar].color, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{PILLAR_CFG[pillar].label}</span>
                 </div>
                 <input
                   autoFocus
@@ -997,8 +997,8 @@ function QuickCapture() {
                   style={{ ...inputStyle, width: '100%', fontSize: 14, padding: '12px 14px' }}
                 />
                 <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'flex-end' }}>
-                  <button onClick={() => setPillar(null)} style={{ padding: '8px 14px', borderRadius: 9, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Terug</button>
-                  <button onClick={save} disabled={!title.trim()} style={{ padding: '8px 18px', borderRadius: 9, border: 'none', background: title.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: title.trim() ? 'var(--color-bg)' : 'var(--color-muted)', fontSize: 12, fontWeight: 700, cursor: title.trim() ? 'pointer' : 'default', fontFamily: 'inherit' }}>Toevoegen</button>
+                  <button onClick={() => setPillar(null)} style={{ padding: '8px 14px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>Terug</button>
+                  <button onClick={save} disabled={!title.trim()} style={{ padding: '8px 18px', borderRadius: 14, border: 'none', background: title.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: title.trim() ? 'var(--color-bg)' : 'var(--color-muted)', fontSize: 12, fontWeight: 500, cursor: title.trim() ? 'pointer' : 'default', fontFamily: 'inherit' }}>Toevoegen</button>
                 </div>
               </div>
             )}
@@ -1026,11 +1026,11 @@ export function ContentCreation({ business = 'lu', projectId, projectName }: { b
     <BizCtx.Provider value={biz}>
     <div style={{ maxWidth: 900 }}>
       <div style={{ marginBottom: 30 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2, marginBottom: 4 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2, marginBottom: 4 }}>
           Content{projectName ? ` · ${projectName}` : business === 'bora' ? ' · Bora' : ''}
         </h1>
         <p style={{ fontSize: 12, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
-          Plan · schrijf · publiceer · druk <span style={{ fontWeight: 700, color: 'var(--color-ink)' }}>N</span> voor een nieuw idee
+          Plan · schrijf · publiceer · druk <span style={{ fontWeight: 500, color: 'var(--color-ink)' }}>N</span> voor een nieuw idee
         </p>
       </div>
 
@@ -1042,7 +1042,7 @@ export function ContentCreation({ business = 'lu', projectId, projectName }: { b
         <AuthorityTracker />
       </SectionShell>
 
-      <SectionShell title="Planner" icon={<Sparkles size={13} color="#7AACCF" />}>
+      <SectionShell title="Planner" icon={<Sparkles size={13} color="var(--pf-depth-text)" />}>
         <PlannerBoard onOpenCard={setOpenCardId} />
       </SectionShell>
 
@@ -1050,7 +1050,7 @@ export function ContentCreation({ business = 'lu', projectId, projectName }: { b
         <ContentCalendar onOpenCard={setOpenCardId} />
       </SectionShell>
 
-      <SectionShell title="Brain Dump" icon={<Lightbulb size={13} color="#C4935A" />} defaultOpen={false}>
+      <SectionShell title="Brain Dump" icon={<Lightbulb size={13} color="var(--pf-depth-text)" />} defaultOpen={false}>
         <BrainDump />
       </SectionShell>
 

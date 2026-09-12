@@ -427,3 +427,12 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 .pf-legacy h1, .pf-legacy h2, .pf-legacy h3 { font-weight: 500 }
 .pf-page--one > .pf-one.pf-one--wide { max-width: 1120px }
 .pf-segments--wrap { flex-wrap:wrap; row-gap:2px }
+
+/* the older systems in the brand: Instrument Sans, two weights, calm labels, no hard borders */
+.pf-legacy, .pf-legacy button, .pf-legacy input, .pf-legacy select, .pf-legacy textarea { font-family:'Instrument Sans','Inter',system-ui,sans-serif }
+.pf-legacy [style*="font-family: var(--font-mono)"], .pf-legacy [style*="fontFamily"] { }
+.pf-legacy h1 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); letter-spacing:-.025em; line-height:1.12 }
+.pf-legacy [style*="text-transform: uppercase"] { letter-spacing:.06em }
+.pf-legacy input, .pf-legacy select, .pf-legacy textarea { border-radius:14px }
+.pf-legacy [style*="border-radius: 999px"] { border-radius:999px }
+.pf-legacy * { text-decoration-color:var(--border) }

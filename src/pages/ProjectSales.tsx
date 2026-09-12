@@ -7,11 +7,11 @@ import { Plus, X } from 'lucide-react'
 type LeadStatus = 'nieuw' | 'gesprek' | 'voorstel' | 'gewonnen' | 'verloren'
 
 const STATUSES: { id: LeadStatus; label: string; color: string }[] = [
-  { id: 'nieuw',    label: 'Nieuw',    color: '#7C7F84' },
-  { id: 'gesprek',  label: 'Gesprek',  color: '#4C6481' },
-  { id: 'voorstel', label: 'Voorstel', color: '#C4935A' },
-  { id: 'gewonnen', label: 'Gewonnen', color: '#6DB889' },
-  { id: 'verloren', label: 'Verloren', color: '#B9BBBE' },
+  { id: 'nieuw',    label: 'Nieuw',    color: 'var(--color-subtle)' },
+  { id: 'gesprek',  label: 'Gesprek',  color: 'var(--pf-depth-text)' },
+  { id: 'voorstel', label: 'Voorstel', color: 'var(--pf-depth-text)' },
+  { id: 'gewonnen', label: 'Gewonnen', color: 'var(--pf-depth-text)' },
+  { id: 'verloren', label: 'Verloren', color: 'var(--color-border)' },
 ]
 
 interface Lead {
@@ -63,8 +63,8 @@ const eur = (n: number) => `€${n.toLocaleString('nl-BE')}`
 function Stat({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
     <div className="card" style={{ padding: '16px 18px', flex: 1, minWidth: 130 }}>
-      <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{label}</p>
-      <p style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1 }}>{value}</p>
+      <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 6 }}>{label}</p>
+      <p style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1 }}>{value}</p>
       <p style={{ fontSize: 10.5, color: 'var(--color-subtle)', marginTop: 5 }}>{sub}</p>
     </div>
   )
@@ -91,7 +91,7 @@ export function ProjectSales({ projectId, projectName }: { projectId: string; pr
   return (
     <div style={{ maxWidth: 760 }}>
       <div style={{ marginBottom: 30 }}>
-        <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2, marginBottom: 4 }}>
+        <h1 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2, marginBottom: 4 }}>
           Sales · {projectName}
         </h1>
         <p style={{ fontSize: 12, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
@@ -105,7 +105,7 @@ export function ProjectSales({ projectId, projectName }: { projectId: string; pr
       </div>
 
       <div className="card" style={{ padding: '18px 20px', marginBottom: 16 }}>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Nieuwe lead</p>
+        <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>Nieuwe lead</p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <input className="input" style={{ flex: 2, minWidth: 140 }} placeholder="Naam" value={name} onChange={e => setName(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAdd()} />
           <input className="input" style={{ flex: 2, minWidth: 140 }} placeholder="Dienst of aanbod" value={service} onChange={e => setService(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAdd()} />
@@ -129,10 +129,10 @@ export function ProjectSales({ projectId, projectName }: { projectId: string; pr
             <div key={lead.id} className="card" style={{ padding: '13px 16px', display: 'flex', alignItems: 'center', gap: 12, opacity: lead.status === 'verloren' ? 0.55 : 1 }}>
               <div style={{ width: 6, height: 6, borderRadius: '50%', background: cfg.color, flexShrink: 0 }} />
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>{lead.name}</p>
+                <p style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em' }}>{lead.name}</p>
                 {lead.service && <p style={{ fontSize: 11.5, color: 'var(--color-subtle)', marginTop: 1 }}>{lead.service}</p>}
               </div>
-              <span style={{ fontSize: 13, fontWeight: 700, color: closed ? 'var(--color-subtle)' : 'var(--color-ink)', fontVariantNumeric: 'tabular-nums' }}>
+              <span style={{ fontSize: 13, fontWeight: 500, color: closed ? 'var(--color-subtle)' : 'var(--color-ink)', fontVariantNumeric: 'tabular-nums' }}>
                 {lead.value > 0 ? eur(lead.value) : ''}
               </span>
               <select
