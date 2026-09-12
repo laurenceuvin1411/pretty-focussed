@@ -518,6 +518,10 @@ The grouped list, twice. On Sales, open conversations sit in three stage groups 
 
 Superseded on Sales on 4 September 2026 by the conversation card (below); the row form survives for Won and Not now, with a closed stage ring in place of the check. Finance keeps the rows as described.
 
+### Surfaces, lighter than the ground (12 September 2026)
+
+Laurence's call on the Air ground: Paper cards on a blue-tinted room read as beige on blue and hide the green. Surfaces now sit lighter than whatever ground she picks: `--surface` is a 62 percent mix of white into the ground (whitish on Bone, a pale blue-white on Air, a pale sage-white on Field, warm white on Travertine), and the older pages' `--color-card` and `--color-surface` follow it inside the room. Dark mode keeps its own surface. The instrument (the sage scale) is unchanged and reads better for it.
+
 ### Focus, corrected (12 September 2026)
 
 Laurence's correction: the four worlds (Business, Brand, Life, Clients) were my structure, not hers, and hiding the habit, project and content systems behind Search read as removing them. Focus now carries her four segments in one Haze segmented pill: **Your focus**, **Your habits**, **Your projects**, **Your content**. The world switcher is gone from the shell (the context store stays for later).

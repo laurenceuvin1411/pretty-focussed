@@ -239,11 +239,14 @@
 .pf-block time { display:block; font:400 11px/16px 'JetBrains Mono',ui-monospace,monospace; letter-spacing:.02em; color:var(--text-3) }
 
 /* ── the app room (pages under the nav pill) ────────────────── */
-.pf-app { position:relative; width:100%; flex:1 1 auto; min-width:0; min-height:100vh; background:var(--ground); color:var(--text) }
-.pf-app[data-ground="travertine"] { --ground:#F0E7DB; --surface:#E7DFD2 }
-.pf-app[data-ground="field"] { --ground:#E9EFE2; --surface:#E0E7D8 }
-.pf-app[data-ground="air"] { --ground:#E4EDF5; --surface:#DBE4EC }
-:root:not([data-theme="light"]) .pf-app[data-ground] { --ground:#14150F; --surface:#1D1F18 }
+.pf-app { position:relative; width:100%; flex:1 1 auto; min-width:0; min-height:100vh; background:var(--ground); color:var(--text);
+  /* surfaces sit lighter than the ground in every room (Laurence, 12 Sept: whitish, so the green reads); the older pages follow */
+  --surface:color-mix(in srgb, #FFFFFF 62%, var(--ground));
+  --color-card:var(--surface); --color-card-solid:var(--surface); --color-surface:var(--surface); --color-surface-warm:var(--surface); --color-border:var(--border) }
+.pf-app[data-ground="travertine"] { --ground:#F0E7DB }
+.pf-app[data-ground="field"] { --ground:#E9EFE2 }
+.pf-app[data-ground="air"] { --ground:#E4EDF5 }
+:root:not([data-theme="light"]) .pf-app[data-ground] { --ground:#14150F; --surface:#1D1F18; --color-card:#1D1F18; --color-surface:#1D1F18 }
 .pf-app__head { position:relative; z-index:1; max-width:1120px; margin-inline:auto; padding:20px 20px 0; display:flex; align-items:center; justify-content:space-between; min-height:44px }
 .pf-brand { display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:inherit; font-size:14px; font-weight:500; letter-spacing:-.01em; word-spacing:-.06em }
 .pf-page { position:relative; z-index:1; max-width:1120px; margin-inline:auto; padding:24px 20px calc(120px + env(safe-area-inset-bottom)) }
