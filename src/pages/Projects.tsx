@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NewProjectModal } from '../components/layout/Sidebar'
 import { useParams } from 'react-router-dom'
 import { format, subMonths, addMonths, subWeeks, addWeeks, subQuarters, addQuarters, subYears, addYears } from 'date-fns'
 import { enGB, nlBE } from 'date-fns/locale'
@@ -364,6 +365,7 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
   const resolvedId = fixedProjectId ?? paramId
   const [activeId, setActiveId] = useState(resolvedId ?? projects[0]?.id ?? '')
   const [showAddModal, setShowAddModal] = useState(false)
+  const [showNew, setShowNew] = useState(false)
   const showTabs = !resolvedId
   const activeProject = projects.find(p => p.id === (resolvedId ?? activeId)) ?? (showTabs ? projects.find(p => p.id === activeId) : undefined)
   const isCustomProject = activeProject && !SEED_PROJECT_IDS.has(activeProject.id)
@@ -390,7 +392,15 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
             <p style={{ fontSize: 13, color: 'var(--color-subtle)', marginTop: 4 }}>Terugkerende taken per periode</p>
           )}
         </div>
-        {isCustomProject && (
+        {showTabs && (
+          <button
+            onClick={() => setShowNew(true)}
+            style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '12px 22px', borderRadius: 999, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            <Plus size={14} /> Nieuw project
+          </button>
+        )}
+        {isCustomProject && !showTabs && (
           <button
             onClick={handleDeleteProject}
             style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '7px 13px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit', marginTop: 4 }}
@@ -484,11 +494,14 @@ export function Projects({ fixedProjectId }: { fixedProjectId?: string } = {}) {
       ) : (
         <div style={{ textAlign: 'center', padding: '80px 0', color: 'var(--color-subtle)' }}>
           <FolderOpen size={32} style={{ margin: '0 auto 12px', opacity: 0.3 }} />
-          <p style={{ fontSize: 14 }}>Geen projecten gevonden.</p>
+          <p style={{ fontSize: 14 }}>Nog geen projecten. Maak er een met de knop hierboven.</p>
         </div>
       )}
 
       {/* Add task modal */}
+      {showNew && (
+        <NewProjectModal onClose={() => setShowNew(false)} onCreated={path => { const id = path.split('/')[2]; setShowNew(false); if (id) setActiveId(id) }} />
+      )}
       {showAddModal && activeProject && (
         <AddTaskModal projectId={activeProject.id} onClose={() => setShowAddModal(false)} />
       )}

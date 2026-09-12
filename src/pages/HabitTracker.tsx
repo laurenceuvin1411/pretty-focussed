@@ -14,14 +14,14 @@ import type { Habit } from '../types'
 
 // ── Category config ────────────────────────────────────────────────
 const CAT_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  persoonlijk:   { label: 'Personal',      color: 'var(--pf-depth-text)', bg: 'rgba(196,136,78,0.08)' },
-  professioneel: { label: 'Professional',  color: 'var(--pf-depth-text)', bg: 'var(--pf-sage-soft)' },
-  lifestyle:     { label: 'Personal',      color: 'var(--pf-depth-text)', bg: 'rgba(196,136,78,0.08)' },
-  physical:      { label: 'Physical',      color: 'var(--pf-depth-text)', bg: 'rgba(196,136,78,0.08)' },
-  mental:        { label: 'Mental',        color: 'var(--pf-depth-text)', bg: 'var(--pf-sage-soft)' },
-  professional:  { label: 'Professional',  color: 'var(--pf-depth-text)', bg: 'var(--pf-sage-soft)' },
-  financial:     { label: 'Financial',     color: 'var(--pf-depth-text)', bg: 'var(--pf-sage-soft)' },
-  relationships: { label: 'Relationships', color: 'var(--pf-depth-text)', bg: 'var(--pf-sage-soft)' },
+  persoonlijk:   { label: 'Personal',      color: 'var(--pf-sage)', bg: 'var(--pf-veil)' },
+  professioneel: { label: 'Professional',  color: 'var(--pf-focus)', bg: 'var(--pf-veil)' },
+  lifestyle:     { label: 'Personal',      color: 'var(--pf-sage)', bg: 'var(--pf-veil)' },
+  physical:      { label: 'Physical',      color: 'var(--pf-haze)', bg: 'var(--pf-veil)' },
+  mental:        { label: 'Mental',        color: 'var(--pf-sage)', bg: 'var(--pf-veil)' },
+  professional:  { label: 'Professional',  color: 'var(--pf-focus)', bg: 'var(--pf-veil)' },
+  financial:     { label: 'Financial',     color: 'var(--pf-depth-text)', bg: 'var(--pf-veil)' },
+  relationships: { label: 'Relationships', color: 'var(--pf-haze)', bg: 'var(--pf-veil)' },
 }
 
 const CATEGORIES = ['persoonlijk', 'professioneel'] as const
@@ -250,22 +250,22 @@ function HabitRow({ habit, done, onToggle, streak, monthPct, onEdit, onDelete }:
         style={{
           flex: 1, display: 'flex', alignItems: 'center', gap: 16, padding: '15px 20px',
           cursor: 'pointer', textAlign: 'left', background: 'transparent', border: 'none',
-          borderRadius: 14, transition: 'background 150ms',
+          borderRadius: 14, transition: 'background 150ms', backgroundColor: done ? 'var(--pf-veil)' : 'transparent', opacity: done ? .7 : 1,
         }}>
         {/* Big checkbox */}
         <div style={{
           width: 26, height: 26, borderRadius: 16, flexShrink: 0,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: done ? cfg.color : 'transparent',
-          border: done ? `2px solid ${cfg.color}` : '2px solid var(--color-surface-stone)',
+          background: done ? 'var(--pf-focus)' : 'transparent',
+          border: done ? '2px solid var(--pf-focus)' : `2px solid ${cfg.color}`,
           transition: 'all 200ms cubic-bezier(.16,1,.3,1)',
-          boxShadow: done ? `0 0 10px ${cfg.color}50` : 'none',
+          boxShadow: 'none',
         }}>
-          {done && <Check size={13} color="var(--color-ink)" strokeWidth={3} />}
+          {done && <Check size={13} color="var(--color-bg)" strokeWidth={2.4} />}
         </div>
 
         <div style={{ flex: 1 }}>
-          <p style={{ fontSize: 14, fontWeight: done ? 400 : 500, color: done ? 'var(--color-muted)' : 'var(--color-ink)', textDecoration: done ? 'line-through' : 'none', transition: 'all 200ms', letterSpacing: '-0.01em' }}>
+          <p style={{ fontSize: 14, fontWeight: done ? 400 : 500, color: done ? 'var(--color-muted)' : 'var(--color-ink)', textDecoration: 'none', transition: 'all 200ms', letterSpacing: '-0.01em' }}>
             {habit.name}
           </p>
           <p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 2 }}>
@@ -276,7 +276,7 @@ function HabitRow({ habit, done, onToggle, streak, monthPct, onEdit, onDelete }:
 
         {/* Streak */}
         {streak > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 99, background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(245,158,11,0.2)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 99, background: 'var(--pf-veil)', border: '1px solid var(--pf-haze)' }}>
             <Flame size={10} color="var(--pf-depth-text)" />
             <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--pf-depth-text)' }}>{streak}</span>
           </div>
@@ -511,11 +511,11 @@ export function HabitTracker() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 28 }}>
             {[
               { label: 'Today', value: `${todayDone}/${todayTotal}`, sub: 'habits', color: 'var(--pf-depth-text)', icon: <Check size={12} /> },
-              { label: 'Score', value: `${todayScore}%`, sub: 'day score', color: todayScore >= 80 ? 'var(--pf-depth-text)' : todayScore >= 50 ? 'var(--pf-depth-text)' : 'var(--pf-depth-text)', icon: <Star size={12} /> },
+              { label: 'Score', value: `${todayScore}%`, sub: 'day score', color: todayScore >= 80 ? 'var(--pf-depth-text)' : todayScore >= 50 ? 'var(--pf-focus)' : 'var(--color-muted)', icon: <Star size={12} /> },
               { label: 'Streak', value: `${perfectDays}`, sub: 'perfect days', color: 'var(--pf-depth-text)', icon: <Flame size={12} /> },
-              { label: 'Month', value: `${monthScore}%`, sub: 'month score', color: monthScore >= 75 ? 'var(--pf-depth-text)' : 'var(--pf-depth-text)', icon: <TrendingUp size={12} /> },
+              { label: 'Month', value: `${monthScore}%`, sub: 'month score', color: monthScore >= 75 ? 'var(--pf-depth-text)' : monthScore >= 40 ? 'var(--pf-focus)' : 'var(--color-muted)', icon: <TrendingUp size={12} /> },
             ].map(s => (
-              <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', padding: '16px 18px' }}>
+              <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: s.label === 'Score' && todayScore >= 80 ? 'var(--pf-veil)' : 'var(--color-card)', padding: '16px 18px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'var(--color-subtle)', marginBottom: 8 }}>{s.icon}</div>
                 <p style={{ fontSize: 24, fontWeight: 500, color: s.color, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{s.value}</p>
                 <p style={{ fontSize: 9, color: 'var(--color-subtle)', marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.sub}</p>
@@ -534,20 +534,21 @@ export function HabitTracker() {
                 const isDayToday = dStr === todayStr
                 const isFut = dStr > todayStr
                 const isSelected = dStr === selectedDateStr
-                const col = pct >= 1 ? 'var(--pf-depth-text)' : pct >= 0.5 ? 'var(--pf-depth-text)' : 'var(--pf-depth-text)'
+                const fill = isFut ? 'transparent' : pct >= 1 ? 'var(--pf-focus)' : pct >= 0.66 ? 'var(--pf-sage)' : pct > 0 ? 'var(--pf-haze)' : 'var(--pf-veil)'
+                const ink = pct >= 1 ? 'var(--color-bg)' : 'var(--pf-depth-text)'
                 return (
                   <div key={dStr}
                     onClick={() => { if (!isFut) setSelectedDateStr(dStr) }}
                     style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, cursor: isFut ? 'default' : 'pointer' }}>
                     <div style={{
                       width: '100%', height: 40, borderRadius: 16,
-                      background: isFut ? 'rgba(255,255,255,0.02)' : `${col}${Math.round(pct * 50 + 12).toString(16).padStart(2,'0')}`,
-                      border: isSelected ? `2px solid ${isDayToday ? col : 'var(--color-accent)'}` : `1px solid ${isDayToday ? col : 'transparent'}`,
+                      background: fill,
+                      border: isFut ? '1px dotted var(--color-border)' : '1px solid transparent',
+                      boxShadow: isSelected ? '0 0 0 2px var(--color-ink)' : isDayToday ? '0 0 0 1px var(--color-ink)' : 'none',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      transition: 'border 120ms',
-                      boxShadow: isSelected ? `0 0 0 3px rgba(201,104,64,0.15)` : 'none',
+                      transition: 'background-color 200ms cubic-bezier(.23,1,.32,1), box-shadow 120ms',
                     }}>
-                      {!isFut && activeHabits.length > 0 && <span style={{ fontSize: 10, fontWeight: 500, color: pct >= 0.5 ? col : 'var(--color-subtle)' }}>{done}/{activeHabits.length}</span>}
+                      {!isFut && activeHabits.length > 0 && <span style={{ fontSize: 11, fontWeight: 500, color: ink, fontFamily: 'var(--font-mono)' }}>{done}/{activeHabits.length}</span>}
                     </div>
                     <span style={{ fontSize: 9, fontWeight: isSelected || isDayToday ? 700 : 400, color: isSelected ? 'var(--color-accent)' : isDayToday ? 'var(--color-ink)' : 'var(--color-subtle)', letterSpacing: '0.06em' }}>
                       {format(d, 'EEE', { locale: nlBE }).charAt(0).toUpperCase()}
@@ -630,7 +631,7 @@ export function HabitTracker() {
               { label: 'Perfect days', value: perfectDays, color: 'var(--pf-depth-text)', icon: <Flame size={12} /> },
               { label: 'Month score', value: `${monthScore}%`, color: monthScore >= 75 ? 'var(--pf-depth-text)' : monthScore >= 50 ? 'var(--pf-depth-text)' : 'var(--pf-depth-text)', icon: <Star size={12} /> },
             ].map(s => (
-              <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', padding: '16px 18px' }}>
+              <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: s.label === 'Score' && todayScore >= 80 ? 'var(--pf-veil)' : 'var(--color-card)', padding: '16px 18px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'var(--color-subtle)', marginBottom: 8 }}>{s.icon}</div>
                 <p style={{ fontSize: 24, fontWeight: 500, color: s.color, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{s.value}</p>
                 <p style={{ fontSize: 9, color: 'var(--color-subtle)', marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.label}</p>

@@ -3,7 +3,7 @@
 @theme {
   /* ── Pretty Focussed — dark: Ink ground, Bone text (the Full Stop inverts) ── */
   --color-bg:            #14150F;
-  --pf-depth-text: #C6D0B8; --pf-sage: #98A886; --pf-haze: #3E4936; --pf-veil: #282B22; --pf-sage-soft: rgba(152,168,134,0.16);
+  --pf-depth-text: #C6D0B8; --pf-focus: #6E7F5E; --pf-sage: #98A886; --pf-haze: #3E4936; --pf-veil: #282B22; --pf-sage-soft: rgba(152,168,134,0.16);
   --color-surface:       #1D1F18;
   --color-surface-warm:  #1D1F18;
   --color-surface-stone: #282B22;
@@ -370,7 +370,7 @@ h2, h3 { font-family: 'Instrument Sans', system-ui, sans-serif; font-weight: 500
 [data-theme="light"] {
   /* ── Pretty Focussed — light: Bone ground, Ink text ── */
   --color-bg:            #F4F2EE;
-  --pf-depth-text: #3E4936; --pf-sage: #98A886; --pf-haze: #C6D0B8; --pf-veil: #E2E7DA; --pf-sage-soft: rgba(152,168,134,0.14);
+  --pf-depth-text: #3E4936; --pf-focus: #6E7F5E; --pf-sage: #98A886; --pf-haze: #C6D0B8; --pf-veil: #E2E7DA; --pf-sage-soft: rgba(152,168,134,0.14);
   --color-surface:       #EAE7E1;
   --color-surface-warm:  #EAE7E1;
   --color-surface-stone: rgba(214,209,199,0.40);

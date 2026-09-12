@@ -143,7 +143,7 @@ const TEMPLATES: Template[] = [
 ]
 
 // ── New Project Modal ────────────────────────────────────────────
-function NewProjectModal({ onClose, onCreated }: { onClose: () => void; onCreated: (path: string) => void }) {
+export function NewProjectModal({ onClose, onCreated }: { onClose: () => void; onCreated: (path: string) => void }) {
   const { addProject } = useProjectDataStore()
   const [name, setName] = useState('')
   const [templateId, setTemplateId] = useState('bv')
