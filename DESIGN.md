@@ -518,6 +518,13 @@ The grouped list, twice. On Sales, open conversations sit in three stage groups 
 
 Superseded on Sales on 4 September 2026 by the conversation card (below); the row form survives for Won and Not now, with a closed stage ring in place of the check. Finance keeps the rows as described.
 
+### Focus, corrected (12 September 2026)
+
+Laurence's correction: the four worlds (Business, Brand, Life, Clients) were my structure, not hers, and hiding the habit, project and content systems behind Search read as removing them. Focus now carries her four segments in one Haze segmented pill: **Your focus**, **Your habits**, **Your projects**, **Your content**. The world switcher is gone from the shell (the context store stays for later).
+
+- **Your focus** (`src/pf/now/YourFocus.tsx`) is four chapters, one open at a time and the others visible and soft, exactly as the look back: 01 Who you are (the word for the year, up to four values as chips, one line about the woman running this), 02 What you want (three outcomes per lane as chips with an inline line to add, the quarter's six goals with their bars, the month's number), 03 What's getting in the way (obstacles as chips proposed from the week: a plan that did not hold, habits that slip, conversations waiting, what she let go; six common ones; one field for her own; stored in `focusStore.obstacles`), 04 Your next 30 days (the month's focus proposed from the first open goal and the first obstacle, the goals that get the month, the habits that hold it, the session as the next step).
+- **Your habits, Your projects, Your content** mount the full Laurence OS systems (`HabitTracker`, `Projects`, `ContentCreation`) inside the room, in a wide column (`.pf-one--wide`) with their own inner styling for now; the shell runs the Supabase data sync so they hold real data. Project detail pages still open in the older shell at `/projects/:id/…`. Restyling these three to the brand is a separate, later round.
+
 ### The Navigation Model (proposal, 5 September 2026)
 
 Depth of field applied to the whole app: at any moment there is one thing her attention should be on, and everything else is present but held back. Built for a brain with a small working memory, no feel for time, and a threshold at starting rather than at saving. The interface answers; it never asks.

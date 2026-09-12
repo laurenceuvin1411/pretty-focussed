@@ -16,13 +16,16 @@ export interface YearOutcome {
   createdAt: string
 }
 
-export interface YearPlan { word?: string; line?: string }
+export interface YearPlan { word?: string; line?: string; values?: string[]; who?: string }
+export interface Obstacle { id: string; text: string; on: boolean; createdAt: string }
 export interface MonthPlan { focus?: string; goalIds: string[] }
 
 interface FocusStore {
   years: Record<string, YearPlan>
   outcomes: YearOutcome[]
   months: Record<string, MonthPlan>
+  obstacles: Obstacle[]
+  setObstacles: (o: Obstacle[]) => void
   setYear: (year: string, patch: Partial<YearPlan>) => void
   addOutcome: (year: string, lane: Lane, title: string) => string | null
   updateOutcome: (id: string, patch: Partial<YearOutcome>) => void
@@ -38,6 +41,8 @@ export const useFocusStore = create<FocusStore>()(
       years: {},
       outcomes: [],
       months: {},
+      obstacles: [],
+      setObstacles: (obstacles) => set({ obstacles }),
 
       setYear: (year, patch) => set(s => ({ years: { ...s.years, [year]: { ...s.years[year], ...patch } } })),
 

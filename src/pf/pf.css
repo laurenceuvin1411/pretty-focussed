@@ -421,3 +421,9 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 .pf-lb__q.is-done:hover, .pf-lb__q.is-done:focus-within { opacity:1 }
 .pf-lb__row { display:grid; grid-template-columns:20px minmax(0,1fr) auto; gap:14px; align-items:center; width:100%; min-height:52px; padding:12px 0; background:none; border:0; border-top:1px dotted var(--border); font:inherit; color:inherit; text-align:left; cursor:pointer }
 .pf-lb__row:disabled { cursor:default }
+
+/* the older systems (habits, projects, content) inside the new room: same width, their own inner styling */
+.pf-legacy { width: 100%; max-width: 1120px; color: var(--text) }
+.pf-legacy h1, .pf-legacy h2, .pf-legacy h3 { font-weight: 500 }
+.pf-page--one > .pf-one.pf-one--wide { max-width: 1120px }
+.pf-segments--wrap { flex-wrap:wrap; row-gap:2px }

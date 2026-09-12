@@ -9,7 +9,9 @@ import { useSettingsStore } from '../settingsStore'
 import { useWeekStore } from '../../store/pf/weekStore'
 import { useCalendarStore } from '../../store/calendarStore'
 import { weekKey, todayStr } from '../../lib/pf/week'
-import { CONTEXTS, useContextStore, useClock, minutesBetween } from './contextStore'
+import { useContextStore, useClock, minutesBetween } from './contextStore'
+import { useAuthStore } from '../../store/authStore'
+import { useDataSync } from '../../hooks/useDataSync'
 import { slotsFor, currentSlot, nextSlot, fmtMin } from './timeline'
 
 const NAV = [
@@ -25,7 +27,10 @@ const PLACES: { label: string; to: string; hint?: string }[] = [
   { label: 'Now', to: '/now', hint: 'What is on, what is next' },
   { label: 'Today', to: '/today', hint: 'The day, block by block' },
   { label: 'Week', to: '/week', hint: 'Three priorities and the session' },
-  { label: 'Focus', to: '/focus', hint: 'Goals and numbers for this world' },
+  { label: 'Focus', to: '/focus', hint: 'Who you are, what you want, what is in the way, your next 30 days' },
+  { label: 'Your habits', to: '/focus/habits', hint: 'The habit system' },
+  { label: 'Your projects', to: '/focus/projects', hint: 'Projects with kompas, sales and content' },
+  { label: 'Your content', to: '/focus/content', hint: 'Scripts, planner, calendar' },
   { label: 'Me', to: '/me', hint: 'Room, hours, habits, sign out' },
   { label: 'Weekly Session', to: '/session', hint: 'Twenty minutes that set the week' },
   { label: 'Recap', to: '/recap', hint: 'Friday, shareable' },
@@ -47,11 +52,12 @@ const PLACES: { label: string; to: string; hint?: string }[] = [
 
 export function NowShell() {
   const ground = useSettingsStore(s => s.ground)
-  const context = useContextStore(s => s.context)
-  const setContext = useContextStore(s => s.setContext)
   const setLastRoute = useContextStore(s => s.setLastRoute)
   const { pathname } = useLocation()
   const [search, setSearch] = useState(false)
+  // Her habits, projects and content live in Supabase: keep them in sync here too, as the older shell does.
+  const userId = useAuthStore(s => s.user?.id)
+  useDataSync(userId)
 
   // Where she is, remembered. Opening the app returns here.
   useEffect(() => { if (pathname !== '/') setLastRoute(pathname) }, [pathname, setLastRoute])
@@ -75,11 +81,6 @@ export function NowShell() {
           <Link to="/now" className="pf-brand" aria-label="Now"><ApertureMark size={22} /> Pretty Focussed</Link>
           <button type="button" className="pf-btn pf-btn--tertiary pf-head2__search" onClick={() => setSearch(true)} aria-keyshortcuts="Meta+K Control+K">Search</button>
         </div>
-        <div className="pf-segments pf-segments--haze" role="tablist" aria-label="World">
-          {CONTEXTS.map(c => (
-            <button key={c.id} type="button" role="tab" aria-selected={context === c.id} className="pf-segment" onClick={() => setContext(c.id)}>{c.label}</button>
-          ))}
-        </div>
         <TimeStrip />
         <nav className="pf-tnav" aria-label="Pretty Focussed">
           {NAV.map(n => (
@@ -88,7 +89,7 @@ export function NowShell() {
         </nav>
       </header>
       <main className="pf-page pf-page--one">
-        <div className="pf-one"><Outlet /></div>
+        <div className={`pf-one ${/^\/focus\/(habits|projects|content)/.test(pathname) ? 'pf-one--wide' : ''}`}><Outlet /></div>
       </main>
       <Palette open={search} onClose={() => setSearch(false)} />
     </div>

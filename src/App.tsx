@@ -151,6 +151,9 @@ export default function App() {
           <Route path="/now"      element={<Now />} />
           <Route path="/week"     element={<WeekScreen />} />
           <Route path="/focus"    element={<Focus />} />
+          <Route path="/focus/habits"   element={<Focus />} />
+          <Route path="/focus/projects" element={<Focus />} />
+          <Route path="/focus/content"  element={<Focus />} />
           <Route path="/me"       element={<MeScreen />} />
           <Route path="/field"    element={<Field />} />
           <Route path="/today"    element={<TodayScreen />} />
@@ -210,6 +213,9 @@ export default function App() {
           <Route path="/now"      element={<Now />} />
           <Route path="/week"     element={<WeekScreen />} />
           <Route path="/focus"    element={<Focus />} />
+          <Route path="/focus/habits"   element={<Focus />} />
+          <Route path="/focus/projects" element={<Focus />} />
+          <Route path="/focus/content"  element={<Focus />} />
           <Route path="/me"       element={<MeScreen />} />
           <Route path="/field"    element={<Field />} />
           <Route path="/today"    element={<TodayScreen />} />
