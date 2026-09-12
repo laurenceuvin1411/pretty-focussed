@@ -8,7 +8,6 @@ import {
 } from 'lucide-react'
 import {
   useContentCreationStore, useBoraContentCreationStore, getProjectContentStore, getContentStats, PILLAR_CFG,
-  AUTHORITY_GOAL,
 } from '../store/contentCreationStore'
 import type { Pillar, Script, ContentCard, ScriptStatus, CardStatus, ContentFormat, ContentCreationStoreHook } from '../store/contentCreationStore'
 
@@ -123,24 +122,16 @@ function SectionShell({ title, icon, defaultOpen = true, badge, children }: {
 // SECTIE 1 · Dashboard
 // ═══════════════════════════════════════════════════════════════
 function Dashboard() {
-  const business = useContext(BizCtx)
   const { scripts, cards, baselinePosted, postedDays, weekGoal } = useStore()
   const stats = useMemo(() => getContentStats(scripts, cards, baselinePosted, postedDays), [scripts, cards, baselinePosted, postedDays])
   const thisWeek = postsInWeek(scripts, postedDays)
 
-  const kpis = business === 'bora' ? [
+  const kpis = [
     { label: 'Posts dit jaar', value: stats.postsThisYear, sub: 'alle pillars' },
     { label: 'Deze week', value: `${thisWeek}/${weekGoal}`, sub: 'weekdoel', color: thisWeek >= weekGoal ? '#6DB889' : GOLD },
     { label: 'Weekdoel', value: `${Math.min(100, Math.round((thisWeek / weekGoal) * 100))}%`, sub: 'deze week', bar: Math.min(100, Math.round((thisWeek / weekGoal) * 100)) },
     { label: 'Streak', value: stats.streak, sub: stats.streak === 1 ? 'week' : 'weken', icon: <Flame size={13} color={stats.streak > 0 ? '#C4935A' : 'var(--color-subtle)'} /> },
     { label: 'Deze maand', value: stats.postedThisMonth, sub: 'gepost' },
-  ] : [
-    { label: 'Posts dit jaar', value: stats.postsThisYear, sub: 'alle pillars' },
-    { label: 'Talking heads klaar', value: stats.completed, sub: `van ${AUTHORITY_GOAL}`, color: GOLD },
-    { label: 'Nog te gaan', value: stats.remaining, sub: 'talking heads', color: GOLD },
-    { label: 'Streak', value: stats.streak, sub: stats.streak === 1 ? 'week' : 'weken', icon: <Flame size={13} color={stats.streak > 0 ? '#C4935A' : 'var(--color-subtle)'} /> },
-    { label: 'Jaardoel', value: `${stats.pctOfGoal}%`, sub: 'voltooid', bar: stats.pctOfGoal },
-    { label: 'Deze maand nog', value: stats.monthLeftTarget, sub: 'om op tempo te blijven' },
   ]
 
   return (
@@ -167,7 +158,8 @@ function Dashboard() {
 // ═══════════════════════════════════════════════════════════════
 // SECTIE 2 · Authority tracker
 // ═══════════════════════════════════════════════════════════════
-function BoraWeekGoalHeader() {
+// Het weekdoel: zij kiest hoeveel posts per week, de app telt.
+function WeekGoalHeader() {
   const { scripts, postedDays, weekGoal, setWeekGoal } = useStore()
   const thisWeek = postsInWeek(scripts, postedDays)
   const pct = Math.min(100, Math.round((thisWeek / weekGoal) * 100))
@@ -199,82 +191,6 @@ function BoraWeekGoalHeader() {
         <div style={{ height: '100%', width: `${pct}%`, background: done ? '#6DB889' : `linear-gradient(90deg, ${GOLD}, #C4935A)`, borderRadius: 99, transition: 'width 800ms cubic-bezier(.16,1,.3,1)' }} />
       </div>
       {done && <p style={{ fontSize: 11, color: '#6DB889', fontWeight: 700, marginTop: 10 }}>Weekdoel gehaald. Alles erboven is bonus.</p>}
-    </div>
-  )
-}
-
-function AuthorityGoalHeader() {
-  const { scripts, cards, baselinePosted, setBaselinePosted, postedDays } = useStore()
-  const stats = useMemo(() => getContentStats(scripts, cards, baselinePosted, postedDays), [scripts, cards, baselinePosted, postedDays])
-  const [editBaseline, setEditBaseline] = useState(false)
-  const [draft, setDraft] = useState('')
-
-  return (
-    <div style={{ borderRadius: 16, border: `1.5px solid ${GOLD}35`, background: `linear-gradient(135deg, rgba(212,169,106,0.06), transparent)`, padding: '20px 24px', marginBottom: 16 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 14 }}>
-        <div>
-          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: GOLD, fontFamily: 'var(--font-mono)', marginBottom: 4 }}>Authority Goal</p>
-          <p style={{ fontSize: 18, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)' }}>
-            {AUTHORITY_GOAL} talking heads vóór 31 december 2026
-          </p>
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          <p style={{ fontSize: 28, fontWeight: 800, fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em', color: GOLD, lineHeight: 1 }}>
-            {stats.completed}<span style={{ fontSize: 15, color: 'var(--color-subtle)' }}>/{AUTHORITY_GOAL}</span>
-          </p>
-        </div>
-      </div>
-
-      <div style={{ height: 6, borderRadius: 99, background: 'rgba(212,169,106,0.12)', overflow: 'hidden', marginBottom: 14 }}>
-        <div style={{ height: '100%', width: `${stats.pctOfGoal}%`, background: `linear-gradient(90deg, ${GOLD}, #C4935A)`, borderRadius: 99, transition: 'width 800ms cubic-bezier(.16,1,.3,1)' }} />
-      </div>
-
-      <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-        <div><Mono style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>{stats.remaining}</Mono><p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 2 }}>te gaan</p></div>
-        <div><Mono style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>{stats.perWeekNeeded.toFixed(1)}</Mono><p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 2 }}>per week nodig</p></div>
-        <div><Mono style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>{Math.ceil(stats.perMonthNeeded)}</Mono><p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 2 }}>per maand nodig</p></div>
-        <div>
-          <Mono style={{ fontSize: 15, fontWeight: 800, color: stats.estDoneDate && stats.estDoneDate <= new Date('2026-12-31') ? '#6DB889' : '#C4935A' }}>
-            {stats.estDoneDate ? format(stats.estDoneDate, 'd MMM yyyy', { locale: nlBE }) : 'nog geen tempo'}
-          </Mono>
-          <p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 2 }}>verwachte einddatum</p>
-        </div>
-
-        {/* Startteller: al gepost buiten de app */}
-        <div style={{ marginLeft: 'auto' }}>
-          {editBaseline ? (
-            <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
-              <input
-                autoFocus
-                type="number"
-                min={0}
-                max={100}
-                value={draft}
-                onChange={e => setDraft(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter') { setBaselinePosted(Number(draft)); setEditBaseline(false) }
-                  if (e.key === 'Escape') setEditBaseline(false)
-                }}
-                aria-label="Aantal al gepost buiten de app"
-                style={{ ...inputStyle, width: 64, fontSize: 13, fontFamily: 'var(--font-mono)', padding: '6px 10px' }}
-              />
-              <button
-                onClick={() => { setBaselinePosted(Number(draft)); setEditBaseline(false) }}
-                style={{ padding: '6px 12px', borderRadius: 16, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 11, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}
-              >OK</button>
-            </div>
-          ) : (
-            <button
-              onClick={() => { setDraft(String(baselinePosted)); setEditBaseline(true) }}
-              title="Posts die je al maakte vóór deze tracker, tellen mee richting de 100"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', textAlign: 'right' }}
-            >
-              <Mono style={{ fontSize: 15, fontWeight: 800, color: baselinePosted > 0 ? GOLD : 'var(--color-subtle)' }}>{baselinePosted}</Mono>
-              <p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 2, borderBottom: '1px dashed var(--color-border)' }}>al gepost vóór de app</p>
-            </button>
-          )}
-        </div>
-      </div>
     </div>
   )
 }
@@ -425,7 +341,6 @@ function AuthorityTracker() {
     return list
   }, [scripts, search, statusFilter, sortBy])
 
-  const business = useContext(BizCtx)
 
   function newScript() {
     const id = addScript()
@@ -434,7 +349,7 @@ function AuthorityTracker() {
 
   return (
     <div>
-      {business === 'bora' ? <BoraWeekGoalHeader /> : <AuthorityGoalHeader />}
+      <WeekGoalHeader />
 
       {/* Toolbar */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -465,7 +380,7 @@ function AuthorityTracker() {
         <div style={{ padding: '36px 24px', borderRadius: 14, border: '1.5px dashed var(--color-border)', textAlign: 'center' }}>
           <Mic size={18} color={GOLD} style={{ marginBottom: 8 }} />
           <p style={{ fontSize: 13, color: 'var(--color-subtle)' }}>
-            {scripts.length === 0 ? 'Schrijf hier je eerste talking-head script.' : 'Geen scripts gevonden met deze filters.'}
+            {scripts.length === 0 ? 'Schrijf hier je eerste script.' : 'Geen scripts gevonden met deze filters.'}
           </p>
         </div>
       ) : (
@@ -1123,7 +1038,7 @@ export function ContentCreation({ business = 'lu', projectId, projectName }: { b
         <Dashboard />
       </SectionShell>
 
-      <SectionShell title="Authority Building" icon={<Mic size={13} color={GOLD} />}>
+      <SectionShell title="Scripts · weekdoel" icon={<Mic size={13} color={GOLD} />}>
         <AuthorityTracker />
       </SectionShell>
 
