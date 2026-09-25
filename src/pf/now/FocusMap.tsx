@@ -18,7 +18,7 @@ export function FocusMap() {
   const mp = months[monthKey()] ?? { goalIds: [] }
   return (
     <div className="pf-note">
-      <span className="pf-glass" style={{ justifySelf: 'start' }}><b>{plan.word || 'Your focus'}</b>{plan.word && <span className="pf-mono">{y.key}</span>}</span>
+      <span className="pf-glass pf-note__tag"><b>{plan.word || 'Your focus'}</b>{plan.word && <span className="pf-mono">{y.key}</span>}</span>
       <LaneMap lane="business" chosen={mp.goalIds} />
       <LaneMap lane="life" chosen={mp.goalIds} />
       {mp.focus && <p className="pf-small pf-note__line">{mp.focus}</p>}

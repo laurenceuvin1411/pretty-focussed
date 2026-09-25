@@ -540,7 +540,7 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 .pf-focus-grid{display:grid; gap:36px}
 @media (min-width:980px){ .pf-focus-grid{grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr); gap:clamp(40px,5vw,72px); align-items:start} .pf-focus-side{position:sticky; top:24px} }
 .pf-note{position:relative; display:grid; gap:12px}
-.pf-note__tag{position:absolute; z-index:3; top:-14px; left:18px}
+.pf-note__tag{justify-self:start}
 .pf-note__tag b{text-transform:none; letter-spacing:-.01em; font-size:13px}
 .pf-note__line{margin:0; padding:0 4px}
 .pf-map{position:relative; container-type:inline-size; display:grid; gap:6px; width:100%; padding:10px; border-radius:32px;
@@ -596,3 +596,9 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 /* an empty slot keeps its words even when it is short */
 @container (max-height:118px){ .pf-blk--empty .b-focus{display:block; -webkit-line-clamp:1; font-size:.875rem; text-align:right; max-width:none} }
 .pf-note { gap:14px }
+
+/* an empty slot is one calm line, whatever its height */
+.pf-blk--empty{flex-direction:row; align-items:center; justify-content:space-between; gap:12px; min-height:52px}
+.pf-blk--empty .b-top{align-self:center}
+.pf-blk--empty .b-bot{justify-items:end}
+.pf-blk--empty .b-focus{display:block; font-size:.9375rem; text-align:right; max-width:none; -webkit-line-clamp:unset}
