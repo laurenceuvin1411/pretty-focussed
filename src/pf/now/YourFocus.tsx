@@ -13,6 +13,7 @@ import { useSalesStore } from '../../store/pf/salesStore'
 import { yearInfo, monthKey, monthInfo, quarterInfo, weekKey, prevWeekKey, weekDatesFromKey } from '../../lib/pf/week'
 import { DepthBar } from '../DepthBar'
 import { useDraft } from './contextStore'
+import { FocusMap } from './FocusMap'
 
 const CHAPTERS = [
   { n: '01', title: 'Who you are', q: 'Who you are.' },
@@ -26,7 +27,8 @@ const fmtInt = (n: number) => new Intl.NumberFormat('en-IE', { maximumFractionDi
 export function YourFocus() {
   const [i, setI] = useState(0)
   return (
-    <div className="pf-enter pf-stack-lg" style={{ gap: 36 }}>
+    <div className="pf-enter pf-focus-grid">
+    <div className="pf-stack-lg" style={{ gap: 36, minWidth: 0 }}>
       <header className="pf-stack" style={{ gap: 14 }}>
         <p className="pf-over">Your focus · {CHAPTERS[i].n} of 04</p>
         <h1 className="pf-h1">{CHAPTERS[i].q}</h1>
@@ -60,6 +62,8 @@ export function YourFocus() {
           )
         })}
       </div>
+    </div>
+    <aside className="pf-focus-side" aria-label="The note"><FocusMap /></aside>
     </div>
   )
 }

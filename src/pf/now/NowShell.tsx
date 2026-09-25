@@ -5,6 +5,7 @@ import { Link, NavLink, Navigate, Outlet, useLocation, useNavigate } from 'react
 import '../pf.css'
 import { ApertureMark } from '../Aperture'
 import { Sheet } from '../Sheet'
+import { DailyBreath } from '../Breath'
 import { useSettingsStore } from '../settingsStore'
 import { useWeekStore } from '../../store/pf/weekStore'
 import { useCalendarStore } from '../../store/calendarStore'
@@ -98,6 +99,7 @@ export function NowShell() {
         <div className={`pf-one ${/^\/focus\/(priorities|habits|projects|content)/.test(pathname) ? 'pf-one--wide' : ''}`}><Outlet /></div>
       </main>
       <Palette open={search} onClose={() => setSearch(false)} />
+      <DailyBreath />
     </div>
   )
 }

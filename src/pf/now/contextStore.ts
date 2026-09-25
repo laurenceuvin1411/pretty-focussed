@@ -19,6 +19,8 @@ interface ContextStore {
   setLastRoute: (r: string) => void
   drafts: Record<string, string>
   setDraft: (key: string, value: string) => void
+  lastBreath: string | null
+  setLastBreath: (d: string) => void
 }
 
 export const useContextStore = create<ContextStore>()(
@@ -28,6 +30,8 @@ export const useContextStore = create<ContextStore>()(
       setContext: (context) => set({ context }),
       lastRoute: '/now',
       setLastRoute: (lastRoute) => set({ lastRoute }),
+      lastBreath: null,
+      setLastBreath: (lastBreath) => set({ lastBreath }),
       drafts: {},
       setDraft: (key, value) => set(s => {
         const drafts = { ...s.drafts }

@@ -3,6 +3,7 @@ import { format, startOfWeek, addDays } from 'date-fns'
 import { nlBE, enGB } from 'date-fns/locale'
 import { Plus, Trash2, Calendar as CalendarIcon, FileText, Timer, ChevronLeft, ChevronRight, Play, Pause, Square, Pin, ListTodo, Link2 } from 'lucide-react'
 import { useProductivityStore } from '../store/productivityStore'
+import { BreathRing } from '../pf/Breath'
 import type { Todo, TodoPriority, TodoSphere } from '../store/productivityStore'
 
 const SPHERE_CFG: Record<TodoSphere, { label: string; color: string }> = {
@@ -37,6 +38,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 // ── Task card: one row for the calendar and the list. Check, time, what, how long. ──
 const DUR_STEPS = [0, 15, 30, 45, 60, 90, 120, 180]
+const BREATH_AFTER_MIN = 20   // in focus this long, the circle comes to breathe with her
 function fmtDur(m: number) { if (m < 60) return `${m} min`; const h = Math.floor(m / 60), r = m % 60; return r ? `${h} h ${r}` : `${h} h` }
 
 function plateOf(t: Todo) { return t.sphere === 'professional' ? '1' : t.sphere === 'personal' ? '3' : '2' }
@@ -381,6 +383,9 @@ function FocusSection() {
   }, [remaining, timer.status])
 
   const pct = timer.durationSec > 0 ? ((timer.durationSec - remaining) / timer.durationSec) * 100 : 0
+  const elapsedMin = timer.durationSec > 0 ? (timer.durationSec - remaining) / 60 : 0
+  const [breathing, setBreathing] = useState(false)
+  const breathDue = timer.status === 'running' && timer.mode === 'focus' && elapsedMin >= BREATH_AFTER_MIN
   const todayStr = TODAY()
   const todaySessions = sessions.filter(s => s.date === todayStr)
   const todayMinutes = todaySessions.reduce((sum, s) => sum + s.minutes, 0)
@@ -416,13 +421,24 @@ function FocusSection() {
               {fmtClock(remaining)}
             </span>
             <span style={{ fontSize: 11, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
-              {timer.status === 'running' ? 'bezig' : timer.status === 'paused' ? 'gepauzeerd' : isBreakReady ? 'sessie klaar!' : 'klaar om te starten'}
+              {timer.status === 'running' ? 'running' : timer.status === 'paused' ? 'paused' : isBreakReady ? 'session done' : 'ready to start'}
             </span>
           </div>
         </div>
 
+        {(breathDue || breathing) && (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, marginBottom: 28 }}>
+            <BreathRing size={150} />
+            <p style={{ fontSize: 13, color: 'var(--color-subtle)', margin: 0 }}>{breathDue ? `${Math.round(elapsedMin)} minutes in. Breathe with it.` : 'Breathe with it.'}</p>
+            {breathing && !breathDue && <button type="button" className="pf-btn pf-btn--tertiary" onClick={() => setBreathing(false)}>Enough</button>}
+          </div>
+        )}
+
         {/* Controls */}
-        <div style={{ display: 'flex', gap: 10, marginBottom: 24 }}>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {!breathDue && !breathing && (
+            <button type="button" className="pf-btn pf-btn--tertiary" onClick={() => setBreathing(true)} style={{ padding: '10px 6px' }}>Breathe</button>
+          )}
           {timer.status === 'idle' && !isBreakReady && (
             <button onClick={() => store.startTimer(timer.todoId)} data-testid="start-focus"
               style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 14, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
@@ -437,7 +453,7 @@ function FocusSection() {
               </button>
               <button onClick={() => store.startTimer(timer.todoId)}
                 style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 24px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-ink)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
-                Volgende focus
+                Next focus
               </button>
             </>
           )}
