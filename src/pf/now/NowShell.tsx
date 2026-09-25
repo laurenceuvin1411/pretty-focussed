@@ -14,12 +14,13 @@ import { useAuthStore } from '../../store/authStore'
 import { useDataSync } from '../../hooks/useDataSync'
 import { slotsFor, currentSlot, nextSlot, fmtMin } from './timeline'
 
+// The main navigation is her five segments (25 September, on her call): one pill, always the same words.
 const NAV = [
-  { to: '/now',   label: 'Now' },
-  { to: '/today', label: 'Today' },
-  { to: '/week',  label: 'Week' },
-  { to: '/focus', label: 'Focus' },
-  { to: '/me',    label: 'Me' },
+  { to: '/focus',            label: 'Your focus',      end: true },
+  { to: '/focus/priorities', label: 'Your priorities' },
+  { to: '/focus/habits',     label: 'Your habits' },
+  { to: '/focus/projects',   label: 'Your projects' },
+  { to: '/focus/content',    label: 'Your content' },
 ]
 
 // Everything she can reach by typing. The five above, and all that sits behind them.
@@ -79,13 +80,17 @@ export function NowShell() {
       <div className="pf-grain" aria-hidden="true" />
       <header className="pf-app__head pf-head2">
         <div className="pf-head2__row">
-          <Link to="/now" className="pf-brand" aria-label="Now"><ApertureMark size={22} /> Pretty Focussed</Link>
-          <button type="button" className="pf-btn pf-btn--tertiary pf-head2__search" onClick={() => setSearch(true)} aria-keyshortcuts="Meta+K Control+K">Search</button>
+          <Link to="/focus" className="pf-brand" aria-label="Your focus"><ApertureMark size={22} /> Pretty Focussed</Link>
+          <span style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+            <NavLink to="/now" className="pf-btn pf-btn--tertiary pf-head2__search">Now</NavLink>
+            <NavLink to="/me" className="pf-btn pf-btn--tertiary pf-head2__search">Me</NavLink>
+            <button type="button" className="pf-btn pf-btn--tertiary pf-head2__search" onClick={() => setSearch(true)} aria-keyshortcuts="Meta+K Control+K">Search</button>
+          </span>
         </div>
         <TimeStrip />
-        <nav className="pf-tnav" aria-label="Pretty Focussed">
+        <nav className="pf-segments pf-segments--haze pf-segments--nav" aria-label="Pretty Focussed">
           {NAV.map(n => (
-            <NavLink key={n.to} to={n.to} className={({ isActive }) => `pf-tnav__item ${isActive ? 'is-on' : ''}`}>{n.label}</NavLink>
+            <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `pf-segment ${isActive ? 'is-on' : ''}`} aria-current={undefined}>{n.label}</NavLink>
           ))}
         </nav>
       </header>
@@ -99,7 +104,7 @@ export function NowShell() {
 
 // Opening the app is returning. "/" goes to the screen she left.
 export function Resume() {
-  const [to] = useState(() => { const l = useContextStore.getState().lastRoute; return l && l !== '/' ? l : '/now' })   // read once: the redirect must not chase later writes
+  const [to] = useState(() => { const l = useContextStore.getState().lastRoute; return l && l !== '/' ? l : '/focus' })   // read once: the redirect must not chase later writes
   return <Navigate to={to} replace />
 }
 

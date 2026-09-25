@@ -522,6 +522,10 @@ Superseded on Sales on 4 September 2026 by the conversation card (below); the ro
 
 Laurence's call on the Air ground: Paper cards on a blue-tinted room read as beige on blue and hide the green. Surfaces now sit lighter than whatever ground she picks: `--surface` is a 62 percent mix of white into the ground (whitish on Bone, a pale blue-white on Air, a pale sage-white on Field, warm white on Travertine), and the older pages' `--color-card` and `--color-surface` follow it inside the room. Dark mode keeps its own surface. The instrument (the sage scale) is unchanged and reads better for it.
 
+### The main navigation, her five segments (25 September 2026)
+
+On Laurence's call the five words Now, Today, Week, Focus, Me are no longer the navigation. The header carries her five segments as one Haze pill under the time strip: Your focus, Your priorities, Your habits, Your projects, Your content. On the phone the pill scrolls sideways; there is no bottom bar any more. Now and Me remain as text links beside Search in the header, and Today, Week, the session, the recap and everything else stay one search away. The brand mark and `/` open Your focus. The segments' focus ring is an Ink hairline, never the browser's.
+
 ### Focus, corrected (12 September 2026)
 
 Laurence's correction: the four worlds (Business, Brand, Life, Clients) were my structure, not hers, and hiding the habit, project and content systems behind Search read as removing them. Focus now carries her four segments in one Haze segmented pill: **Your focus**, **Your habits**, **Your projects**, **Your content**. The world switcher is gone from the shell (the context store stays for later).

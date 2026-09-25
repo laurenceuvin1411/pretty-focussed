@@ -517,3 +517,11 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 :root:not([data-theme="light"]) .pf-dayplan{background:#282B22; box-shadow:none; color:var(--text)}
 :root:not([data-theme="light"]) .pf-dayc{background:#282B22; box-shadow:none; color:var(--text)}
 @media (prefers-reduced-motion:reduce){ .pf-resolve,.pf-dayplan__body{animation:none} }
+
+/* the main navigation: her five segments in the header. On the phone the pill scrolls sideways. */
+.pf-segments--nav { max-width:100%; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; text-decoration:none }
+.pf-segments--nav::-webkit-scrollbar { display:none }
+.pf-segments--nav .pf-segment { white-space:nowrap; text-decoration:none; display:inline-flex; align-items:center }
+.pf-segments--nav .pf-segment.is-on { background:var(--depth-1); color:var(--text) }
+.pf-segment:focus-visible { outline:1px solid var(--text); outline-offset:2px }
+.pf-page { padding-bottom:calc(64px + env(safe-area-inset-bottom)) }
