@@ -3,7 +3,7 @@
 import { useLocation } from 'react-router-dom'
 import { YourFocus } from './YourFocus'
 import { HabitTracker } from '../../pages/HabitTracker'
-import { Projects } from '../../pages/Projects'
+import { YourProjects } from './YourProjects'
 import { ContentCreation } from '../../pages/ContentCreation'
 import { Productivity } from '../../pages/Productivity'
 
@@ -17,7 +17,7 @@ export function Focus() {
       {active === 'focus' && <YourFocus />}
       {active === 'priorities' && <div className="pf-legacy"><Productivity /></div>}
       {active === 'habits' && <div className="pf-legacy"><HabitTracker /></div>}
-      {active === 'projects' && <div className="pf-legacy"><Projects /></div>}
+      {active === 'projects' && <YourProjects />}
       {active === 'content' && <div className="pf-legacy"><ContentCreation /></div>}
     </div>
   )

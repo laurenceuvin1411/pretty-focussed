@@ -26,6 +26,9 @@ export interface Project {
   color: string
   emoji: string
   instagramUrl?: string
+  outcome?: string   // what done looks like, in her words
+  due?: string       // YYYY-MM-DD
+  done?: boolean
   checklists: { id: string; title: string; items: ChecklistItem[] }[]
   // Sub-tabs in de sidebar (zoals de Laurence Uvin / Bora groepen).
   // Zonder sections toont het project enkel de admin/overview-pagina.

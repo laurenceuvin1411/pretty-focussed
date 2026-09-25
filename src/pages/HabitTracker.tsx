@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react'
 import { format, getDaysInMonth, startOfWeek, eachDayOfInterval, endOfWeek } from 'date-fns'
 import { nlBE } from 'date-fns/locale'
-import {
-  ChevronLeft, ChevronRight, Flame, Star, Calendar, Check, Sparkles,
-  Plus, Pencil, Trash2, Target, TrendingUp, X, ChevronDown, ChevronUp,
-} from 'lucide-react'
+import { ChevronLeft, ChevronRight, Star, Check, Sparkles, Plus, Pencil, Trash2, Target, TrendingUp, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { useHabitStore } from '../store/habitStore'
 import { usePlannerStore } from '../store/plannerStore'
 import { HabitAICoach } from '../components/HabitAICoach'
@@ -237,8 +234,8 @@ function GoalCard({ goal }: { goal: ReturnType<typeof usePlannerStore>['goals'][
 }
 
 // ── Habit Checklist Row ─────────────────────────────────────────────
-function HabitRow({ habit, done, onToggle, streak, monthPct, onEdit, onDelete }: {
-  habit: Habit; done: boolean; onToggle: () => void; streak: number; monthPct: number; onEdit: () => void; onDelete: () => void
+function HabitRow({ habit, done, onToggle, monthPct, onEdit, onDelete }: {
+  habit: Habit; done: boolean; onToggle: () => void; monthPct: number; onEdit: () => void; onDelete: () => void
 }) {
   const cfg = CAT_CONFIG[habit.category] ?? CAT_CONFIG.lifestyle
   const [showActions, setShowActions] = useState(false)
@@ -274,13 +271,6 @@ function HabitRow({ habit, done, onToggle, streak, monthPct, onEdit, onDelete }:
           </p>
         </div>
 
-        {/* Streak */}
-        {streak > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 99, background: 'var(--pf-veil)', border: '1px solid var(--pf-haze)' }}>
-            <Flame size={10} color="var(--pf-depth-text)" />
-            <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--pf-depth-text)' }}>{streak}</span>
-          </div>
-        )}
 
         {/* Month % */}
         <span style={{ fontSize: 11, fontWeight: 500, color: monthPct >= 75 ? 'var(--pf-depth-text)' : monthPct >= 50 ? 'var(--pf-depth-text)' : 'var(--color-subtle)', minWidth: 28, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
@@ -379,7 +369,7 @@ export function HabitTracker() {
     if (next <= todayStr) setSelectedDateStr(next)
   }
 
-  const { habits, logs, toggleHabit, deleteHabit, getDailyScore, getMonthlyScore, getPerfectDays, getStreak } = useHabitStore()
+  const { habits, logs, toggleHabit, deleteHabit, getDailyScore, getMonthlyScore } = useHabitStore()
   const { goals } = usePlannerStore()
 
   const year = viewDate.getFullYear()
@@ -427,7 +417,6 @@ export function HabitTracker() {
   const todayDone = logs.filter(l => l.date === selectedDateStr && l.completed && scheduledHabits.some(h => h.id === l.habitId)).length
   const todayTotal = scheduledHabits.length
   const monthScore = getMonthlyScore(monthStr)
-  const perfectDays = getPerfectDays(monthStr)
   const monthlyDone = logs.filter(l => l.date.startsWith(monthStr) && l.completed).length
 
   // Week habit heatmap
@@ -435,7 +424,7 @@ export function HabitTracker() {
   const weekEnd = endOfWeek(today, { weekStartsOn: 1 })
   const weekDays = eachDayOfInterval({ start: weekStart, end: weekEnd })
 
-  const motivation = todayScore === 100 ? 'Perfect day. Streak alive.' :
+  const motivation = todayScore === 100 ? 'All of them. That is a day.' :
     todayScore >= 75 ? 'Strong. Finish it.' :
     todayScore >= 50 ? 'Halfway. Keep going.' :
     todayDone > 0 ? 'Good start. Keep going.' : 'New day. Make it count.'
@@ -508,11 +497,10 @@ export function HabitTracker() {
           </div>
 
           {/* Stats row */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 28 }}>
             {[
               { label: 'Today', value: `${todayDone}/${todayTotal}`, sub: 'habits', color: 'var(--pf-depth-text)', icon: <Check size={12} /> },
               { label: 'Score', value: `${todayScore}%`, sub: 'day score', color: todayScore >= 80 ? 'var(--pf-depth-text)' : todayScore >= 50 ? 'var(--pf-focus)' : 'var(--color-muted)', icon: <Star size={12} /> },
-              { label: 'Streak', value: `${perfectDays}`, sub: 'perfect days', color: 'var(--pf-depth-text)', icon: <Flame size={12} /> },
               { label: 'Month', value: `${monthScore}%`, sub: 'month score', color: monthScore >= 75 ? 'var(--pf-depth-text)' : monthScore >= 40 ? 'var(--pf-focus)' : 'var(--color-muted)', icon: <TrendingUp size={12} /> },
             ].map(s => (
               <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: s.label === 'Score' && todayScore >= 80 ? 'var(--pf-veil)' : 'var(--color-card)', padding: '16px 18px' }}>
@@ -593,7 +581,6 @@ export function HabitTracker() {
                           habit={habit}
                           done={getTodayLog(habit.id)?.completed ?? false}
                           onToggle={() => toggleHabit(habit.id, selectedDateStr)}
-                          streak={getStreak(habit.id)}
                           monthPct={getHabitMonthPct(habit.id)}
                           onEdit={() => setEditHabit(habit)}
                           onDelete={() => deleteHabit(habit.id)}
@@ -624,11 +611,10 @@ export function HabitTracker() {
       {tab === 'month' && (
         <div>
           {/* Month stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 24 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 24 }}>
             {[
               { label: 'Active habits', value: activeHabits.length, color: 'var(--color-ink)', icon: <Target size={12} /> },
               { label: 'Done this month', value: monthlyDone, color: 'var(--pf-depth-text)', icon: <Check size={12} /> },
-              { label: 'Perfect days', value: perfectDays, color: 'var(--pf-depth-text)', icon: <Flame size={12} /> },
               { label: 'Month score', value: `${monthScore}%`, color: monthScore >= 75 ? 'var(--pf-depth-text)' : monthScore >= 50 ? 'var(--pf-depth-text)' : 'var(--pf-depth-text)', icon: <Star size={12} /> },
             ].map(s => (
               <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: s.label === 'Score' && todayScore >= 80 ? 'var(--pf-veil)' : 'var(--color-card)', padding: '16px 18px' }}>

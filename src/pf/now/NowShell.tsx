@@ -96,7 +96,7 @@ export function NowShell() {
         </nav>
       </header>
       <main className="pf-page pf-page--one">
-        <div className={`pf-one ${/^\/focus\/(priorities|habits|projects|content)/.test(pathname) ? 'pf-one--wide' : ''}`}><Outlet /></div>
+        <div className={`pf-one ${/^\/focus\/(priorities|habits|content)/.test(pathname) ? 'pf-one--wide' : ''}`}><Outlet /></div>
       </main>
       <Palette open={search} onClose={() => setSearch(false)} />
       <DailyBreath />

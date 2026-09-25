@@ -74,7 +74,7 @@ function InlineLine({ value, placeholder, onSave, className, label, style }: { v
 }
 
 // Destructive: Ink sweeps across the pill for 1.6 seconds while pressed. Release when full and it is gone.
-function HoldToRemove({ onConfirm }: { onConfirm: () => void }) {
+export function HoldToRemove({ onConfirm }: { onConfirm: () => void }) {
   const [holding, setHolding] = useState(false)
   const timer = useRef<number | null>(null)
   const full = useRef(false)
