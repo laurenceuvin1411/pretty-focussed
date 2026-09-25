@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { format, getDaysInMonth, startOfWeek, eachDayOfInterval, endOfWeek } from 'date-fns'
 import { nlBE } from 'date-fns/locale'
-import { ChevronLeft, ChevronRight, Star, Check, Sparkles, Plus, Pencil, Trash2, Target, TrendingUp, X, ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Star, Check, Sparkles, Plus, Pencil, Trash2, Target, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { useHabitStore } from '../store/habitStore'
 import { usePlannerStore } from '../store/plannerStore'
 import { HabitAICoach } from '../components/HabitAICoach'
@@ -415,7 +415,6 @@ export function HabitTracker() {
   const scheduledHabits = activeHabits.filter(h => isScheduledOn(h, selectedDateStr))
   const todayScore = getDailyScore(selectedDateStr)
   const todayDone = logs.filter(l => l.date === selectedDateStr && l.completed && scheduledHabits.some(h => h.id === l.habitId)).length
-  const todayTotal = scheduledHabits.length
   const monthScore = getMonthlyScore(monthStr)
   const monthlyDone = logs.filter(l => l.date.startsWith(monthStr) && l.completed).length
 
@@ -494,21 +493,6 @@ export function HabitTracker() {
             <button onClick={() => goDay(1)} disabled={isToday} style={{ width: 32, height: 32, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', cursor: isToday ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isToday ? 'var(--color-subtle)' : 'var(--color-muted)', opacity: isToday ? 0.35 : 1 }}>
               <ChevronRight size={15} />
             </button>
-          </div>
-
-          {/* Stats row */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 28 }}>
-            {[
-              { label: 'Today', value: `${todayDone}/${todayTotal}`, sub: 'habits', color: 'var(--pf-depth-text)', icon: <Check size={12} /> },
-              { label: 'Score', value: `${todayScore}%`, sub: 'day score', color: todayScore >= 80 ? 'var(--pf-depth-text)' : todayScore >= 50 ? 'var(--pf-focus)' : 'var(--color-muted)', icon: <Star size={12} /> },
-              { label: 'Month', value: `${monthScore}%`, sub: 'month score', color: monthScore >= 75 ? 'var(--pf-depth-text)' : monthScore >= 40 ? 'var(--pf-focus)' : 'var(--color-muted)', icon: <TrendingUp size={12} /> },
-            ].map(s => (
-              <div key={s.label} style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: s.label === 'Score' && todayScore >= 80 ? 'var(--pf-veil)' : 'var(--color-card)', padding: '16px 18px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'var(--color-subtle)', marginBottom: 8 }}>{s.icon}</div>
-                <p style={{ fontSize: 24, fontWeight: 500, color: s.color, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{s.value}</p>
-                <p style={{ fontSize: 9, color: 'var(--color-subtle)', marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{s.sub}</p>
-              </div>
-            ))}
           </div>
 
           {/* Week heatmap */}

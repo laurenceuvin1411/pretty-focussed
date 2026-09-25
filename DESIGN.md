@@ -526,7 +526,7 @@ Laurence's call on the Air ground: Paper cards on a blue-tinted room read as bei
 
 Laurence's verdict on the mounted Laurence OS page: unfocussed, random options. Rebuilt as `src/pf/now/YourProjects.tsx` on the same store, so nothing is lost: a project is a name, one line of what done looks like, a date if it has one, and steps. The screen opens with the answer ("2 projects in motion." and the next step across them, or the one that is overdue), one Ink pill "New project" (a sheet: what you are building, what done looks like, the first step, a date), then the projects as hairline rows with the next step, the date in mono and a small depth bar of steps done. A row opens the project sheet: steps as check rows with an inline line for the next one, name, line and date editable, "Done" as the pill and hold-to-remove as the way out. Done projects sit faded under the live ones. Sections, periods, colours and emojis are gone from view; the older project pages still answer at `/projects/:id` for the owner's seed projects.
 
-**No perfect days.** On Laurence's call ("perfect days don't exist, no guilt"), the habit tracker lost its "Perfect days" stat, the streak stat and the per-habit flame. A full day reads "All of them. That is a day."
+**No perfect days.** On Laurence's call ("perfect days don't exist, no guilt"), the habit tracker lost its "Perfect days" stat, the streak stat and the per-habit flame. A full day reads "All of them. That is a day." The row of three score cards (habits, day score, month score) under the day switcher went too: no added value, in her words.
 
 ### The note and the breath (25 September 2026)
 
