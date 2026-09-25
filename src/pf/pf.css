@@ -120,7 +120,8 @@
 .pf-btn:active { transform:scale(.97) }
 .pf-btn:disabled { cursor:default; opacity:.4 }
 .pf-btn--primary { background:var(--action); color:var(--action-text); box-shadow:var(--sh-md) }
-.pf-btn--secondary { box-shadow:inset 0 0 0 1px var(--border); color:var(--text) }
+.pf-btn--secondary { background:var(--glass); -webkit-backdrop-filter:blur(32px) saturate(1.2); backdrop-filter:blur(32px) saturate(1.2); box-shadow:var(--sh-glass), 0 0 0 1px rgb(20 21 15 / .08); color:var(--text) }
+@media (hover:hover) and (pointer:fine){ .pf-btn--secondary:hover { background:rgb(255 255 255 / .92) } :root:not([data-theme="light"]) .pf-btn--secondary:hover { background:var(--glass) } }
 .pf-btn--tertiary { padding:10px 6px; color:var(--text-2); text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgb(20 21 15 / .3); min-height:44px }
 .pf-btn--full { width:100% }
 @media (hover:hover) and (pointer:fine) {
@@ -443,35 +444,76 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 /* the older two-column layouts stack on the phone */
 @media (max-width: 767px) { .pf-legacy .pf-two-col { grid-template-columns: minmax(0,1fr) !important } }
 
-/* the week strip and the task cards (Your priorities) */
-.pf-weekstrip { display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:8px }
-.pf-daycard { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; min-height:84px; padding:12px 4px; border-radius:20px; border:0; background:var(--surface); color:var(--text-2); box-shadow:var(--sh-sm); cursor:pointer; font:inherit; transition:transform var(--d-press) var(--ease-out), background-color var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out) }
-.pf-daycard:active { transform:scale(.97) }
-.pf-daycard[aria-pressed="true"] { background:var(--action); color:var(--action-text) }
-.pf-daycard__dow { font:500 11px/1 'JetBrains Mono',ui-monospace,monospace; letter-spacing:.06em }
-.pf-daycard__num { font-size:26px; line-height:1; font-weight:500; letter-spacing:-.03em; color:var(--text) }
-.pf-daycard[aria-pressed="true"] .pf-daycard__num { color:var(--action-text) }
-.pf-daycard__dots { display:flex; gap:4px; height:6px }
-.pf-daycard__dots i { width:6px; height:6px; border-radius:50%; display:block }
-.pf-daycard.is-today:not([aria-pressed="true"]) { box-shadow:inset 0 0 0 1px var(--text) }
-.pf-taskcard { display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:14px; align-items:center; padding:14px 16px; border-radius:20px; background:var(--sunken); min-height:64px; transition:opacity var(--d-base) var(--ease-out) }
-.pf-taskcard.is-done { opacity:.5 }
-.pf-taskcard__time { font:500 26px/1 'JetBrains Mono',ui-monospace,monospace; letter-spacing:-.03em; color:var(--text); background:none; border:0; padding:0; cursor:pointer; min-width:44px; text-align:left }
-.pf-taskcard__time.is-empty { font-size:11px; letter-spacing:.06em; color:var(--text-3) }
-.pf-taskcard__cap { font:500 11px/1 'Instrument Sans',system-ui,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--text-2); margin-bottom:5px; background:none; border:0; padding:0; cursor:pointer; text-align:left }
-.pf-taskcard__title { font-size:17px; line-height:1.25; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
-.pf-taskcard__right { display:flex; align-items:center; gap:6px }
-.pf-taskcard__dur { font:400 12px/1 'JetBrains Mono',ui-monospace,monospace; letter-spacing:.02em; color:var(--text-2); background:none; border:0; padding:6px 4px; cursor:pointer; white-space:nowrap }
-.pf-taskcard__icon { width:32px; height:32px; border-radius:50%; border:0; background:transparent; color:var(--text-3); display:grid; place-items:center; cursor:pointer; padding:0 }
-@media (hover:hover) and (pointer:fine) { .pf-taskcard__icon:hover { background:var(--surface); color:var(--text) } }
-@media (max-width:767px) {
-  .pf-weekstrip { gap:5px }
-  .pf-daycard { min-height:72px; border-radius:16px; padding:10px 2px }
-  .pf-daycard__num { font-size:20px }
-  .pf-taskcard { grid-template-columns:auto auto minmax(0,1fr); padding:12px 12px; gap:10px }
-  .pf-taskcard__right { grid-column:1 / -1; justify-content:flex-end; margin-top:-4px }
-  .pf-taskcard__time { font-size:20px }
-  .pf-taskcard__title { white-space:normal }
-  .pf-legacy .pf-tabs-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none }
-  .pf-legacy .pf-tabs-scroll::-webkit-scrollbar { display:none }
+
+/* ── THE WEEK, as on prettyfocussed.com (web/assets/pf.css › THE WEEK), ported verbatim ──
+   Atmosphere plates on the days and the slots; the chosen day is the full stop. */
+.pf {
+  --pf-noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
 }
+[data-plate="1"]{--plate:linear-gradient(155deg, #A6C1D8, #CBD9E4)}
+[data-plate="2"]{--plate:linear-gradient(155deg, #CBD9E4, #F4F2EE)}
+[data-plate="3"]{--plate:linear-gradient(155deg, #EFE3D8, #D8CDBD)}
+.pf-sched{position:relative; overflow:hidden; border-radius:var(--r-sheet); padding:clamp(18px,3vw,32px);
+  background:linear-gradient(170deg, #D5E0EA 0%, #E8ECEE 50%, #F1E7DE 100%);
+  box-shadow:inset 0 0 0 1px rgb(255 255 255 / .6), var(--sh-lg); display:grid; gap:18px}
+.pf-sched::after{content:''; position:absolute; inset:0; background-image:var(--pf-noise); opacity:.04; mix-blend-mode:multiply; pointer-events:none}
+.pf-sched > *{position:relative; z-index:1}
+.pf-sched__top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap}
+.pf-sched__top .pf-over{color:var(--pf-slate-600)}
+.pf-days{display:grid; grid-template-columns:repeat(7, minmax(0, 1fr)); gap:clamp(4px,1vw,10px)}
+.pf-dayc{display:grid; justify-items:center; gap:6px; padding:12px 0 12px; border-radius:18px; border:0; cursor:pointer; font:inherit;
+  background:rgb(255 255 255 / .75); box-shadow:inset 0 0 0 1px rgb(255 255 255 / .9), 0 2px 8px rgb(62 73 54 / .05); color:var(--pf-ink);
+  transition:transform var(--d-press) var(--ease-out), background-color var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out)}
+.pf-dayc:active{transform:scale(.97)}
+.pf-dayc .dn{font-family:'JetBrains Mono',ui-monospace,monospace; font-size:10px; letter-spacing:.02em; color:var(--pf-slate-600)}
+.pf-dayc .dd{font-size:clamp(1.125rem, .9rem + 1vw, 1.5rem); font-weight:500; letter-spacing:-.02em; line-height:1}
+.pf-dayc .dots{display:flex; gap:3px; min-height:6px}
+.pf-dayc .dots i{display:block; width:6px; height:6px; border-radius:50%; background:var(--plate); background-size:400% 400%}
+.pf-dayc .dots i.is-done{opacity:.45}
+.pf-dayc.is-free{background:rgb(255 255 255 / .32)}
+.pf-dayc.is-free .dd{color:var(--pf-slate-600)}
+.pf-dayc.is-today:not([aria-selected="true"]){box-shadow:inset 0 0 0 1px var(--pf-ink)}
+.pf-dayc[aria-selected="true"]{background:var(--pf-ink); color:var(--pf-bone); box-shadow:0 8px 24px rgb(62 73 54 / .14)}
+.pf-dayc[aria-selected="true"] .dn,.pf-dayc[aria-selected="true"] .dd{color:var(--pf-bone)}
+.pf-dayc[aria-selected="true"] .dots i{box-shadow:0 0 0 1px rgb(244 242 238 / .5)}
+.pf-dayplan{display:grid; gap:8px; min-height:120px; padding:18px; border-radius:24px; background:rgb(255 255 255 / .78);
+  box-shadow:inset 0 0 0 1px rgb(255 255 255 / .95), 0 8px 28px rgb(62 73 54 / .06); color:var(--pf-ink)}
+.pf-dayplan .pf-over{margin-bottom:4px; color:var(--pf-slate-400)}
+.pf-dayplan .free{margin:0; font-size:1.0625rem; color:var(--pf-slate-600)}
+.pf-slot{position:relative; display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:16px; align-items:center; padding:14px 16px 14px 16px;
+  border-radius:18px; background:var(--plate, linear-gradient(155deg, #CBD9E4, #F4F2EE)); background-size:180% 180%; color:var(--pf-ink);
+  transition:opacity var(--d-base) var(--ease-out), filter var(--d-base) var(--ease-out)}
+.pf-slot.is-done{opacity:.45}
+.pf-slot .pf-check{border-color:rgb(20 21 15 / .35)}
+.pf-slot .pf-check[aria-checked="true"]{background:var(--pf-ink); border-color:var(--pf-ink); color:var(--pf-bone)}
+.pf-slot__time{margin:0; font-size:clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); line-height:1; font-weight:500; letter-spacing:-.04em; font-variant-numeric:tabular-nums; color:var(--pf-ink); background:none; border:0; padding:0; cursor:pointer; text-align:left; min-width:44px}
+.pf-slot__time.is-empty{font-family:'JetBrains Mono',ui-monospace,monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--pf-slate-600); font-weight:500}
+.pf-slot__body{min-width:0}
+.pf-slot__area{margin:0 0 3px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; color:var(--pf-ink); background:none; border:0; padding:0; cursor:pointer; text-align:left}
+.pf-slot__focus{margin:0; font-size:1rem; line-height:1.3; color:var(--pf-ink); overflow-wrap:anywhere; cursor:text}
+.pf-slot__right{display:flex; align-items:center; gap:2px}
+.pf-slot__len{margin:0; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px; color:var(--pf-slate-600); white-space:nowrap; background:none; border:0; padding:6px 8px; cursor:pointer}
+.pf-slot__icon{width:32px; height:32px; border-radius:50%; border:0; background:transparent; color:var(--pf-slate-600); display:grid; place-items:center; cursor:pointer; padding:0; transition:transform var(--d-press) var(--ease-out)}
+.pf-slot__icon:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){ .pf-slot__icon:hover{background:rgb(255 255 255 / .55); color:var(--pf-ink)} }
+/* one slot sharp: the row she is working on rises, its neighbours go soft */
+.pf-dayplan:has(.pf-slot:focus-within) .pf-slot:not(:focus-within){opacity:.55; filter:blur(2px)}
+@media (max-width:480px){
+  .pf-dayc{padding:10px 0; border-radius:14px}
+  .pf-dayc .dots i{width:5px; height:5px}
+  .pf-slot{grid-template-columns:auto auto minmax(0,1fr); padding:12px 12px; gap:10px}
+  .pf-slot__right{grid-column:1 / -1; justify-content:flex-end; margin-top:-2px}
+}
+/* the site's arrival: the field resolves, in order. Brand clock, once per mount. */
+.pf-resolve{animation:pf-resolve-in 700ms var(--ease-out) both}
+.pf-resolve.d1{animation-delay:80ms}.pf-resolve.d2{animation-delay:160ms}.pf-resolve.d3{animation-delay:260ms}
+@keyframes pf-resolve-in{from{opacity:0; filter:blur(8px); transform:translate3d(0,10px,0)}}
+/* the day panel swaps its content with the site's view transition: out fast, in slower */
+.pf-dayplan__body{animation:pf-view-in 220ms var(--ease-out) both}
+@keyframes pf-view-in{from{opacity:0; filter:blur(6px); transform:translate3d(0,8px,0)}}
+/* group panels in the list share the day panel's surface */
+.pf-legacy .pf-tabs-scroll { display:none }
+:root:not([data-theme="light"]) .pf-sched{background:#1D1F18; box-shadow:none}
+:root:not([data-theme="light"]) .pf-dayplan{background:#282B22; box-shadow:none; color:var(--text)}
+:root:not([data-theme="light"]) .pf-dayc{background:#282B22; box-shadow:none; color:var(--text)}
+@media (prefers-reduced-motion:reduce){ .pf-resolve,.pf-dayplan__body{animation:none} }
