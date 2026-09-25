@@ -13,6 +13,8 @@ export interface Todo {
   priority: TodoPriority
   sphere?: TodoSphere    // persoonlijk of professioneel
   date?: string          // YYYY-MM-DD, optioneel: verschijnt dan op de kalender
+  time?: string          // HH:mm, optional: a timed block on the day
+  minutes?: number       // planned duration
   noteId?: string        // gekoppelde notitie
   focusMinutes: number   // totaal gefocuste minuten op deze taak
   createdAt: string

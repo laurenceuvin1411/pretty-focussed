@@ -387,7 +387,7 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 
 /* ── the reworked room: one switcher, a time line, five words ─────────
    Nothing floats, nothing is an icon alone. The page is one column. */
-.pf-head2 { display:flex; flex-direction:column; align-items:stretch; gap:16px }
+.pf-head2 { display:flex; flex-direction:column; align-items:stretch; gap:16px; z-index:403 }   /* above main, so the fixed bottom nav inside it stays tappable */
 .pf-head2__row { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:44px }
 .pf-head2__search { padding:10px 0; min-height:44px }
 .pf-segments--haze .pf-segment[aria-selected="true"] { background:var(--depth-1); color:var(--text) }
@@ -442,3 +442,36 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 
 /* the older two-column layouts stack on the phone */
 @media (max-width: 767px) { .pf-legacy .pf-two-col { grid-template-columns: minmax(0,1fr) !important } }
+
+/* the week strip and the task cards (Your priorities) */
+.pf-weekstrip { display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:8px }
+.pf-daycard { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; min-height:84px; padding:12px 4px; border-radius:20px; border:0; background:var(--surface); color:var(--text-2); box-shadow:var(--sh-sm); cursor:pointer; font:inherit; transition:transform var(--d-press) var(--ease-out), background-color var(--d-fast) var(--ease-out), color var(--d-fast) var(--ease-out) }
+.pf-daycard:active { transform:scale(.97) }
+.pf-daycard[aria-pressed="true"] { background:var(--action); color:var(--action-text) }
+.pf-daycard__dow { font:500 11px/1 'JetBrains Mono',ui-monospace,monospace; letter-spacing:.06em }
+.pf-daycard__num { font-size:26px; line-height:1; font-weight:500; letter-spacing:-.03em; color:var(--text) }
+.pf-daycard[aria-pressed="true"] .pf-daycard__num { color:var(--action-text) }
+.pf-daycard__dots { display:flex; gap:4px; height:6px }
+.pf-daycard__dots i { width:6px; height:6px; border-radius:50%; display:block }
+.pf-daycard.is-today:not([aria-pressed="true"]) { box-shadow:inset 0 0 0 1px var(--text) }
+.pf-taskcard { display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:14px; align-items:center; padding:14px 16px; border-radius:20px; background:var(--sunken); min-height:64px; transition:opacity var(--d-base) var(--ease-out) }
+.pf-taskcard.is-done { opacity:.5 }
+.pf-taskcard__time { font:500 26px/1 'JetBrains Mono',ui-monospace,monospace; letter-spacing:-.03em; color:var(--text); background:none; border:0; padding:0; cursor:pointer; min-width:44px; text-align:left }
+.pf-taskcard__time.is-empty { font-size:11px; letter-spacing:.06em; color:var(--text-3) }
+.pf-taskcard__cap { font:500 11px/1 'Instrument Sans',system-ui,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--text-2); margin-bottom:5px; background:none; border:0; padding:0; cursor:pointer; text-align:left }
+.pf-taskcard__title { font-size:17px; line-height:1.25; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+.pf-taskcard__right { display:flex; align-items:center; gap:6px }
+.pf-taskcard__dur { font:400 12px/1 'JetBrains Mono',ui-monospace,monospace; letter-spacing:.02em; color:var(--text-2); background:none; border:0; padding:6px 4px; cursor:pointer; white-space:nowrap }
+.pf-taskcard__icon { width:32px; height:32px; border-radius:50%; border:0; background:transparent; color:var(--text-3); display:grid; place-items:center; cursor:pointer; padding:0 }
+@media (hover:hover) and (pointer:fine) { .pf-taskcard__icon:hover { background:var(--surface); color:var(--text) } }
+@media (max-width:767px) {
+  .pf-weekstrip { gap:5px }
+  .pf-daycard { min-height:72px; border-radius:16px; padding:10px 2px }
+  .pf-daycard__num { font-size:20px }
+  .pf-taskcard { grid-template-columns:auto auto minmax(0,1fr); padding:12px 12px; gap:10px }
+  .pf-taskcard__right { grid-column:1 / -1; justify-content:flex-end; margin-top:-4px }
+  .pf-taskcard__time { font-size:20px }
+  .pf-taskcard__title { white-space:normal }
+  .pf-legacy .pf-tabs-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none }
+  .pf-legacy .pf-tabs-scroll::-webkit-scrollbar { display:none }
+}

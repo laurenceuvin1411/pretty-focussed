@@ -1,10 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { format, addMonths, subMonths, getDaysInMonth, startOfMonth, getDay } from 'date-fns'
-import { nlBE } from 'date-fns/locale'
-import {
-  Plus, Check, Trash2, Calendar as CalendarIcon, FileText, Timer,
-  ChevronLeft, ChevronRight, Play, Pause, Square, Pin, X, ListTodo, Link2,
-} from 'lucide-react'
+import { format, startOfWeek, addDays } from 'date-fns'
+import { nlBE, enGB } from 'date-fns/locale'
+import { Plus, Trash2, Calendar as CalendarIcon, FileText, Timer, ChevronLeft, ChevronRight, Play, Pause, Square, Pin, ListTodo, Link2 } from 'lucide-react'
 import { useProductivityStore } from '../store/productivityStore'
 import type { Todo, TodoPriority, TodoSphere } from '../store/productivityStore'
 
@@ -38,377 +35,174 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   )
 }
 
-// ── Todo row ─────────────────────────────────────────────────────
-function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string) => void }) {
+// ── Task card: one row for the calendar and the list. Check, time, what, how long. ──
+const DUR_STEPS = [0, 15, 30, 45, 60, 90, 120, 180]
+function fmtDur(m: number) { if (m < 60) return `${m} min`; const h = Math.floor(m / 60), r = m % 60; return r ? `${h} h ${r}` : `${h} h` }
+function sphereDot(t: Todo) { return t.done ? 'var(--pf-depth-text)' : t.sphere === 'professional' ? 'var(--pf-focus)' : t.sphere === 'personal' ? 'var(--pf-sage)' : 'var(--color-border)' }
+
+function TaskCard({ todo, onOpenNote, showDate = false }: { todo: Todo; onOpenNote: (todoId: string) => void; showDate?: boolean }) {
   const { toggleTodo, deleteTodo, updateTodo } = useProductivityStore()
-  const [hover, setHover] = useState(false)
+  const timeRef = useRef<HTMLInputElement>(null)
   const dateRef = useRef<HTMLInputElement>(null)
-  const pri = PRIORITY_CFG[todo.priority]
-  const isToday = todo.date === TODAY()
-  const isOverdue = !!todo.date && todo.date < TODAY() && !todo.done
-
+  const [editing, setEditing] = useState(false)
+  const [title, setTitle] = useState(todo.title)
+  const open = (el: HTMLInputElement | null) => { if (!el) return; if (typeof el.showPicker === 'function') el.showPicker(); else el.click() }
+  function cycleDur() { const i = DUR_STEPS.indexOf(todo.minutes ?? 0); updateTodo(todo.id, { minutes: DUR_STEPS[(i + 1) % DUR_STEPS.length] || undefined }) }
+  function cycleSphere() { updateTodo(todo.id, { sphere: todo.sphere === 'personal' ? 'professional' : todo.sphere === 'professional' ? undefined : 'personal' }) }
+  function commit() { const t = title.trim(); if (t && t !== todo.title) updateTodo(todo.id, { title: t }); else setTitle(todo.title); setEditing(false) }
+  const cap = todo.sphere ? SPHERE_CFG[todo.sphere].label : PRIORITY_CFG[todo.priority].label
   return (
-    <div
-      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
-      style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 16px', borderBottom: '1px solid var(--color-border)', background: hover ? 'rgba(124,127,132,0.04)' : 'transparent', transition: 'background 150ms' }}
-    >
-      <button
-        onClick={() => toggleTodo(todo.id)}
-        aria-label={todo.done ? 'Heropen taak' : 'Vink taak af'}
-        style={{
-          width: 22, height: 22, borderRadius: 14, flexShrink: 0, cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: todo.done ? 'var(--pf-depth-text)' : 'transparent',
-          border: `2px solid ${todo.done ? 'var(--pf-depth-text)' : 'rgba(124,127,132,0.32)'}`,
-          transition: 'all 180ms',
-        }}
-      >
-        {todo.done && <Check size={12} color="#fff" strokeWidth={3} />}
+    <div className={`pf-taskcard ${todo.done ? 'is-done' : ''}`}>
+      <button type="button" role="checkbox" aria-checked={todo.done} aria-label={todo.title} className="pf-check" onClick={() => toggleTodo(todo.id)}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
       </button>
-
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontSize: 14, fontWeight: 500, color: todo.done ? 'var(--color-muted)' : 'var(--color-ink)', textDecoration: todo.done ? 'line-through' : 'none', letterSpacing: '-0.01em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {todo.title}
-        </p>
-        <div style={{ display: 'flex', gap: 8, marginTop: 2, alignItems: 'center' }}>
-          <span style={{ fontSize: 10, fontWeight: 500, color: pri.color, fontFamily: 'var(--font-mono)' }}>{pri.label}</span>
-          <button
-            onClick={e => {
-              e.stopPropagation()
-              const next = todo.sphere === 'personal' ? 'professional' : todo.sphere === 'professional' ? undefined : 'personal'
-              updateTodo(todo.id, { sphere: next })
-            }}
-            title="Wissel: persoonlijk / professioneel / geen"
-            style={{
-              fontSize: 10, fontWeight: 500, fontFamily: 'var(--font-mono)', cursor: 'pointer',
-              background: 'none', border: 'none', padding: 0,
-              color: todo.sphere ? SPHERE_CFG[todo.sphere].color : 'var(--color-subtle)',
-              opacity: todo.sphere ? 1 : 0.5,
-            }}
-          >
-            {todo.sphere ? SPHERE_CFG[todo.sphere].label : '+ sfeer'}
-          </button>
-          {todo.date && (
-            <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: isOverdue ? 'var(--pf-depth-text)' : isToday ? ACCENT : 'var(--color-subtle)', fontWeight: isToday || isOverdue ? 700 : 400 }}>
-              {isOverdue ? 'Verlopen · ' : isToday ? 'Vandaag' : format(new Date(todo.date + 'T12:00:00'), 'd MMM', { locale: nlBE })}
-              {isOverdue && format(new Date(todo.date + 'T12:00:00'), 'd MMM', { locale: nlBE })}
-            </span>
-          )}
-          {todo.focusMinutes > 0 && (
-            <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--color-subtle)', display: 'flex', alignItems: 'center', gap: 3 }}>
-              <Timer size={9} /> {todo.focusMinutes}m
-            </span>
-          )}
-          {todo.noteId && (
-            <button onClick={() => onOpenNote(todo.id)} title="Open notitie" style={{ fontSize: 10, color: ACCENT, background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', gap: 3, fontFamily: 'inherit' }}>
-              <FileText size={9} /> notitie
-            </button>
-          )}
-        </div>
-      </div>
-
-      {hover && (
-        <div style={{ display: 'flex', gap: 5, flexShrink: 0, position: 'relative' }}>
-          <button
-            onClick={() => {
-              const el = dateRef.current
-              if (!el) return
-              if (typeof el.showPicker === 'function') el.showPicker()
-              else el.click()
-            }}
-            title={todo.date ? `Gepland: ${todo.date} (klik om te wijzigen)` : 'Plan op datum'}
-            style={{ width: 26, height: 26, borderRadius: 14, border: `1px solid ${todo.date ? ACCENT : 'var(--color-border)'}`, background: todo.date ? 'var(--pf-sage-soft)' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: todo.date ? ACCENT : 'var(--color-subtle)' }}
-          >
-            <CalendarIcon size={11} />
-          </button>
-          <input
-            ref={dateRef}
-            type="date"
-            value={todo.date ?? ''}
-            onChange={e => updateTodo(todo.id, { date: e.target.value || undefined })}
-            aria-label="Plan taak op datum"
-            style={{ position: 'absolute', left: 0, top: 26, width: 1, height: 1, opacity: 0, border: 'none', padding: 0 }}
-            tabIndex={-1}
-          />
-          {!todo.noteId && (
-            <button onClick={() => onOpenNote(todo.id)} title="Notitie toevoegen"
-              style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
-              <FileText size={11} />
-            </button>
-          )}
-          <button onClick={() => deleteTodo(todo.id)} title="Verwijder"
-            style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
-            <Trash2 size={11} />
-          </button>
-        </div>
-      )}
+      <span style={{ position: 'relative' }}>
+        <button type="button" className={`pf-taskcard__time ${todo.time ? '' : 'is-empty'}`} onClick={() => open(timeRef.current)} aria-label={todo.time ? `Starts ${todo.time}, change` : 'Set a time'}>
+          {todo.time ?? 'TIME'}
+        </button>
+        <input ref={timeRef} type="time" value={todo.time ?? ''} onChange={e => updateTodo(todo.id, { time: e.target.value || undefined })} aria-label="Time" tabIndex={-1}
+          style={{ position: 'absolute', left: 0, top: 30, width: 1, height: 1, opacity: 0, border: 'none', padding: 0 }} />
+      </span>
+      <span style={{ minWidth: 0 }}>
+        <button type="button" className="pf-taskcard__cap" onClick={cycleSphere} title="Personal, professional, or none">{cap}{showDate && todo.date ? ` · ${format(new Date(todo.date + 'T12:00:00'), 'd MMM', { locale: nlBE })}` : ''}</button>
+        {editing ? (
+          <input className="pf-inline" value={title} autoFocus onChange={e => setTitle(e.target.value)} onBlur={commit} onKeyDown={e => { if (e.key === 'Enter') commit(); if (e.key === 'Escape') { setTitle(todo.title); setEditing(false) } }} aria-label="Task" style={{ fontSize: 17 }} />
+        ) : (
+          <span className="pf-taskcard__title" style={{ display: 'block', cursor: 'text' }} onClick={() => setEditing(true)}>{todo.title}</span>
+        )}
+      </span>
+      <span className="pf-taskcard__right">
+        <button type="button" className="pf-taskcard__dur" onClick={cycleDur} aria-label="Duration">{todo.minutes ? fmtDur(todo.minutes) : '+ time'}</button>
+        <span style={{ position: 'relative' }}>
+          <button type="button" className="pf-taskcard__icon" onClick={() => open(dateRef.current)} aria-label={todo.date ? `On ${todo.date}, change` : 'Plan on a day'}><CalendarIcon size={14} /></button>
+          <input ref={dateRef} type="date" value={todo.date ?? ''} onChange={e => updateTodo(todo.id, { date: e.target.value || undefined })} aria-label="Date" tabIndex={-1}
+            style={{ position: 'absolute', left: 0, top: 30, width: 1, height: 1, opacity: 0, border: 'none', padding: 0 }} />
+        </span>
+        <button type="button" className="pf-taskcard__icon" onClick={() => onOpenNote(todo.id)} aria-label={todo.noteId ? 'Open the note' : 'Add a note'} style={{ color: todo.noteId ? 'var(--pf-depth-text)' : undefined }}><FileText size={14} /></button>
+        <button type="button" className="pf-taskcard__icon" onClick={() => deleteTodo(todo.id)} aria-label="Remove"><Trash2 size={14} /></button>
+      </span>
     </div>
   )
 }
 
-// ── Todos section ────────────────────────────────────────────────
-function TodosSection({ onOpenNote }: { onOpenNote: (todoId: string) => void }) {
-  const { todos, addTodo } = useProductivityStore()
+// ── Quick add: one line, a day, a time, a sphere. ────────────────
+function QuickAdd({ date, onAdd }: { date?: string; onAdd: (title: string, sphere?: TodoSphere, time?: string, minutes?: number, date?: string) => void }) {
   const [title, setTitle] = useState('')
-  const [priority, setPriority] = useState<TodoPriority>('medium')
   const [sphere, setSphere] = useState<'' | TodoSphere>('')
-  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  const [minutes, setMinutes] = useState(0)
+  const [day, setDay] = useState(date ?? '')
+  function submit() { if (!title.trim()) return; onAdd(title.trim(), sphere || undefined, time || undefined, minutes || undefined, (date ?? day) || undefined); setTitle(''); setTime(''); setMinutes(0) }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <input value={title} onChange={e => setTitle(e.target.value)} onKeyDown={e => e.key === 'Enter' && submit()} aria-label="New task" style={{ ...inputStyle, flex: 1, fontSize: 15, padding: '12px 14px' }} />
+        <button onClick={submit} disabled={!title.trim()} aria-label="Add" style={{ width: 44, height: 44, borderRadius: 999, border: 'none', background: title.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: title.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: title.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Plus size={16} /></button>
+      </div>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+        {(Object.keys(SPHERE_CFG) as TodoSphere[]).map(s => (
+          <button key={s} type="button" className="pf-chip pf-chip--haze" aria-pressed={sphere === s} onClick={() => setSphere(sphere === s ? '' : s)} style={{ minHeight: 34, padding: '7px 12px', fontSize: 13 }}>{SPHERE_CFG[s].label}</button>
+        ))}
+        <input type="time" value={time} onChange={e => setTime(e.target.value)} aria-label="Time" style={{ ...inputStyle, width: 'auto', padding: '6px 10px', fontSize: 13, fontFamily: 'var(--font-mono)', minHeight: 34 }} />
+        <select value={minutes} onChange={e => setMinutes(Number(e.target.value))} aria-label="Duration" style={{ ...inputStyle, width: 'auto', padding: '6px 10px', fontSize: 13, fontFamily: 'var(--font-mono)', minHeight: 34 }}>
+          {DUR_STEPS.map(m => <option key={m} value={m}>{m ? fmtDur(m) : 'no duration'}</option>)}
+        </select>
+        {!date && <input type="date" value={day} onChange={e => setDay(e.target.value)} aria-label="Date" style={{ ...inputStyle, width: 'auto', padding: '6px 10px', fontSize: 13, fontFamily: 'var(--font-mono)', minHeight: 34 }} />}
+      </div>
+    </div>
+  )
+}
+
+const byTime = (a: Todo, b: Todo) => (a.done === b.done ? 0 : a.done ? 1 : -1) || (a.time ?? '99').localeCompare(b.time ?? '99') || a.createdAt.localeCompare(b.createdAt)
+
+// ── Todos section: the same cards, grouped by when ──────────────
+function TodosSection({ onOpenNote }: { onOpenNote: (todoId: string) => void }) {
+  const { todos, addTodo, updateTodo } = useProductivityStore()
   const [showDone, setShowDone] = useState(false)
-
-  function submit() {
-    if (!title.trim()) return
-    addTodo(title.trim(), priority, date || undefined, sphere || undefined)
-    setTitle('')
-    setDate('')
-    setSphere('')
-  }
-
+  const todayStr = TODAY()
   const open = todos.filter(t => !t.done)
   const done = todos.filter(t => t.done)
-  const priOrder: TodoPriority[] = ['high', 'medium', 'low']
-  const todayStr = TODAY()
-
-  const overdue = open.filter(t => t.date && t.date < todayStr)
-  const todayList = open.filter(t => t.date === todayStr)
-  const upcoming = open.filter(t => t.date && t.date > todayStr)
-  const someday = open.filter(t => !t.date)
-  const sortPri = (a: Todo, b: Todo) => priOrder.indexOf(a.priority) - priOrder.indexOf(b.priority)
-
   const groups: { label: string; items: Todo[] }[] = [
-    { label: 'Verlopen', items: overdue.sort(sortPri) },
-    { label: 'Vandaag', items: todayList.sort(sortPri) },
-    { label: 'Gepland', items: upcoming.sort((a, b) => (a.date! < b.date! ? -1 : 1)) },
-    { label: 'Ooit', items: someday.sort(sortPri) },
+    { label: 'Overdue', items: open.filter(t => t.date && t.date < todayStr).sort(byTime) },
+    { label: 'Today', items: open.filter(t => t.date === todayStr).sort(byTime) },
+    { label: 'Planned', items: open.filter(t => t.date && t.date > todayStr).sort((a, b) => a.date!.localeCompare(b.date!) || byTime(a, b)) },
+    { label: 'Someday', items: open.filter(t => !t.date).sort(byTime) },
   ].filter(g => g.items.length > 0)
-
+  function add(title: string, sphere?: TodoSphere, time?: string, minutes?: number, date?: string) {
+    const id = addTodo(title, 'medium', date, sphere)
+    if (time || minutes) updateTodo(id, { time, minutes })
+  }
   return (
-    <div style={{ maxWidth: 640 }}>
-      {/* Quick add */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 24, alignItems: 'center' }}>
-        <input
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && submit()}
-          placeholder="Nieuwe taak..."
-          style={{ ...inputStyle, flex: 1, padding: '12px 16px', fontSize: 14 }}
-        />
-        <select
-          value={priority}
-          onChange={e => setPriority(e.target.value as TodoPriority)}
-          style={{ ...inputStyle, width: 100, cursor: 'pointer' }}
-          aria-label="Prioriteit"
-        >
-          <option value="high">Hoog</option>
-          <option value="medium">Medium</option>
-          <option value="low">Laag</option>
-        </select>
-        <select
-          value={sphere}
-          onChange={e => setSphere(e.target.value as '' | TodoSphere)}
-          style={{ ...inputStyle, width: 128, cursor: 'pointer', color: sphere ? SPHERE_CFG[sphere].color : 'var(--color-subtle)' }}
-          aria-label="Sfeer"
-        >
-          <option value="">Sfeer...</option>
-          <option value="personal">Persoonlijk</option>
-          <option value="professional">Professioneel</option>
-        </select>
-        <input
-          type="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-          style={{ ...inputStyle, width: 140, cursor: 'pointer', colorScheme: 'light dark' }}
-          aria-label="Datum"
-        />
-        <button
-          onClick={submit}
-          disabled={!title.trim()}
-          aria-label="Taak toevoegen"
-          style={{ width: 42, height: 40, borderRadius: 14, border: 'none', background: title.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: title.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: title.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 150ms' }}
-        >
-          <Plus size={16} />
-        </button>
-      </div>
-
-      {groups.length === 0 && done.length === 0 && (
-        <div style={{ padding: '40px 24px', borderRadius: 14, border: '1.5px dashed var(--color-border)', textAlign: 'center' }}>
-          <p style={{ fontSize: 13, color: 'var(--color-subtle)' }}>Nog geen taken. Voeg je eerste taak toe hierboven.</p>
-        </div>
-      )}
-
+    <div style={{ maxWidth: 720, display: 'flex', flexDirection: 'column', gap: 28 }}>
+      <QuickAdd onAdd={add} />
+      {groups.length === 0 && done.length === 0 && <p style={{ fontSize: 14, color: 'var(--color-subtle)' }}>Nothing yet. One line above is enough.</p>}
       {groups.map(g => (
-        <div key={g.label} style={{ marginBottom: 22 }}>
+        <div key={g.label}>
           <SectionLabel>{g.label} · {g.items.length}</SectionLabel>
-          <div style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', overflow: 'hidden' }}>
-            {g.items.map(t => <TodoRow key={t.id} todo={t} onOpenNote={onOpenNote} />)}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {g.items.map(t => <TaskCard key={t.id} todo={t} onOpenNote={onOpenNote} showDate={g.label !== 'Today'} />)}
           </div>
         </div>
       ))}
-
       {done.length > 0 && (
-        <div style={{ marginBottom: 22 }}>
-          <button onClick={() => setShowDone(v => !v)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', display: 'block', marginBottom: 10 }}>
-            <SectionLabel>{showDone ? '▾' : '▸'} Afgewerkt · {done.length}</SectionLabel>
+        <div>
+          <button onClick={() => setShowDone(v => !v)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', display: 'block' }}>
+            <SectionLabel>{showDone ? 'Hide' : 'Show'} done · {done.length}</SectionLabel>
           </button>
-          {showDone && (
-            <div style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', overflow: 'hidden', opacity: 0.7 }}>
-              {done.map(t => <TodoRow key={t.id} todo={t} onOpenNote={onOpenNote} />)}
-            </div>
-          )}
+          {showDone && <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>{done.map(t => <TaskCard key={t.id} todo={t} onOpenNote={onOpenNote} showDate />)}</div>}
         </div>
       )}
     </div>
   )
 }
 
-// ── Calendar section ─────────────────────────────────────────────
+// ── Calendar: one week as seven cards, the chosen day as a list of time cards ──
 function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void }) {
-  const { todos, addTodo } = useProductivityStore()
-  const [viewDate, setViewDate] = useState(new Date())
-  const [selected, setSelected] = useState<string>(TODAY())
-  const [quickTitle, setQuickTitle] = useState('')
-  const [quickSphere, setQuickSphere] = useState<'' | TodoSphere>('')
-
-  const year = viewDate.getFullYear()
-  const month = viewDate.getMonth()
-  const daysInMonth = getDaysInMonth(viewDate)
-  const firstDow = (getDay(startOfMonth(viewDate)) + 6) % 7 // maandag = 0
+  const { todos, addTodo, updateTodo } = useProductivityStore()
   const todayStr = TODAY()
-
-  const byDate = useMemo(() => {
-    const map: Record<string, Todo[]> = {}
-    todos.forEach(t => { if (t.date) (map[t.date] ??= []).push(t) })
-    return map
-  }, [todos])
-
-  const selectedTodos = byDate[selected] ?? []
-
-  function quickAdd() {
-    if (!quickTitle.trim()) return
-    addTodo(quickTitle.trim(), 'medium', selected, quickSphere || undefined)
-    setQuickSphere('')
-    setQuickTitle('')
+  const [selected, setSelected] = useState<string>(todayStr)
+  const [weekStart, setWeekStart] = useState<Date>(() => startOfWeek(new Date(), { weekStartsOn: 1 }))
+  const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i))
+  const byDate = useMemo(() => { const m: Record<string, Todo[]> = {}; todos.forEach(t => { if (t.date) (m[t.date] ??= []).push(t) }); return m }, [todos])
+  const list = [...(byDate[selected] ?? [])].sort(byTime)
+  const thisMonday = startOfWeek(new Date(selected + 'T12:00:00'), { weekStartsOn: 1 })
+  const diff = Math.round((weekStart.getTime() - thisMonday.getTime()) / (7 * 86400000))
+  const label = diff === 0 ? 'This week' : diff === 1 ? 'Next week' : diff === -1 ? 'Last week' : `Week ${format(weekStart, 'w')}`
+  const range = `${format(days[0], 'd MMMM', { locale: enGB })} to ${format(days[6], 'd MMMM', { locale: enGB })}`
+  function add(title: string, sphere?: TodoSphere, time?: string, minutes?: number) {
+    const id = addTodo(title, 'medium', selected, sphere)
+    if (time || minutes) updateTodo(id, { time, minutes })
   }
-
-  const cells: (number | null)[] = [
-    ...Array.from({ length: firstDow }, () => null),
-    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
-  ]
-
   return (
-    <div className="pf-two-col" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 1fr)', gap: 24, alignItems: 'start' }}>
-      {/* Month grid */}
-      <div className="card" style={{ padding: 20, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-          <p style={{ fontSize: 15, fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em', textTransform: 'capitalize' }}>
-            {format(viewDate, 'MMMM yyyy', { locale: nlBE })}
-          </p>
-          <div style={{ display: 'flex', gap: 6 }}>
-            <button onClick={() => setViewDate(d => subMonths(d, 1))} aria-label="Vorige maand"
-              style={{ width: 28, height: 28, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
-              <ChevronLeft size={13} />
-            </button>
-            <button onClick={() => setViewDate(d => addMonths(d, 1))} aria-label="Volgende maand"
-              style={{ width: 28, height: 28, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
-              <ChevronRight size={13} />
-            </button>
-          </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <button type="button" className="pf-chev" aria-label="Previous week" onClick={() => setWeekStart(d => addDays(d, -7))}><ChevronLeft size={16} strokeWidth={1.5} /></button>
+          <SectionLabel>{label}</SectionLabel>
+          <button type="button" className="pf-chev" aria-label="Next week" onClick={() => setWeekStart(d => addDays(d, 7))}><ChevronRight size={16} strokeWidth={1.5} /></button>
         </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, marginBottom: 6 }}>
-          {['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'].map(d => (
-            <div key={d} style={{ textAlign: 'center', fontSize: 9, fontWeight: 500, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', padding: '4px 0' }}>{d}</div>
-          ))}
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4 }}>
-          {cells.map((d, i) => {
-            if (d === null) return <div key={`e${i}`} />
-            const dateStr = format(new Date(year, month, d), 'yyyy-MM-dd')
-            const dayTodos = byDate[dateStr] ?? []
-            const openCount = dayTodos.filter(t => !t.done).length
-            const allDone = dayTodos.length > 0 && openCount === 0
-            const isSel = dateStr === selected
-            const isToday = dateStr === todayStr
-            return (
-              <button
-                key={d}
-                onClick={() => setSelected(dateStr)}
-                style={{
-                  aspectRatio: '1', borderRadius: 14, cursor: 'pointer', position: 'relative',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3,
-                  border: `1.5px solid ${isSel ? ACCENT : isToday ? 'var(--pf-sage-soft)' : 'transparent'}`,
-                  background: isSel ? 'var(--pf-sage-soft)' : 'transparent',
-                  transition: 'all 150ms', fontFamily: 'inherit', padding: 0,
-                }}
-              >
-                <span style={{ fontSize: 12, fontWeight: isToday || isSel ? 700 : 400, color: isSel ? ACCENT : isToday ? 'var(--color-ink)' : 'var(--color-muted)' }}>{d}</span>
-                {dayTodos.length > 0 && (
-                  <div style={{ display: 'flex', gap: 2 }}>
-                    {dayTodos.slice(0, 3).map((t, j) => (
-                      <span key={j} style={{ width: 4, height: 4, borderRadius: '50%', background: t.done ? 'var(--pf-depth-text)' : allDone ? 'var(--pf-depth-text)' : PRIORITY_CFG[t.priority].color, opacity: t.done ? 0.5 : 1 }} />
-                    ))}
-                    {dayTodos.length > 3 && <span style={{ fontSize: 7, color: 'var(--color-subtle)', lineHeight: '4px' }}>+</span>}
-                  </div>
-                )}
-              </button>
-            )
-          })}
-        </div>
+        <span style={{ fontSize: 13, color: 'var(--color-subtle)' }}>{range}</span>
       </div>
 
-      {/* Day detail */}
-      <div className="card" style={{ padding: 20, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
-        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-ink)', marginBottom: 2, textTransform: 'capitalize' }}>
-          {format(new Date(selected + 'T12:00:00'), 'EEEE d MMMM', { locale: nlBE })}
-        </p>
-        <p style={{ fontSize: 11, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>
-          {selectedTodos.filter(t => !t.done).length} open · {selectedTodos.filter(t => t.done).length} klaar
-        </p>
-
-        <div style={{ marginBottom: 14 }}>
-          <div style={{ display: 'flex', gap: 6 }}>
-            <input
-              value={quickTitle}
-              onChange={e => setQuickTitle(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && quickAdd()}
-              placeholder="Taak voor deze dag..."
-              style={{ ...inputStyle, flex: 1, fontSize: 12, padding: '8px 12px' }}
-            />
-            <button onClick={quickAdd} disabled={!quickTitle.trim()} aria-label="Toevoegen"
-              style={{ width: 34, height: 34, borderRadius: 14, border: 'none', background: quickTitle.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: quickTitle.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: quickTitle.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <Plus size={14} />
+      <div className="pf-weekstrip" role="tablist" aria-label="Days">
+        {days.map(d => {
+          const ds = format(d, 'yyyy-MM-dd')
+          const items = byDate[ds] ?? []
+          return (
+            <button key={ds} type="button" role="tab" aria-selected={ds === selected} aria-pressed={ds === selected} className={`pf-daycard ${ds === todayStr ? 'is-today' : ''}`} onClick={() => setSelected(ds)}>
+              <span className="pf-daycard__dow">{format(d, 'EEE', { locale: enGB })}</span>
+              <span className="pf-daycard__num">{format(d, 'd')}</span>
+              <span className="pf-daycard__dots" aria-hidden="true">{items.slice(0, 4).map(t => <i key={t.id} style={{ background: ds === selected ? 'var(--action-text)' : sphereDot(t), opacity: t.done ? .5 : 1 }} />)}</span>
             </button>
-          </div>
-          {/* Sfeer: persoonlijk of professioneel */}
-          <div style={{ display: 'flex', gap: 5, marginTop: 7 }}>
-            {(Object.keys(SPHERE_CFG) as TodoSphere[]).map(s => {
-              const active = quickSphere === s
-              return (
-                <button key={s} onClick={() => setQuickSphere(active ? '' : s)}
-                  aria-label={`Markeer als ${SPHERE_CFG[s].label}`}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 5, padding: '4px 11px', borderRadius: 99,
-                    fontSize: 10, fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-mono)',
-                    transition: 'all 150ms',
-                    border: `1.5px solid ${active ? SPHERE_CFG[s].color : 'var(--color-border)'}`,
-                    background: active ? `${SPHERE_CFG[s].color}18` : 'transparent',
-                    color: active ? SPHERE_CFG[s].color : 'var(--color-subtle)',
-                  }}>
-                  <span style={{ width: 5, height: 5, borderRadius: '50%', background: SPHERE_CFG[s].color, display: 'inline-block' }} />
-                  {SPHERE_CFG[s].label}
-                </button>
-              )
-            })}
-          </div>
-        </div>
+          )
+        })}
+      </div>
 
-        {selectedTodos.length === 0 ? (
-          <p style={{ fontSize: 12, color: 'var(--color-subtle)', textAlign: 'center', padding: '20px 0' }}>Niets gepland op deze dag.</p>
-        ) : (
-          <div style={{ borderRadius: 14, border: '1px solid var(--color-border)', overflow: 'hidden' }}>
-            {selectedTodos.map(t => <TodoRow key={t.id} todo={t} onOpenNote={onOpenNote} />)}
-          </div>
-        )}
+      <div style={{ borderRadius: 24, background: 'var(--color-card)', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', padding: 'clamp(14px, 3vw, 22px)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <SectionLabel>{format(new Date(selected + 'T12:00:00'), 'EEEE', { locale: enGB })} · {list.filter(t => !t.done).length} open</SectionLabel>
+        {list.length === 0 ? <p style={{ fontSize: 14, color: 'var(--color-subtle)', padding: '6px 0 10px' }}>Nothing on this day.</p>
+          : <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>{list.map(t => <TaskCard key={t.id} todo={t} onOpenNote={onOpenNote} />)}</div>}
+        <div style={{ marginTop: 6 }}><QuickAdd date={selected} onAdd={(title, sphere, time, minutes) => add(title, sphere, time, minutes)} /></div>
       </div>
     </div>
   )
@@ -810,7 +604,7 @@ export function Productivity() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 4, marginBottom: 28, borderBottom: '1px solid var(--color-border)', paddingBottom: 0 }}>
+      <div className="pf-tabs-scroll" style={{ display: 'flex', gap: 4, marginBottom: 28, borderBottom: '1px solid var(--color-border)', paddingBottom: 0 }}>
         {TABS.map(t => (
           <button
             key={t.key}
