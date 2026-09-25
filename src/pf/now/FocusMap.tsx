@@ -1,27 +1,38 @@
-// The note: her focus as the plan map from prettyfocussed.com. Three blocks on atmosphere plates,
-// area proportional to weight, the number large, her words under it. It reads at a glance and stays in view.
+// The note: her focus as the plan map from prettyfocussed.com, once per lane. Professional focus, personal focus,
+// three blocks each on atmosphere plates, area proportional to what is left, the number large, the goal under it.
+// An empty slot says there is room, and opens the goals.
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useFocusStore } from '../../store/pf/focusStore'
-import { useGoalStore, goalProgress, LANE_LABEL } from '../../store/pf/goalStore'
-import type { Goal90 } from '../../store/pf/goalStore'
-import { yearInfo, monthKey, monthInfo, quarterInfo } from '../../lib/pf/week'
+import { useGoalStore, goalProgress, LANE_LABEL, MAX_PER_LANE } from '../../store/pf/goalStore'
+import type { Goal90, Lane } from '../../store/pf/goalStore'
+import { yearInfo, monthKey, quarterInfo } from '../../lib/pf/week'
 
-interface Blk { key: string; name: string; hrs: string; pct: number | null; focus: string; weight: number; plate: 1 | 2 | 3 }
+interface Blk { key: string; name: string; hrs: string; pct: number | null; focus: string; weight: number; plate: 1 | 2 | 3; empty?: boolean }
 
 export function FocusMap() {
   const y = yearInfo()
-  const month = monthKey()
-  const m = monthInfo(month)
   const years = useFocusStore(s => s.years)
   const months = useFocusStore(s => s.months)
-  const obstacles = useFocusStore(s => s.obstacles)
-  const goals = useGoalStore(s => s.goals)
   const plan = years[y.key] ?? {}
-  const mp = months[month] ?? { goalIds: [] }
+  const mp = months[monthKey()] ?? { goalIds: [] }
+  return (
+    <div className="pf-note">
+      <span className="pf-glass" style={{ justifySelf: 'start' }}><b>{plan.word || 'Your focus'}</b>{plan.word && <span className="pf-mono">{y.key}</span>}</span>
+      <LaneMap lane="business" chosen={mp.goalIds} />
+      <LaneMap lane="life" chosen={mp.goalIds} />
+      {mp.focus && <p className="pf-small pf-note__line">{mp.focus}</p>}
+    </div>
+  )
+}
+
+function LaneMap({ lane, chosen }: { lane: Lane; chosen: string[] }) {
+  const goals = useGoalStore(s => s.goals)
   const q = quarterInfo().key
-  const open = goals.filter(g => g.quarter === q && !g.done)
-  const chosen = mp.goalIds.map(id => open.find(g => g.id === id)).filter((g): g is Goal90 => !!g)
-  const three = (chosen.length ? chosen : open).slice(0, 3)
+  const open = goals.filter(g => g.quarter === q && g.lane === lane && !g.done)
+  const picked = chosen.map(id => open.find(g => g.id === id)).filter((g): g is Goal90 => !!g)
+  const rest = open.filter(g => !picked.includes(g))
+  const three = [...picked, ...rest].slice(0, MAX_PER_LANE)
   const ref = useRef<HTMLDivElement>(null)
   const [wide, setWide] = useState(false)
   useEffect(() => {
@@ -30,18 +41,11 @@ export function FocusMap() {
     ro.observe(el); return () => ro.disconnect()
   }, [])
 
-  // Weight: what is left on a measurable goal counts more; a goal without a number sits at the median.
   const blocks: Blk[] = three.map((g, i) => {
     const pct = goalProgress(g)
-    const left = pct === null ? 50 : Math.max(10, 100 - pct)
-    return { key: g.id, name: LANE_LABEL[g.lane], hrs: g.target ? `${g.current ?? 0} / ${g.target} ${g.unit ?? ''}`.trim() : 'open', pct, focus: g.title, weight: left, plate: ([1, 2, 3] as const)[i] }
+    return { key: g.id, name: LANE_LABEL[lane], hrs: g.target ? `${g.current ?? 0} / ${g.target} ${g.unit ?? ''}`.trim() : 'open', pct, focus: g.title, weight: pct === null ? 50 : Math.max(12, 100 - pct), plate: ([1, 2, 3] as const)[i] }
   })
-  if (blocks.length === 0) {
-    blocks.push({ key: 'word', name: y.key, hrs: `${y.daysLeft} days left`, pct: null, focus: plan.word ? `${plan.word}.` : 'One word for the year.', weight: 60, plate: 1 })
-    blocks.push({ key: 'month', name: m.name, hrs: `${m.daysLeft} days left`, pct: null, focus: mp.focus || 'One focus for the month.', weight: 25, plate: 2 })
-    blocks.push({ key: 'way', name: 'In the way', hrs: '', pct: null, focus: obstacles.find(o => o.on)?.text || 'Nothing named yet.', weight: 15, plate: 3 })
-  }
-  while (blocks.length < 3) blocks.push({ key: `pad${blocks.length}`, name: blocks.length === 1 ? m.name : 'In the way', hrs: '', pct: null, focus: blocks.length === 1 ? (mp.focus || 'One focus for the month.') : (obstacles.find(o => o.on)?.text || 'Nothing named yet.'), weight: 20, plate: ([1, 2, 3] as const)[blocks.length] })
+  while (blocks.length < MAX_PER_LANE) blocks.push({ key: `empty-${blocks.length}`, name: LANE_LABEL[lane], hrs: '', pct: null, focus: blocks.length === 0 ? 'Nothing here yet.' : 'Room for one more.', weight: 22, plate: ([1, 2, 3] as const)[blocks.length], empty: true })
   const sorted = [...blocks].sort((a, b) => b.weight - a.weight)
   const t = sorted.reduce((s, b) => s + b.weight, 0) || 1
   const a = sorted[0].weight / t
@@ -51,10 +55,15 @@ export function FocusMap() {
   const style = { '--tall-rows': `${fr(a)} ${fr(1 - a)}`, '--tall-cols': `${fr(b)} ${fr(c)}`, '--wide-cols': `${fr(a)} ${fr(1 - a)}`, '--wide-rows': `${fr(b)} ${fr(c)}` } as React.CSSProperties
 
   return (
-    <div className="pf-note">
-      <span className="pf-glass pf-note__tag"><b>{plan.word || 'Your focus'}</b>{plan.word && <span className="pf-mono">{y.key}</span>}</span>
-      <div ref={ref} className={`pf-map ${wide ? 'is-wide' : ''}`} style={style}>
-        {sorted.map(bk => (
+    <div className="pf-note__lane">
+      <p className="pf-over" style={{ padding: '0 4px' }}>{LANE_LABEL[lane]} focus · {three.length} of {MAX_PER_LANE}</p>
+      <div ref={ref} className={`pf-map pf-map--lane ${wide ? 'is-wide' : ''}`} style={style}>
+        {sorted.map(bk => bk.empty ? (
+          <Link key={bk.key} to="/goals" className="pf-blk pf-blk--empty" data-plate={bk.plate} aria-label={`${bk.focus} Set a ${LANE_LABEL[lane].toLowerCase()} goal`}>
+            <div className="b-top"><p className="b-name">{bk.name}</p></div>
+            <div className="b-bot"><p className="b-focus">{bk.focus}</p></div>
+          </Link>
+        ) : (
           <div key={bk.key} className="pf-blk" data-plate={bk.plate}>
             <div className="b-top">
               <p className="b-name">{bk.name}</p>
@@ -67,7 +76,6 @@ export function FocusMap() {
           </div>
         ))}
       </div>
-      {mp.focus && three.length > 0 && <p className="pf-small pf-note__line">{mp.focus}</p>}
     </div>
   )
 }

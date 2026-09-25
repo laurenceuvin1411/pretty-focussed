@@ -20,7 +20,7 @@ function goalLines(goals: Goal90[]): string {
   if (goals.length === 0) return '(no goals yet)'
   return goals.map(g => {
     const prog = g.target ? ` (${g.current ?? 0}/${g.target}${g.unit ? ' ' + g.unit : ''})` : ''
-    return `- [${g.lane === 'business' ? 'BUSINESS' : 'LIFE'}] ${g.title}${prog}${g.why ? ' · why: ' + g.why : ''}${g.done ? ' · DONE' : ''}`
+    return `- [${g.lane === 'business' ? 'PROFESSIONAL' : 'PERSONAL'}] ${g.title}${prog}${g.why ? ' · why: ' + g.why : ''}${g.done ? ' · DONE' : ''}`
   }).join('\n')
 }
 
@@ -113,7 +113,7 @@ export async function suggestPriorities(week: WeekPlan): Promise<PrioritySuggest
   const user = `${baseContext(week)}
 
 TASK
-Choose the three priorities for this week. At least one from BUSINESS and at least one from LIFE when both lanes have goals. Weigh the revenue gap: when the gap is large, one priority is about selling. Each priority is one concrete outcome that fits in one week, not a theme. Also say, plainly and kindly, what they can leave this week.
+Choose the three priorities for this week. At least one professional and at least one personal when both lanes have goals. Weigh the revenue gap: when the gap is large, one priority is about selling. Each priority is one concrete outcome that fits in one week, not a theme. Also say, plainly and kindly, what they can leave this week.
 
 Valid goalId values: ${goals.map(g => `"${g.id}" (${g.title})`).join(', ') || 'none'}.
 

@@ -584,3 +584,15 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 
 /* on a narrow screen the note comes first: the reminder before the questions */
 @media (max-width:979px){ .pf-focus-side{order:-1} }
+/* the note, per lane: two shorter maps, professional then personal */
+.pf-note__lane { display:grid; gap:8px }
+.pf-map--lane { aspect-ratio:5 / 4 }
+.pf-map--lane.is-wide { aspect-ratio:16 / 8 }
+.pf-blk--empty { text-decoration:none; opacity:.72 }
+.pf-blk--empty::before { opacity:.55 }
+.pf-blk--empty .b-focus { color:var(--pf-slate-600) }
+@media (hover:hover) and (pointer:fine){ .pf-blk--empty:hover { opacity:1 } }
+
+/* an empty slot keeps its words even when it is short */
+@container (max-height:118px){ .pf-blk--empty .b-focus{display:block; -webkit-line-clamp:1; font-size:.875rem; text-align:right; max-width:none} }
+.pf-note { gap:14px }

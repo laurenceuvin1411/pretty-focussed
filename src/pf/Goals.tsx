@@ -355,7 +355,7 @@ export function Quarter({ lanes = LANES, compact = false }: { lanes?: Lane[]; co
           <p className="pf-over">{q.key} · day {q.day} of {q.total}</p>
           <h1 className="pf-h2" style={{ marginTop: 12 }}>Two lanes. Six goals at most.</h1>
           <p className="pf-body" style={{ marginTop: 12 }}>
-            {inQuarter.length === 0 ? 'Business and life. Both win.' : doneCount === inQuarter.length ? 'All of them landed. Set the next six.' : `${doneCount} of ${inQuarter.length} landed. ${q.daysLeft} days left.`}
+            {inQuarter.length === 0 ? 'Professional and personal. Both win.' : doneCount === inQuarter.length ? 'All of them landed. Set the next six.' : `${doneCount} of ${inQuarter.length} landed. ${q.daysLeft} days left.`}
           </p>
         </div>
         <ApertureRing value={q.day} max={q.total} size={112} stroke={7} ticks={[1 / 3, 2 / 3]}>

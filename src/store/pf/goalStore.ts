@@ -5,7 +5,7 @@ import { scopedKey } from '../../lib/workspace'
 import { quarterKey } from '../../lib/pf/week'
 
 export type Lane = 'business' | 'life'
-export const LANE_LABEL: Record<Lane, string> = { business: 'Business', life: 'Life' }
+export const LANE_LABEL: Record<Lane, string> = { business: 'Professional', life: 'Personal' }
 export const MAX_PER_LANE = 3
 
 export interface Goal90 {

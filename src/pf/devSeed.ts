@@ -137,7 +137,7 @@ function seed(mode: string) {
   const lead = (name: string, stage: string, value: number, offerName: string, nextStep?: string, nextDate?: string, closedAt?: string) =>
     ({ id: id(), name, stage, value, offerName, nextStep, nextDate, closedAt, createdAt: now, updatedAt: now, source: 'Instagram' })
   persist('pf-sales-v1', { leads: [
-    lead('Sofie D.', 'proposal', 1500, 'Group programme', 'She decides after her holiday', dates[4]),
+    lead('Sofie D.', 'proposal', 1500, 'Group programme', 'Decides after the holiday', dates[4]),
     lead('Anke V.', 'conversation', 600, 'Strategy session', 'Send two dates', dates[3]),
     lead('Charlotte M.', 'conversation', 1500, 'Group programme', 'Voice note back', dates[3]),
     lead('Lien P.', 'new', 600, 'Strategy session', 'First reply'),

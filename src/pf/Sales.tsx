@@ -548,7 +548,7 @@ function LeadForm({ lead, onDone, onWon }: { lead: Lead | null; onDone: () => vo
     <form className="pf-fields" style={{ display: 'flex', flexDirection: 'column', gap: 18 }} onSubmit={e => { e.preventDefault(); save() }}>
       <div className="pf-fieldset">
         <label className="pf-cap pf-label" htmlFor={`${id}-name`}>Who</label>
-        <input id={`${id}-name`} className="pf-input" value={name} onChange={e => setName(e.target.value)} placeholder="Her name" autoFocus={!lead} />
+        <input id={`${id}-name`} className="pf-input" value={name} onChange={e => setName(e.target.value)} placeholder="Name" autoFocus={!lead} />
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 120px', gap: 10 }}>
         <div className="pf-fieldset">
@@ -580,7 +580,7 @@ function LeadForm({ lead, onDone, onWon }: { lead: Lead | null; onDone: () => vo
           <input id={`${id}-date`} className="pf-input pf-mono" type="date" value={nextDate} onChange={e => setNextDate(e.target.value)} style={small} />
         </div>
         <div className="pf-fieldset">
-          <label className="pf-cap pf-label" htmlFor={`${id}-source`}>Where she came from</label>
+          <label className="pf-cap pf-label" htmlFor={`${id}-source`}>Where they came from</label>
           <input id={`${id}-source`} className="pf-input" value={source} onChange={e => setSource(e.target.value)} placeholder="Instagram, a referral, an event" style={small} />
         </div>
       </div>
