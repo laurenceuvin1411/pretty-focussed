@@ -60,7 +60,7 @@ Founder decisions (4 September 2026) that extend the MVP, in the same world and 
 
 Limits are the design: three priorities, five rituals, ninety days, one decision per screen. If a feature needs a tutorial, it is not ready.
 
-Language: English only (decision 3 September 2026). No Dutch in the product. The existing codebase is Dutch-first, so every screen that becomes part of Pretty Focused is rewritten in English; Dutch and German localisation are not planned for the MVP.
+Language: English only (decision 3 September 2026). Product copy and the assistant never say woman, women, she or her (decision 25 September 2026): the person, you, they. No Dutch in the product. The existing codebase is Dutch-first, so every screen that becomes part of Pretty Focused is rewritten in English; Dutch and German localisation are not planned for the MVP.
 
 Technical: React 19 + Vite + Tailwind v4 + Zustand + Supabase, deployed on Netlify (laurence-os-clients.netlify.app). AI calls go through the Netlify function so the key stays server-side. Data must be per account; seed content belongs to the owner account only. Mobile-first web layout first; native iOS is a later phase.
 

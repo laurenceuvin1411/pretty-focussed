@@ -522,6 +522,10 @@ Superseded on Sales on 4 September 2026 by the conversation card (below); the ro
 
 Laurence's call on the Air ground: Paper cards on a blue-tinted room read as beige on blue and hide the green. Surfaces now sit lighter than whatever ground she picks: `--surface` is a 62 percent mix of white into the ground (whitish on Bone, a pale blue-white on Air, a pale sage-white on Field, warm white on Travertine), and the older pages' `--color-card` and `--color-surface` follow it inside the room. Dark mode keeps its own surface. The instrument (the sage scale) is unchanged and reads better for it.
 
+### No gendered copy (25 September 2026)
+
+On Laurence's call every reference to woman or women left the product and the assistant's prompts, and she/her became they/their or you. The audience in PRODUCT.md stays what it is; the interface addresses the person in front of it.
+
 ### Your projects, in the pattern (25 September 2026)
 
 Laurence's verdict on the mounted Laurence OS page: unfocussed, random options. Rebuilt as `src/pf/now/YourProjects.tsx` on the same store, so nothing is lost: a project is a name, one line of what done looks like, a date if it has one, and steps. The screen opens with the answer ("2 projects in motion." and the next step across them, or the one that is overdue), one Ink pill "New project" (a sheet: what you are building, what done looks like, the first step, a date), then the projects as hairline rows with the next step, the date in mono and a small depth bar of steps done. A row opens the project sheet: steps as check rows with an inline line for the next one, name, line and date editable, "Done" as the pill and hold-to-remove as the way out. Done projects sit faded under the live ones. Sections, periods, colours and emojis are gone from view; the older project pages still answer at `/projects/:id` for the owner's seed projects.

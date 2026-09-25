@@ -105,7 +105,7 @@ function WhoYouAre() {
         </div>
       </div>
       <div className="pf-fieldset">
-        <label className="pf-cap pf-label" htmlFor="focus-who">One line, the woman you are running this as</label>
+        <label className="pf-cap pf-label" htmlFor="focus-who">One line, the person you are running this as</label>
         {plan.who ? (
           <p className="pf-body" style={{ color: 'var(--text)' }}>{plan.who} <button type="button" className="pf-btn pf-btn--tertiary" style={{ fontSize: 14, padding: '0 6px', minHeight: 0, display: 'inline' }} onClick={() => setYear(y.key, { who: undefined })}>change</button></p>
         ) : (

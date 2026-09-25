@@ -1,6 +1,6 @@
 // Look back, thirty seconds. Three questions, one at a time, answered by tapping what the week already knows.
-// The end is visible before she starts: the next questions sit under the current one, soft but present.
-// She may say "Nothing this week" and move on, or speak for twenty seconds and let the app sort it.
+// The end is visible before they start: the next questions sit under the current one, soft but present.
+// They may say "Nothing this week" and move on, or speak for twenty seconds and let the app sort it.
 import { useEffect, useRef, useState } from 'react'
 import { useWeekStore } from '../store/pf/weekStore'
 import type { WeekPlan, Review } from '../store/pf/weekStore'
@@ -47,7 +47,7 @@ function buildChips(prev: WeekPlan | undefined, dates: string[], logs: Record<st
   for (const p of unposted) drops.push({ id: `u-${p}`, label: `Not posted: ${p}`, on: false })
   if (prev?.dropSuggestion) drops.push({ id: 'drop-hint', label: prev.dropSuggestion.replace(/\.$/, ''), on: false })
 
-  // Lessons the week suggests. She confirms one or writes her own.
+  // Lessons the week suggests. They confirm one or write their own.
   const doneN = ps.filter(p => p.done).length
   if (ps.length > 0 && doneN === ps.length) lesson.push({ id: 'l1', label: 'Three, not six. It held.', on: true })
   if (ps.length > 0 && doneN === 0) lesson.push({ id: 'l2', label: 'The week set the plan, not me.', on: false })
@@ -192,7 +192,7 @@ function Speak({ onText }: { onText: (text: string, sorted: Partial<Record<Q, st
     try {
       const raw = await askClaude({
         system: STUDIO_SYSTEM,
-        user: `She spoke her weekly look-back in one breath. Sort it over three fields and return JSON only: {"wins": "...", "drops": "...", "lesson": "..."}. wins = what worked; drops = what she is letting go or stopping; lesson = the one thing she keeps. Keep her words, sentence case, no quotes around them, empty string where nothing fits.\n\nTranscript: ${text}`,
+        user: `They spoke their weekly look-back in one breath. Sort it over three fields and return JSON only: {"wins": "...", "drops": "...", "lesson": "..."}. wins = what worked; drops = what they is letting go or stopping; lesson = the one thing they keeps. Keep their words, sentence case, no quotes around them, empty string where nothing fits.\n\nTranscript: ${text}`,
         model: 'haiku', maxTokens: 400,
       })
       onText(text, extractJSON<Partial<Record<Q, string>>>(raw))

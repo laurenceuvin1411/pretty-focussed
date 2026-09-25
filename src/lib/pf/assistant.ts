@@ -73,7 +73,7 @@ function reviewLines(week: WeekPlan): string {
     parts.push('Last week priorities: ' + prev.priorities.map(p => `${p.title} (${p.done ? 'done' : 'not done'})`).join('; '))
   }
   const rv = week.review ?? prev?.review
-  if (rv) parts.push(`Review: what worked: ${rv.wins || '-'} · what she is letting go: ${rv.drops || '-'} · lesson: ${rv.lesson || '-'} · energy ${rv.energy}/5`)
+  if (rv) parts.push(`Review: what worked: ${rv.wins || '-'} · what they are letting go: ${rv.drops || '-'} · lesson: ${rv.lesson || '-'} · energy ${rv.energy}/5`)
   return parts.join('\n') || '(first week, no review yet)'
 }
 
@@ -81,7 +81,7 @@ function baseContext(week: WeekPlan): string {
   const dates = weekDatesFromKey(week.key)
   const q = quarterInfo()
   const goals = useGoalStore.getState().goalsFor()
-  return `MEMBER: ${firstName() || 'she'}
+  return `MEMBER: ${firstName() || 'the member'}
 WEEK: ${week.key}, ${fmtDay(dates[0], 'd MMMM')} to ${fmtDay(dates[6], 'd MMMM')}
 QUARTER: ${q.key}, day ${q.day} of ${q.total}, ${q.daysLeft} days left
 
@@ -113,7 +113,7 @@ export async function suggestPriorities(week: WeekPlan): Promise<PrioritySuggest
   const user = `${baseContext(week)}
 
 TASK
-Choose the three priorities for this week. At least one from BUSINESS and at least one from LIFE when both lanes have goals. Weigh the revenue gap: when the gap is large, one priority is about selling. Each priority is one concrete outcome that fits in one week, not a theme. Also say, plainly and kindly, what she can leave this week.
+Choose the three priorities for this week. At least one from BUSINESS and at least one from LIFE when both lanes have goals. Weigh the revenue gap: when the gap is large, one priority is about selling. Each priority is one concrete outcome that fits in one week, not a theme. Also say, plainly and kindly, what they can leave this week.
 
 Valid goalId values: ${goals.map(g => `"${g.id}" (${g.title})`).join(', ') || 'none'}.
 
@@ -165,7 +165,7 @@ Draft the week as time blocks per day, all seven days (${dates.join(', ')}).
 - Tuesday and Thursday each get one "admin" block of 45 minutes for small things and mail.
 - intention per day: one sentence, second person, declarative, no exclamation marks.
 - note: one paragraph (60 words maximum) on why this week holds, naming the revenue gap or the cycle when relevant.
-- drop: one sentence on what she is not doing this week.
+- drop: one sentence on what they are not doing this week.
 
 ANSWER AS JSON
 {"days":[{"date":"yyyy-MM-dd","intention":"...","blocks":[{"start":"HH:mm","end":"HH:mm","title":"...","kind":"priority|ritual|event|admin|rest","priorityIndex":0,"ritualId":"..."}]}],"note":"...","drop":"..."}`
@@ -249,10 +249,10 @@ Priorities: ${week.priorities.map(p => `${p.title} (${p.done ? 'done' : 'not don
 Habits kept: ${ritualScore}
 Sales this week: ${weekSales.length ? weekSales.map(s => `${s.label} ${money(s.amount)}`).join(', ') : 'none'} · total ${money(rev.revenueBetween(dates[0], dates[6]))}
 Blocks completed: ${doneBlocks} of ${totalBlocks}
-What she chose not to do: ${week.dropSuggestion || week.review?.drops || '-'}
+What they chose not to do: ${week.dropSuggestion || week.review?.drops || '-'}
 
 TASK
-Write the recap of this week for a card she can share. Honest and warm: name what moved, what she protected, what she let lie. No money figures on the card (that stays private); "revenue moved" is allowed when true. Headline eight words maximum, declarative, ending with a full stop. Each list three items maximum, eight words each. nextWeekHint: one sentence that leads into Sunday.
+Write the recap of this week for a card they can share. Honest and warm: name what moved, what they protected, what they let lie. No money figures on the card (that stays private); "revenue moved" is allowed when true. Headline eight words maximum, declarative, ending with a full stop. Each list three items maximum, eight words each. nextWeekHint: one sentence that leads into Sunday.
 
 ANSWER AS JSON
 {"headline":"...","moved":["..."],"protected":["..."],"dropped":["..."],"nextWeekHint":"..."}`
