@@ -28,6 +28,7 @@ const PLACES: { label: string; to: string; hint?: string }[] = [
   { label: 'Today', to: '/today', hint: 'The day, block by block' },
   { label: 'Week', to: '/week', hint: 'Three priorities and the session' },
   { label: 'Focus', to: '/focus', hint: 'Who you are, what you want, what is in the way, your next 30 days' },
+  { label: 'Your priorities', to: '/focus/priorities', hint: 'To-dos, calendar, notes, focus timer' },
   { label: 'Your habits', to: '/focus/habits', hint: 'The habit system' },
   { label: 'Your projects', to: '/focus/projects', hint: 'Projects with kompas, sales and content' },
   { label: 'Your content', to: '/focus/content', hint: 'Scripts, planner, calendar' },
@@ -89,7 +90,7 @@ export function NowShell() {
         </nav>
       </header>
       <main className="pf-page pf-page--one">
-        <div className={`pf-one ${/^\/focus\/(habits|projects|content)/.test(pathname) ? 'pf-one--wide' : ''}`}><Outlet /></div>
+        <div className={`pf-one ${/^\/focus\/(priorities|habits|projects|content)/.test(pathname) ? 'pf-one--wide' : ''}`}><Outlet /></div>
       </main>
       <Palette open={search} onClose={() => setSearch(false)} />
     </div>

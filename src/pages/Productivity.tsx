@@ -9,22 +9,22 @@ import { useProductivityStore } from '../store/productivityStore'
 import type { Todo, TodoPriority, TodoSphere } from '../store/productivityStore'
 
 const SPHERE_CFG: Record<TodoSphere, { label: string; color: string }> = {
-  personal:     { label: 'Persoonlijk',   color: '#C4935A' },
-  professional: { label: 'Professioneel', color: '#6DB889' },
+  personal:     { label: 'Persoonlijk',   color: 'var(--pf-depth-text)' },
+  professional: { label: 'Professioneel', color: 'var(--pf-depth-text)' },
 }
 
-const ACCENT = '#4C6481'
+const ACCENT = 'var(--pf-sage)'
 const TODAY = () => format(new Date(), 'yyyy-MM-dd')
 
 const PRIORITY_CFG: Record<TodoPriority, { label: string; color: string }> = {
-  high:   { label: 'Hoog',   color: '#C4935A' },
+  high:   { label: 'Hoog',   color: 'var(--pf-depth-text)' },
   medium: { label: 'Medium', color: ACCENT },
-  low:    { label: 'Laag',   color: '#7C7F84' },
+  low:    { label: 'Laag',   color: 'var(--color-subtle)' },
 }
 
 // ── Shared bits ──────────────────────────────────────────────────
 const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '10px 14px', borderRadius: 10,
+  width: '100%', padding: '10px 14px', borderRadius: 14,
   border: '1px solid var(--color-border)', background: 'var(--color-surface)',
   color: 'var(--color-ink)', fontSize: 13, fontFamily: 'inherit',
   outline: 'none', boxSizing: 'border-box',
@@ -32,7 +32,7 @@ const inputStyle: React.CSSProperties = {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>
+    <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 10 }}>
       {children}
     </p>
   )
@@ -56,10 +56,10 @@ function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string
         onClick={() => toggleTodo(todo.id)}
         aria-label={todo.done ? 'Heropen taak' : 'Vink taak af'}
         style={{
-          width: 22, height: 22, borderRadius: 7, flexShrink: 0, cursor: 'pointer',
+          width: 22, height: 22, borderRadius: 14, flexShrink: 0, cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: todo.done ? '#6DB889' : 'transparent',
-          border: `2px solid ${todo.done ? '#6DB889' : 'rgba(124,127,132,0.32)'}`,
+          background: todo.done ? 'var(--pf-depth-text)' : 'transparent',
+          border: `2px solid ${todo.done ? 'var(--pf-depth-text)' : 'rgba(124,127,132,0.32)'}`,
           transition: 'all 180ms',
         }}
       >
@@ -71,7 +71,7 @@ function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string
           {todo.title}
         </p>
         <div style={{ display: 'flex', gap: 8, marginTop: 2, alignItems: 'center' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: pri.color, fontFamily: 'var(--font-mono)' }}>{pri.label}</span>
+          <span style={{ fontSize: 10, fontWeight: 500, color: pri.color, fontFamily: 'var(--font-mono)' }}>{pri.label}</span>
           <button
             onClick={e => {
               e.stopPropagation()
@@ -80,7 +80,7 @@ function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string
             }}
             title="Wissel: persoonlijk / professioneel / geen"
             style={{
-              fontSize: 10, fontWeight: 700, fontFamily: 'var(--font-mono)', cursor: 'pointer',
+              fontSize: 10, fontWeight: 500, fontFamily: 'var(--font-mono)', cursor: 'pointer',
               background: 'none', border: 'none', padding: 0,
               color: todo.sphere ? SPHERE_CFG[todo.sphere].color : 'var(--color-subtle)',
               opacity: todo.sphere ? 1 : 0.5,
@@ -89,7 +89,7 @@ function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string
             {todo.sphere ? SPHERE_CFG[todo.sphere].label : '+ sfeer'}
           </button>
           {todo.date && (
-            <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: isOverdue ? '#C4935A' : isToday ? ACCENT : 'var(--color-subtle)', fontWeight: isToday || isOverdue ? 700 : 400 }}>
+            <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: isOverdue ? 'var(--pf-depth-text)' : isToday ? ACCENT : 'var(--color-subtle)', fontWeight: isToday || isOverdue ? 700 : 400 }}>
               {isOverdue ? 'Verlopen · ' : isToday ? 'Vandaag' : format(new Date(todo.date + 'T12:00:00'), 'd MMM', { locale: nlBE })}
               {isOverdue && format(new Date(todo.date + 'T12:00:00'), 'd MMM', { locale: nlBE })}
             </span>
@@ -117,7 +117,7 @@ function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string
               else el.click()
             }}
             title={todo.date ? `Gepland: ${todo.date} (klik om te wijzigen)` : 'Plan op datum'}
-            style={{ width: 26, height: 26, borderRadius: 7, border: `1px solid ${todo.date ? ACCENT : 'var(--color-border)'}`, background: todo.date ? 'rgba(76,100,129,0.08)' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: todo.date ? ACCENT : 'var(--color-subtle)' }}
+            style={{ width: 26, height: 26, borderRadius: 14, border: `1px solid ${todo.date ? ACCENT : 'var(--color-border)'}`, background: todo.date ? 'var(--pf-sage-soft)' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: todo.date ? ACCENT : 'var(--color-subtle)' }}
           >
             <CalendarIcon size={11} />
           </button>
@@ -132,12 +132,12 @@ function TodoRow({ todo, onOpenNote }: { todo: Todo; onOpenNote: (todoId: string
           />
           {!todo.noteId && (
             <button onClick={() => onOpenNote(todo.id)} title="Notitie toevoegen"
-              style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
+              style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
               <FileText size={11} />
             </button>
           )}
           <button onClick={() => deleteTodo(todo.id)} title="Verwijder"
-            style={{ width: 26, height: 26, borderRadius: 7, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
+            style={{ width: 26, height: 26, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
             <Trash2 size={11} />
           </button>
         </div>
@@ -223,7 +223,7 @@ function TodosSection({ onOpenNote }: { onOpenNote: (todoId: string) => void }) 
           onClick={submit}
           disabled={!title.trim()}
           aria-label="Taak toevoegen"
-          style={{ width: 42, height: 40, borderRadius: 10, border: 'none', background: title.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: title.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: title.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 150ms' }}
+          style={{ width: 42, height: 40, borderRadius: 14, border: 'none', background: title.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: title.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: title.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 150ms' }}
         >
           <Plus size={16} />
         </button>
@@ -238,7 +238,7 @@ function TodosSection({ onOpenNote }: { onOpenNote: (todoId: string) => void }) 
       {groups.map(g => (
         <div key={g.label} style={{ marginBottom: 22 }}>
           <SectionLabel>{g.label} · {g.items.length}</SectionLabel>
-          <div style={{ borderRadius: 14, border: '1px solid var(--color-border)', background: 'var(--color-card)', overflow: 'hidden' }}>
+          <div style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', overflow: 'hidden' }}>
             {g.items.map(t => <TodoRow key={t.id} todo={t} onOpenNote={onOpenNote} />)}
           </div>
         </div>
@@ -250,7 +250,7 @@ function TodosSection({ onOpenNote }: { onOpenNote: (todoId: string) => void }) 
             <SectionLabel>{showDone ? '▾' : '▸'} Afgewerkt · {done.length}</SectionLabel>
           </button>
           {showDone && (
-            <div style={{ borderRadius: 14, border: '1px solid var(--color-border)', background: 'var(--color-card)', overflow: 'hidden', opacity: 0.7 }}>
+            <div style={{ borderRadius: 14, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', overflow: 'hidden', opacity: 0.7 }}>
               {done.map(t => <TodoRow key={t.id} todo={t} onOpenNote={onOpenNote} />)}
             </div>
           )}
@@ -297,18 +297,18 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 1fr)', gap: 24, alignItems: 'start' }}>
       {/* Month grid */}
-      <div className="card" style={{ padding: 20, borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)' }}>
+      <div className="card" style={{ padding: 20, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-          <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-ink)', letterSpacing: '-0.01em', textTransform: 'capitalize' }}>
+          <p style={{ fontSize: 15, fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em', textTransform: 'capitalize' }}>
             {format(viewDate, 'MMMM yyyy', { locale: nlBE })}
           </p>
           <div style={{ display: 'flex', gap: 6 }}>
             <button onClick={() => setViewDate(d => subMonths(d, 1))} aria-label="Vorige maand"
-              style={{ width: 28, height: 28, borderRadius: 8, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
+              style={{ width: 28, height: 28, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
               <ChevronLeft size={13} />
             </button>
             <button onClick={() => setViewDate(d => addMonths(d, 1))} aria-label="Volgende maand"
-              style={{ width: 28, height: 28, borderRadius: 8, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
+              style={{ width: 28, height: 28, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
               <ChevronRight size={13} />
             </button>
           </div>
@@ -316,7 +316,7 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, marginBottom: 6 }}>
           {['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'].map(d => (
-            <div key={d} style={{ textAlign: 'center', fontSize: 9, fontWeight: 700, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', padding: '4px 0' }}>{d}</div>
+            <div key={d} style={{ textAlign: 'center', fontSize: 9, fontWeight: 500, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', padding: '4px 0' }}>{d}</div>
           ))}
         </div>
 
@@ -334,10 +334,10 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
                 key={d}
                 onClick={() => setSelected(dateStr)}
                 style={{
-                  aspectRatio: '1', borderRadius: 9, cursor: 'pointer', position: 'relative',
+                  aspectRatio: '1', borderRadius: 14, cursor: 'pointer', position: 'relative',
                   display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3,
-                  border: `1.5px solid ${isSel ? ACCENT : isToday ? 'rgba(76,100,129,0.35)' : 'transparent'}`,
-                  background: isSel ? 'rgba(76,100,129,0.10)' : 'transparent',
+                  border: `1.5px solid ${isSel ? ACCENT : isToday ? 'var(--pf-sage-soft)' : 'transparent'}`,
+                  background: isSel ? 'var(--pf-sage-soft)' : 'transparent',
                   transition: 'all 150ms', fontFamily: 'inherit', padding: 0,
                 }}
               >
@@ -345,7 +345,7 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
                 {dayTodos.length > 0 && (
                   <div style={{ display: 'flex', gap: 2 }}>
                     {dayTodos.slice(0, 3).map((t, j) => (
-                      <span key={j} style={{ width: 4, height: 4, borderRadius: '50%', background: t.done ? '#6DB889' : allDone ? '#6DB889' : PRIORITY_CFG[t.priority].color, opacity: t.done ? 0.5 : 1 }} />
+                      <span key={j} style={{ width: 4, height: 4, borderRadius: '50%', background: t.done ? 'var(--pf-depth-text)' : allDone ? 'var(--pf-depth-text)' : PRIORITY_CFG[t.priority].color, opacity: t.done ? 0.5 : 1 }} />
                     ))}
                     {dayTodos.length > 3 && <span style={{ fontSize: 7, color: 'var(--color-subtle)', lineHeight: '4px' }}>+</span>}
                   </div>
@@ -357,8 +357,8 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
       </div>
 
       {/* Day detail */}
-      <div className="card" style={{ padding: 20, borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)' }}>
-        <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-ink)', marginBottom: 2, textTransform: 'capitalize' }}>
+      <div className="card" style={{ padding: 20, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
+        <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-ink)', marginBottom: 2, textTransform: 'capitalize' }}>
           {format(new Date(selected + 'T12:00:00'), 'EEEE d MMMM', { locale: nlBE })}
         </p>
         <p style={{ fontSize: 11, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', marginBottom: 14 }}>
@@ -375,7 +375,7 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
               style={{ ...inputStyle, flex: 1, fontSize: 12, padding: '8px 12px' }}
             />
             <button onClick={quickAdd} disabled={!quickTitle.trim()} aria-label="Toevoegen"
-              style={{ width: 34, height: 34, borderRadius: 11, border: 'none', background: quickTitle.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: quickTitle.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: quickTitle.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              style={{ width: 34, height: 34, borderRadius: 14, border: 'none', background: quickTitle.trim() ? 'var(--color-ink)' : 'var(--color-border)', color: quickTitle.trim() ? 'var(--color-bg)' : 'var(--color-muted)', cursor: quickTitle.trim() ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Plus size={14} />
             </button>
           </div>
@@ -388,7 +388,7 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
                   aria-label={`Markeer als ${SPHERE_CFG[s].label}`}
                   style={{
                     display: 'flex', alignItems: 'center', gap: 5, padding: '4px 11px', borderRadius: 99,
-                    fontSize: 10, fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-mono)',
+                    fontSize: 10, fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-mono)',
                     transition: 'all 150ms',
                     border: `1.5px solid ${active ? SPHERE_CFG[s].color : 'var(--color-border)'}`,
                     background: active ? `${SPHERE_CFG[s].color}18` : 'transparent',
@@ -405,7 +405,7 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
         {selectedTodos.length === 0 ? (
           <p style={{ fontSize: 12, color: 'var(--color-subtle)', textAlign: 'center', padding: '20px 0' }}>Niets gepland op deze dag.</p>
         ) : (
-          <div style={{ borderRadius: 12, border: '1px solid var(--color-border)', overflow: 'hidden' }}>
+          <div style={{ borderRadius: 14, border: '1px solid var(--color-border)', overflow: 'hidden' }}>
             {selectedTodos.map(t => <TodoRow key={t.id} todo={t} onOpenNote={onOpenNote} />)}
           </div>
         )}
@@ -445,7 +445,7 @@ function NotesSection({ activeNoteId, setActiveNoteId }: { activeNoteId: string 
             style={{ ...inputStyle, flex: 1, fontSize: 12, padding: '8px 12px' }}
           />
           <button onClick={createNote} aria-label="Nieuwe notitie"
-            style={{ width: 34, height: 34, borderRadius: 9, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            style={{ width: 34, height: 34, borderRadius: 14, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Plus size={14} />
           </button>
         </div>
@@ -461,15 +461,15 @@ function NotesSection({ activeNoteId, setActiveNoteId }: { activeNoteId: string 
                 key={n.id}
                 onClick={() => setActiveNoteId(n.id)}
                 style={{
-                  textAlign: 'left', padding: '12px 14px', borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit',
+                  textAlign: 'left', padding: '12px 14px', borderRadius: 14, cursor: 'pointer', fontFamily: 'inherit',
                   border: `1.5px solid ${n.id === activeNoteId ? ACCENT : 'var(--color-border)'}`,
-                  background: n.id === activeNoteId ? 'rgba(76,100,129,0.06)' : 'var(--color-card)',
+                  background: n.id === activeNoteId ? 'var(--pf-sage-soft)' : 'var(--color-card)',
                   transition: 'all 150ms',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   {n.pinned && <Pin size={10} color={ACCENT} style={{ flexShrink: 0 }} />}
-                  <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <p style={{ fontSize: 13, fontWeight: 500, color: 'var(--color-ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {n.title || 'Zonder titel'}
                   </p>
                 </div>
@@ -488,20 +488,20 @@ function NotesSection({ activeNoteId, setActiveNoteId }: { activeNoteId: string 
 
       {/* Editor */}
       {active ? (
-        <div className="card" style={{ padding: 24, borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)' }}>
+        <div className="card" style={{ padding: 24, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 14 }}>
             <input
               value={active.title}
               onChange={e => updateNote(active.id, { title: e.target.value })}
               placeholder="Titel..."
-              style={{ flex: 1, border: 'none', background: 'transparent', outline: 'none', fontSize: 18, fontWeight: 700, color: 'var(--color-ink)', fontFamily: 'inherit', letterSpacing: '-0.01em', padding: 0 }}
+              style={{ flex: 1, border: 'none', background: 'transparent', outline: 'none', fontSize: 18, fontWeight: 500, color: 'var(--color-ink)', fontFamily: 'inherit', letterSpacing: '-0.01em', padding: 0 }}
             />
             <button onClick={() => updateNote(active.id, { pinned: !active.pinned })} title={active.pinned ? 'Losmaken' : 'Vastpinnen'}
-              style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--color-border)', background: active.pinned ? 'rgba(76,100,129,0.10)' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: active.pinned ? ACCENT : 'var(--color-subtle)' }}>
+              style={{ width: 30, height: 30, borderRadius: 14, border: '1px solid var(--color-border)', background: active.pinned ? 'var(--pf-sage-soft)' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: active.pinned ? ACCENT : 'var(--color-subtle)' }}>
               <Pin size={13} />
             </button>
             <button onClick={() => { deleteNote(active.id); setActiveNoteId(null) }} title="Verwijder notitie"
-              style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
+              style={{ width: 30, height: 30, borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-subtle)' }}>
               <Trash2 size={13} />
             </button>
           </div>
@@ -527,7 +527,7 @@ function NotesSection({ activeNoteId, setActiveNoteId }: { activeNoteId: string 
               ))}
             </select>
             {linkedTodo && (
-              <span style={{ fontSize: 10, color: linkedTodo.done ? '#6DB889' : 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
+              <span style={{ fontSize: 10, color: linkedTodo.done ? 'var(--pf-depth-text)' : 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
                 {linkedTodo.done ? '✓ afgewerkt' : 'open'}
               </span>
             )}
@@ -598,13 +598,13 @@ function FocusSection() {
   const size = 220, stroke = 6
   const r = (size - stroke * 2) / 2
   const circ = 2 * Math.PI * r
-  const ringColor = timer.mode === 'break' ? '#6DB889' : ACCENT
+  const ringColor = timer.mode === 'break' ? 'var(--pf-depth-text)' : ACCENT
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 320px)', gap: 32, alignItems: 'start', maxWidth: 860 }}>
       {/* Timer */}
-      <div className="card" style={{ padding: '40px 32px', borderRadius: 18, border: '1px solid var(--color-border)', background: 'var(--color-card)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: ringColor, fontFamily: 'var(--font-mono)', marginBottom: 24 }}>
+      <div className="card" style={{ padding: '40px 32px', borderRadius: 18, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: ringColor, fontFamily: 'var(--font-mono)', marginBottom: 24 }}>
           {timer.mode === 'break' ? 'Pauze' : 'Focus'}
           {linkedTodo && timer.mode === 'focus' && ` · ${linkedTodo.title.slice(0, 32)}`}
         </p>
@@ -618,7 +618,7 @@ function FocusSection() {
               style={{ transition: 'stroke-dashoffset 500ms linear' }} />
           </svg>
           <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-            <span data-testid="timer-clock" style={{ fontSize: 44, fontWeight: 800, color: 'var(--color-ink)', fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em' }}>
+            <span data-testid="timer-clock" style={{ fontSize: 44, fontWeight: 500, color: 'var(--color-ink)', fontFamily: 'var(--font-mono)', letterSpacing: '-0.02em' }}>
               {fmtClock(remaining)}
             </span>
             <span style={{ fontSize: 11, color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)' }}>
@@ -631,37 +631,37 @@ function FocusSection() {
         <div style={{ display: 'flex', gap: 10, marginBottom: 24 }}>
           {timer.status === 'idle' && !isBreakReady && (
             <button onClick={() => store.startTimer(timer.todoId)} data-testid="start-focus"
-              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 12, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 14, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
               <Play size={14} /> Start focus
             </button>
           )}
           {isBreakReady && (
             <>
               <button onClick={() => store.startBreak()}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 24px', borderRadius: 12, border: 'none', background: '#6DB889', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 24px', borderRadius: 14, border: 'none', background: 'var(--pf-depth-text)', color: '#fff', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
                 <Play size={14} /> Start pauze ({breakLengthMin}m)
               </button>
               <button onClick={() => store.startTimer(timer.todoId)}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 24px', borderRadius: 12, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-ink)', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 24px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-ink)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
                 Volgende focus
               </button>
             </>
           )}
           {timer.status === 'running' && (
             <button onClick={() => store.pauseTimer()} data-testid="pause-focus"
-              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 12, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-ink)', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-ink)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
               <Pause size={14} /> Pauzeer
             </button>
           )}
           {timer.status === 'paused' && (
             <button onClick={() => store.resumeTimer()}
-              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 12, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 28px', borderRadius: 14, border: 'none', background: 'var(--color-ink)', color: 'var(--color-bg)', fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit' }}>
               <Play size={14} /> Hervat
             </button>
           )}
           {timer.status !== 'idle' && (
             <button onClick={() => store.stopTimer()} title="Stop en reset"
-              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 18px', borderRadius: 12, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 14, cursor: 'pointer', fontFamily: 'inherit' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '13px 18px', borderRadius: 14, border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-subtle)', fontSize: 14, cursor: 'pointer', fontFamily: 'inherit' }}>
               <Square size={13} />
             </button>
           )}
@@ -686,13 +686,13 @@ function FocusSection() {
           {timer.status === 'idle' && (
             <div style={{ display: 'flex', gap: 10 }}>
               <div style={{ flex: 1 }}>
-                <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 4 }}>Focus (min)</label>
+                <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 4 }}>Focus (min)</label>
                 <select value={focusLengthMin} onChange={e => store.setFocusLength(Number(e.target.value))} style={{ ...inputStyle, cursor: 'pointer', fontSize: 12 }}>
                   {[15, 25, 45, 60, 90].map(m => <option key={m} value={m}>{m}</option>)}
                 </select>
               </div>
               <div style={{ flex: 1 }}>
-                <label style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 4 }}>Pauze (min)</label>
+                <label style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'var(--color-subtle)', fontFamily: 'var(--font-mono)', display: 'block', marginBottom: 4 }}>Pauze (min)</label>
                 <select value={breakLengthMin} onChange={e => store.setBreakLength(Number(e.target.value))} style={{ ...inputStyle, cursor: 'pointer', fontSize: 12 }}>
                   {[5, 10, 15].map(m => <option key={m} value={m}>{m}</option>)}
                 </select>
@@ -704,22 +704,22 @@ function FocusSection() {
 
       {/* Stats */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <div className="card" style={{ padding: '18px 20px', borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)' }}>
+        <div className="card" style={{ padding: '18px 20px', borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
           <SectionLabel>Vandaag</SectionLabel>
           <div style={{ display: 'flex', gap: 24 }}>
             <div>
-              <p style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-ink)', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>{todayMinutes}<span style={{ fontSize: 13, color: 'var(--color-subtle)' }}>m</span></p>
+              <p style={{ fontSize: 26, fontWeight: 500, color: 'var(--color-ink)', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>{todayMinutes}<span style={{ fontSize: 13, color: 'var(--color-subtle)' }}>m</span></p>
               <p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 3 }}>Gefocust</p>
             </div>
             <div>
-              <p style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-ink)', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>{todaySessions.length}</p>
+              <p style={{ fontSize: 26, fontWeight: 500, color: 'var(--color-ink)', fontFamily: 'var(--font-mono)', lineHeight: 1 }}>{todaySessions.length}</p>
               <p style={{ fontSize: 10, color: 'var(--color-subtle)', marginTop: 3 }}>Sessies</p>
             </div>
           </div>
         </div>
 
         {todaySessions.length > 0 && (
-          <div className="card" style={{ padding: '18px 20px', borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)' }}>
+          <div className="card" style={{ padding: '18px 20px', borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
             <SectionLabel>Sessies vandaag</SectionLabel>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {todaySessions.slice(0, 8).map(s => {
@@ -742,7 +742,7 @@ function FocusSection() {
 
         {/* Per-taak focus totalen */}
         {todos.some(t => t.focusMinutes > 0) && (
-          <div className="card" style={{ padding: '18px 20px', borderRadius: 16, border: '1px solid var(--color-border)', background: 'var(--color-card)' }}>
+          <div className="card" style={{ padding: '18px 20px', borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
             <SectionLabel>Focus per taak</SectionLabel>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {[...todos].filter(t => t.focusMinutes > 0).sort((a, b) => b.focusMinutes - a.focusMinutes).slice(0, 6).map(t => (
@@ -750,7 +750,7 @@ function FocusSection() {
                   <span style={{ fontSize: 12, color: t.done ? 'var(--color-muted)' : 'var(--color-ink)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textDecoration: t.done ? 'line-through' : 'none' }}>
                     {t.title}
                   </span>
-                  <span style={{ fontSize: 10, color: ACCENT, fontFamily: 'var(--font-mono)', fontWeight: 700, flexShrink: 0 }}>{t.focusMinutes}m</span>
+                  <span style={{ fontSize: 10, color: ACCENT, fontFamily: 'var(--font-mono)', fontWeight: 500, flexShrink: 0 }}>{t.focusMinutes}m</span>
                 </div>
               ))}
             </div>
@@ -799,12 +799,12 @@ export function Productivity() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2 }}>
-            Productivity
+          <h1 style={{ fontSize: 24, fontWeight: 500, letterSpacing: '-0.02em', color: 'var(--color-ink)', lineHeight: 1.2 }}>
+            Your priorities
           </h1>
           <p style={{ fontSize: 12, color: 'var(--color-subtle)', marginTop: 4, fontFamily: 'var(--font-mono)' }}>
             {openToday} taken vandaag · {todayMinutes}m gefocust
-            {timer.status === 'running' && <span style={{ color: ACCENT, fontWeight: 700 }}> · timer loopt</span>}
+            {timer.status === 'running' && <span style={{ color: ACCENT, fontWeight: 500 }}> · timer loopt</span>}
           </p>
         </div>
       </div>
