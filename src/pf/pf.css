@@ -439,3 +439,6 @@ input.pf-h2 { font-size:clamp(1.6875rem,1.2rem + 2vw,2.75rem); line-height:1.12;
 .pf-legacy input, .pf-legacy select, .pf-legacy textarea { border-radius:14px }
 .pf-legacy [style*="border-radius: 999px"] { border-radius:999px }
 .pf-legacy * { text-decoration-color:var(--border) }
+
+/* the older two-column layouts stack on the phone */
+@media (max-width: 767px) { .pf-legacy .pf-two-col { grid-template-columns: minmax(0,1fr) !important } }

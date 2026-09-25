@@ -295,7 +295,7 @@ function CalendarSection({ onOpenNote }: { onOpenNote: (todoId: string) => void 
   ]
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 1fr)', gap: 24, alignItems: 'start' }}>
+    <div className="pf-two-col" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 1fr)', gap: 24, alignItems: 'start' }}>
       {/* Month grid */}
       <div className="card" style={{ padding: 20, borderRadius: 16, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
@@ -434,7 +434,7 @@ function NotesSection({ activeNoteId, setActiveNoteId }: { activeNoteId: string 
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(240px, 300px) minmax(0, 1fr)', gap: 24, alignItems: 'start' }}>
+    <div className="pf-two-col" style={{ display: 'grid', gridTemplateColumns: 'minmax(240px, 300px) minmax(0, 1fr)', gap: 24, alignItems: 'start' }}>
       {/* List */}
       <div>
         <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
@@ -601,7 +601,7 @@ function FocusSection() {
   const ringColor = timer.mode === 'break' ? 'var(--pf-depth-text)' : ACCENT
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 320px)', gap: 32, alignItems: 'start', maxWidth: 860 }}>
+    <div className="pf-two-col" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 320px)', gap: 32, alignItems: 'start', maxWidth: 860 }}>
       {/* Timer */}
       <div className="card" style={{ padding: '40px 32px', borderRadius: 18, border: 'none', boxShadow: '0 4px 16px rgb(62 73 54 / .06)', background: 'var(--color-card)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: ringColor, fontFamily: 'var(--font-mono)', marginBottom: 24 }}>
